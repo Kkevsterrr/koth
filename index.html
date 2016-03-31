@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+    <head>
+        <style>
+            #cy {
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+        </style>
+        <script src='https://cdn.socket.io/socket.io-1.4.5.js'></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <script src="http://cytoscape.github.io/cytoscape.js/api/cytoscape.js-latest/cytoscape.min.js"></script>
+        <script>
+            $(function(){ // on dom ready
+
+                
+
+            }); 
+        </script>
+        <script>
+            var socket = io();
+            socket.on('update', function(data) {
+                cy.$('#'+data["id"]).data('color', data["color"])  
+            });
+            socket.on('data', function(data) {
+                $('#cy').cytoscape({
+                    layout: {
+                        name: 'cose',
+                        padding: 10
+                    },
+
+                    style: cytoscape.stylesheet()
+                    .selector('node')
+                    .css({
+                        'content': 'data(name)',
+                        'text-valign': 'center',
+                        'text-outline-width': 2,
+                        'text-outline-color': 'data(color)',
+                        'background-color': 'data(color)',
+                        'color': '#fff'
+                    })
+                    .selector(':selected')
+                    .css({
+                        'border-width': 3,
+                        'border-color': '#333'
+                    })
+                    .selector('edge')
+                    .css({
+                        'opacity': 0.666,
+                        'line-color': 'data(color)',
+                    })
+                    .selector('edge.questionable')
+                    .css({
+                        'line-style': 'dotted',
+                        'target-arrow-shape': 'diamond'
+                    })
+                    .selector('.faded')
+                    .css({
+                        'opacity': 0.25,
+                        'text-opacity': 0
+                    }),
+
+                    elements: data.graph,
+
+                    ready: function(){
+                        window.cy = this;
+
+                        // giddy up
+                    }
+                });
+
+                // Respond with a message including this clients' id sent from the server
+                socket.emit('i am client', {data: 'foo!', id: data.id});
+            });
+            socket.on('time', function(data) {
+                addMessage(data.time);
+            });
+            socket.on('error', console.error.bind(console));
+            socket.on('message', console.log.bind(console));
+
+        </script>
+    </head>
+    <body>
+        <!--<ul id='messages'></ul>-->
+        <div id="cy"></div>
+
+    </body>
+</html>
