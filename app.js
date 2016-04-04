@@ -1,5 +1,3 @@
-require("autoinstall")
-
 var http = require('http'),
     fs = require('fs'),
     index = fs.readFileSync(__dirname + '/index.html');
@@ -9,7 +7,16 @@ var app = http.createServer(function(req, res) {
     res.writeHead(200, {'Content-Type': 'text/html'});
     res.end(index);
 });
-var valid_teams = { "green" : "green", "purple": "purple" }
+var colors = require('colors');
+var claims = {};
+var GAME_NAME = "koth1";
+var CLAIM_DELAY = 5000;
+var valid_teams = { "green" : "green", "red": "red", "blue": "blue" }
+var path = __dirname + "/games/" + GAME_NAME + "/saved/network";
+var scores = {}
+var chart_scores = []
+var d = new Date();
+var elements = read_data();
 var scorebot = http.createServer(function(req, res) {
     if(req.method=='POST') {
         var body='';
@@ -18,13 +25,25 @@ var scorebot = http.createServer(function(req, res) {
         });
         req.on('end',function() {
             var team = qs.parse(body)["team"];
-            console.log(team);
             var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
-            
-            console.log(ip);
+
+            id = check_valid(ip);
             if(valid_teams[team] != undefined) {
-                claim_machine(check_valid(ip), team);
-                res.write("Box claimed for team " + team + ".");
+                now = new Date();
+
+                if(id in claims && team in claims[id] && now.getTime() - claims[id][team] < CLAIM_DELAY) { 
+                    res.write("Cannot claim box - please wait.");
+                    claims[id][team] = now.getTime()
+                } else {
+                    if(!(ip in claims)) {
+                        claims[id] = {}
+                    }
+                    claims[id][team] = now.getTime();
+                    claim_machine(check_valid(ip), team);
+                    res.write("Box claimed for team " + team + ".");
+                    console.log("Box " + id + " ("+ip+") claimed for team " + team + ".");
+                    write_network();
+                }
             } else {
                 res.write("Unknown team.")
             }
@@ -32,43 +51,12 @@ var scorebot = http.createServer(function(req, res) {
         });
     }
 });
+
+
+calculate_score()
 app.listen(3000);
 scorebot.listen(8000);
 var io = require('socket.io').listen(app);
-
-
-var elements = {
-    nodes: [
-    { data: { id: 'green', name: 'Green Team', weight: 65, color: 'green', ip: "::ffff:127.0.0.10"} },
-    { data: { id: 'n1', name: '', weight: 65, color: 'grey', ip: "::ffff:127.0.0.1" } },
-    { data: { id: 'n2', name: '', weight: 65, color: 'grey' , ip: "::ffff:127.0.0.10"} },
-    { data: { id: 'router1', name: 'Router 1', weight: 65, color: 'black' }, ip: "::ffff:127.0.0.10" },
-    { data: { id: 'sp', name: '', weight: 65, color: 'grey' , ip: "::ffff:127.0.0.10"} },
-    { data: { id: 'ip1', name: '', weight: 65, color: 'grey' }, ip: "::ffff:127.0.0.10" },
-    { data: { id: 'ip2', name: '', weight: 65, color: 'grey' , ip: "::ffff:127.0.0.10"} },
-    { data: { id: 'router2', name: 'Router 2', weight: 65, color: 'black' , ip: "::ffff:127.0.0.10"} },
-    { data: { id: 'n6', name: '', weight: 65, color: 'grey' }, ip: "::ffff:127.0.0.10" },
-    { data: { id: 'n7', name: '', weight: 65, color: 'grey' }, ip: "::ffff:127.0.0.10" },
-    { data: { id: 'purple', name: 'Purple Team', weight: 65, color: 'purple' }, ip: "::ffff:127.0.0.10" },
-    ],
-
-    edges: [
-    { data: { source: 'green', target: 'router1', color: 'black', strength: 10 } },
-    { data: { source: 'purple', target: 'router2', color: 'black', strength: 10 } },
-    { data: { source: 'n1', target: 'router1', color: 'black', strength: 10 } },
-    { data: { source: 'n2', target: 'router1', color: 'black', strength: 10 } },
-    { data: { source: 'sp', target: 'router1', color: 'black', strength: 10 } },
-    { data: { source: 'sp', target: 'router2', color: 'black', strength: 10 } },
-    { data: { source: 'ip1', target: 'router1', color: 'black', strength: 10 } },
-    { data: { source: 'ip1', target: 'router2', color: 'black', strength: 10 } },
-    { data: { source: 'ip2', target: 'router1', color: 'black', strength: 10 } },
-    { data: { source: 'ip2', target: 'router2', color: 'black', strength: 10 } },
-    { data: { source: 'n6', target: 'router2', color: 'black', strength: 10 } },
-    { data: { source: 'n7', target: 'router2', color: 'black', strength: 10 } }
-
-    ]
-
-}
 
 function claim_machine(id, team) {
     if(id == "") {
@@ -78,27 +66,86 @@ function claim_machine(id, team) {
             node = elements["nodes"][i]
             if (node["data"]["id"] == id) { 
                 node["data"]["color"] = valid_teams[team]
-                io.sockets.emit('update', { id: id, color: valid_teams[team] } )
+                io.sockets.emit('update', { id: id, color: valid_teams[team], chart: calculate_score()} )
             } 
         }
-        console.log(elements)
     }
 }
+
+function first(arr) {
+    return arr[0];
+};
+function calculate_score() {
+    s = {}
+    ret = []
+    for(var i = 0; i < elements["nodes"].length; i++) {
+            node = elements["nodes"][i];
+            if(node["data"]["color"] in valid_teams) {
+                s[node["data"]["color"]] = s[node["data"]["color"]] + 1 || 0
+            }
+    } 
+    console.log(s);
+    for(var team in s) {
+        if(scores[team] == undefined) {
+            scores[team] = [s[team]]
+        } else {
+            scores[team].push(s[team])
+        }
+    }
+    console.log(scores);
+    var i = 0; 
+    for(team in scores) {
+        ret[i] = [team]
+        ret[i] = ret[i].concat(scores[team])
+        i++;
+    }
+    chart_scores = ret;
+    return chart_scores;
+}
+
 
 
 function check_valid(ip) {
     for(var i = 0; i< elements["nodes"].length; i++) {
         node = elements["nodes"][i]
-        if (node["data"]["ip"] == ip) { return node["data"]["id"]; }
+        if (node["data"]["ip"].indexOf(ip) > -1) { return node["data"]["id"]; }
     }
     return ""
 }
 
+function write_network() {
+    fs.writeFile(path, JSON.stringify(elements, null, 4), 'utf-8', function(err) {
+        if(err) {
+            return console.log(err);
+        }
+    }); 
+}
+function read_data() {
+    try {
+        process.stdout.write("Reading save data file for " + GAME_NAME + "...");
+        net = JSON.parse(fs.readFileSync(path, 'utf8'));
+        console.log("done".green);
+        return net
+    } catch (e) {
+        try {
+            console.log("failed".red);
+            init = __dirname + "/games/" + GAME_NAME + "/init.json";
+            process.stdout.write("Reading initialization file for " + GAME_NAME + "...");
+            net = JSON.parse(fs.readFileSync(init, 'utf8'));
+            console.log("done".green);
+            return net
+        } catch (e) {
+            console.log(e)
+            console.log("ERROR: No init or save file found.")
+            return {}
+        }
+    }
+}
 
 
 
 // Emit current data on connection
 io.on('connection', function(socket) {
-    socket.emit('data', { graph: elements });
+    socket.emit('data', { graph: elements, chart: chart_scores, colors: chart_scores.map(first) });
 });
 

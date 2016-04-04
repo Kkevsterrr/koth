@@ -1,0 +1,315 @@
+{
+    "nodes": [
+        {
+            "data": {
+                "id": "green",
+                "name": "Green Team",
+                "weight": 65,
+                "color": "green",
+                "ip": [
+                    "::ffff:127.0.0.10"
+                ]
+            }
+        },
+        {
+            "data": {
+                "id": "n1",
+                "name": "",
+                "weight": 65,
+                "color": "red",
+                "ip": [
+                    "::ffff:127.0.0.1"
+                ]
+            }
+        },
+        {
+            "data": {
+                "id": "n2",
+                "name": "",
+                "weight": 65,
+                "color": "grey",
+                "ip": [
+                    "::ffff:127.0.0.10"
+                ]
+            }
+        },
+        {
+            "data": {
+                "id": "router1",
+                "name": "Router 1",
+                "weight": 65,
+                "color": "black"
+            },
+            "ip": [
+                "::ffff:127.0.0.10"
+            ]
+        },
+        {
+            "data": {
+                "id": "blue",
+                "name": "Blue Team",
+                "weight": 65,
+                "color": "blue",
+                "ip": [
+                    "::ffff:127.0.0.10"
+                ]
+            }
+        },
+        {
+            "data": {
+                "id": "n3",
+                "name": "",
+                "weight": 65,
+                "color": "grey",
+                "ip": [
+                    "::ffff:127.0.0.10"
+                ]
+            }
+        },
+        {
+            "data": {
+                "id": "n4",
+                "name": "",
+                "weight": 65,
+                "color": "grey",
+                "ip": [
+                    "::ffff:127.0.0.10"
+                ]
+            }
+        },
+        {
+            "data": {
+                "id": "router3",
+                "name": "Router 3",
+                "weight": 65,
+                "color": "black"
+            },
+            "ip": [
+                "::ffff:127.0.0.10"
+            ]
+        },
+        {
+            "data": {
+                "id": "sp",
+                "name": "",
+                "weight": 65,
+                "color": "grey",
+                "ip": [
+                    "::ffff:127.0.0.10"
+                ]
+            }
+        },
+        {
+            "data": {
+                "id": "ip1",
+                "name": "",
+                "weight": 65,
+                "color": "grey"
+            },
+            "ip": [
+                "::ffff:127.0.0.10"
+            ]
+        },
+        {
+            "data": {
+                "id": "ip2",
+                "name": "",
+                "weight": 65,
+                "color": "grey",
+                "ip": [
+                    "::ffff:127.0.0.10"
+                ]
+            }
+        },
+        {
+            "data": {
+                "id": "router2",
+                "name": "Router 2",
+                "weight": 65,
+                "color": "black",
+                "ip": [
+                    "::ffff:127.0.0.10"
+                ]
+            }
+        },
+        {
+            "data": {
+                "id": "n6",
+                "name": "",
+                "weight": 65,
+                "color": "grey"
+            },
+            "ip": [
+                "::ffff:127.0.0.10"
+            ]
+        },
+        {
+            "data": {
+                "id": "n7",
+                "name": "",
+                "weight": 65,
+                "color": "grey"
+            },
+            "ip": [
+                "::ffff:127.0.0.10"
+            ]
+        },
+        {
+            "data": {
+                "id": "red",
+                "name": "Red Team",
+                "weight": 65,
+                "color": "red"
+            },
+            "ip": [
+                "::ffff:127.0.0.10"
+            ]
+        }
+    ],
+    "edges": [
+        {
+            "data": {
+                "source": "green",
+                "target": "router1",
+                "color": "black",
+                "strength": 10
+            }
+        },
+        {
+            "data": {
+                "source": "red",
+                "target": "router2",
+                "color": "black",
+                "strength": 10
+            }
+        },
+        {
+            "data": {
+                "source": "blue",
+                "target": "router3",
+                "color": "black",
+                "strength": 10
+            }
+        },
+        {
+            "data": {
+                "source": "n1",
+                "target": "router1",
+                "color": "black",
+                "strength": 10
+            }
+        },
+        {
+            "data": {
+                "source": "n2",
+                "target": "router1",
+                "color": "black",
+                "strength": 10
+            }
+        },
+        {
+            "data": {
+                "source": "n3",
+                "target": "router3",
+                "color": "black",
+                "strength": 10
+            }
+        },
+        {
+            "data": {
+                "source": "n4",
+                "target": "router3",
+                "color": "black",
+                "strength": 10
+            }
+        },
+        {
+            "data": {
+                "source": "sp",
+                "target": "router1",
+                "color": "black",
+                "strength": 10
+            }
+        },
+        {
+            "data": {
+                "source": "sp",
+                "target": "router2",
+                "color": "black",
+                "strength": 10
+            }
+        },
+        {
+            "data": {
+                "source": "sp",
+                "target": "router3",
+                "color": "black",
+                "strength": 10
+            }
+        },
+        {
+            "data": {
+                "source": "ip1",
+                "target": "router3",
+                "color": "black",
+                "strength": 10
+            }
+        },
+        {
+            "data": {
+                "source": "ip2",
+                "target": "router3",
+                "color": "black",
+                "strength": 10
+            }
+        },
+        {
+            "data": {
+                "source": "ip1",
+                "target": "router1",
+                "color": "black",
+                "strength": 10
+            }
+        },
+        {
+            "data": {
+                "source": "ip1",
+                "target": "router2",
+                "color": "black",
+                "strength": 10
+            }
+        },
+        {
+            "data": {
+                "source": "ip2",
+                "target": "router1",
+                "color": "black",
+                "strength": 10
+            }
+        },
+        {
+            "data": {
+                "source": "ip2",
+                "target": "router2",
+                "color": "black",
+                "strength": 10
+            }
+        },
+        {
+            "data": {
+                "source": "n6",
+                "target": "router2",
+                "color": "black",
+                "strength": 10
+            }
+        },
+        {
+            "data": {
+                "source": "n7",
+                "target": "router2",
+                "color": "black",
+                "strength": 10
+            }
+        }
+    ]
+}
