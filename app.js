@@ -72,16 +72,14 @@ function claim_machine(id, team) {
     }
 }
 
-function first(arr) {
-    return arr[0];
-};
+function first(arr) { return arr[0]; }
 function calculate_score() {
     s = {}
     ret = []
     for(var i = 0; i < elements["nodes"].length; i++) {
             node = elements["nodes"][i];
             if(node["data"]["color"] in valid_teams) {
-                s[node["data"]["color"]] = s[node["data"]["color"]] + 1 || 0
+                s[node["data"]["color"]] = s[node["data"]["color"]] + 1 || 1
             }
     } 
     console.log(s);
@@ -130,6 +128,8 @@ function read_data() {
         try {
             console.log("failed".red);
             init = __dirname + "/games/" + GAME_NAME + "/init.json";
+            init = __dirname + "/games/" + GAME_NAME + "/test.json";
+
             process.stdout.write("Reading initialization file for " + GAME_NAME + "...");
             net = JSON.parse(fs.readFileSync(init, 'utf8'));
             console.log("done".green);

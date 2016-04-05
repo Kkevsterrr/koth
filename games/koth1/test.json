@@ -1,0 +1,397 @@
+{
+  "nodes": [
+    {
+      "data": {
+        "id": "Green",
+        "weight": 65,
+        "color": "green",
+        "name": "Green",
+        "ip": [
+          "10.3.0.1"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "Blue",
+        "weight": 65,
+        "color": "blue",
+        "name": "Blue",
+        "ip": [
+          "10.2.0.1"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "SecurePivot",
+        "weight": 65,
+        "color": "grey",
+        "name": "",
+        "ip": [
+          "10.2.0.5",
+          "10.3.0.5",
+          "10.4.0.6"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "Bee-Box-00001",
+        "weight": 65,
+        "color": "grey",
+        "name": "",
+        "ip": [
+          "10.3.0.4"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "Bee-Box-00002",
+        "weight": 65,
+        "color": "grey",
+        "name": "",
+        "ip": [
+          "10.2.0.4"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "Metasploitable2-00001",
+        "weight": 65,
+        "color": "grey",
+        "name": "",
+        "ip": [
+          "10.3.0.9"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "Metasploitable2-00002",
+        "weight": 65,
+        "color": "grey",
+        "name": "",
+        "ip": [
+          "10.3.0.6"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "InsecurePivot",
+        "weight": 65,
+        "color": "grey",
+        "name": "",
+        "ip": [
+          "10.3.0.7",
+          "10.2.0.2",
+          "10.4.0.3"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "Metasploitable2-00004",
+        "weight": 65,
+        "color": "grey",
+        "name": "",
+        "ip": [
+          "10.2.0.6"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "Metasploitable2-00005",
+        "weight": 65,
+        "color": "grey",
+        "name": "",
+        "ip": [
+          "10.2.0.7"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "InsecurePivot2",
+        "weight": 65,
+        "color": "grey",
+        "name": "",
+        "ip": [
+          "10.3.0.2",
+          "10.2.0.3",
+          "10.4.0.4"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "Metasploitable2-00003",
+        "weight": 65,
+        "color": "grey",
+        "name": "",
+        "ip": [
+          "10.3.0.3"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "Red",
+        "weight": 65,
+        "color": "red",
+        "name": "Red",
+        "ip": [
+          "10.4.0.1"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "Metasploitable2-00006",
+        "weight": 65,
+        "color": "grey",
+        "name": "",
+        "ip": [
+          "10.4.0.2"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "Bee-Box-00003",
+        "weight": 65,
+        "color": "grey",
+        "name": "",
+        "ip": [
+          "10.4.0.7"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "Metasploitable2-00007",
+        "weight": 65,
+        "color": "grey",
+        "name": "",
+        "ip": [
+          "10.4.0.8"
+        ]
+      }
+    },
+    {
+      "data": {
+        "ip": [
+          "10.2.0.254/16"
+        ],
+        "id": "router_f05750f3-7d7f-4976-9838-02c6d12781f3",
+        "name": "Router 1",
+        "weight": 65,
+        "color": "black"
+      }
+    },
+    {
+      "data": {
+        "ip": [
+          "10.3.0.254/16"
+        ],
+        "id": "router_81c60c75-83cc-495c-87a8-7fd5e1306948",
+        "name": "Router 2",
+        "weight": 65,
+        "color": "black"
+      }
+    },
+    {
+      "data": {
+        "ip": [
+          "10.4.0.254/16"
+        ],
+        "id": "router_b3786f91-f78f-42f7-9860-62a7c96c5897",
+        "name": "Router 3",
+        "weight": 65,
+        "color": "black"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "data": {
+        "source": "Blue",
+        "target": "router_f05750f3-7d7f-4976-9838-02c6d12781f3",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "SecurePivot",
+        "target": "router_f05750f3-7d7f-4976-9838-02c6d12781f3",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "Bee-Box-00002",
+        "target": "router_f05750f3-7d7f-4976-9838-02c6d12781f3",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "InsecurePivot",
+        "target": "router_f05750f3-7d7f-4976-9838-02c6d12781f3",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "Metasploitable2-00004",
+        "target": "router_f05750f3-7d7f-4976-9838-02c6d12781f3",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "Metasploitable2-00005",
+        "target": "router_f05750f3-7d7f-4976-9838-02c6d12781f3",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "InsecurePivot2",
+        "target": "router_f05750f3-7d7f-4976-9838-02c6d12781f3",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "Green",
+        "target": "router_81c60c75-83cc-495c-87a8-7fd5e1306948",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "SecurePivot",
+        "target": "router_81c60c75-83cc-495c-87a8-7fd5e1306948",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "Bee-Box-00001",
+        "target": "router_81c60c75-83cc-495c-87a8-7fd5e1306948",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "Metasploitable2-00001",
+        "target": "router_81c60c75-83cc-495c-87a8-7fd5e1306948",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "Metasploitable2-00002",
+        "target": "router_81c60c75-83cc-495c-87a8-7fd5e1306948",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "InsecurePivot",
+        "target": "router_81c60c75-83cc-495c-87a8-7fd5e1306948",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "InsecurePivot2",
+        "target": "router_81c60c75-83cc-495c-87a8-7fd5e1306948",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "Metasploitable2-00003",
+        "target": "router_81c60c75-83cc-495c-87a8-7fd5e1306948",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "SecurePivot",
+        "target": "router_b3786f91-f78f-42f7-9860-62a7c96c5897",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "InsecurePivot",
+        "target": "router_b3786f91-f78f-42f7-9860-62a7c96c5897",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "InsecurePivot2",
+        "target": "router_b3786f91-f78f-42f7-9860-62a7c96c5897",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "Red",
+        "target": "router_b3786f91-f78f-42f7-9860-62a7c96c5897",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "Metasploitable2-00006",
+        "target": "router_b3786f91-f78f-42f7-9860-62a7c96c5897",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "Bee-Box-00003",
+        "target": "router_b3786f91-f78f-42f7-9860-62a7c96c5897",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "Metasploitable2-00007",
+        "target": "router_b3786f91-f78f-42f7-9860-62a7c96c5897",
+        "color": "black",
+        "strength": 10
+      }
+    }
+  ]
+}
