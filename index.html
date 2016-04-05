@@ -142,7 +142,7 @@
                         elements: data.graph,
                     });
                     cy.elements('node').qtip({
-                        content: function() { return this.data("ip") ; },
+                        content: function() { return "<center><b><u>IPs<\/u><\/b><\/center>" + this.data("ip").join("<br/>") ; },
                         position: {
                             my: 'top center',
                             at: 'bottom center'                 
