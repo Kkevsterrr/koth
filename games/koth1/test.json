@@ -70,17 +70,6 @@
     },
     {
       "data": {
-        "id": "Metasploitable2-00002",
-        "weight": 65,
-        "color": "grey",
-        "name": "",
-        "ip": [
-          "10.3.0.6"
-        ]
-      }
-    },
-    {
-      "data": {
         "id": "InsecurePivot",
         "weight": 65,
         "color": "grey",
@@ -300,14 +289,6 @@
     {
       "data": {
         "source": "Metasploitable2-00001",
-        "target": "router_81c60c75-83cc-495c-87a8-7fd5e1306948",
-        "color": "black",
-        "strength": 10
-      }
-    },
-    {
-      "data": {
-        "source": "Metasploitable2-00002",
         "target": "router_81c60c75-83cc-495c-87a8-7fd5e1306948",
         "color": "black",
         "strength": 10
