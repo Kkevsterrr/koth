@@ -1,28 +1,30 @@
 var fs = require('fs');
 var valid_teams = {"green" : "green", "blue" : "blue", "red" : "red" }
+
 network = {};
 network["nodes"] = [];
 network["edges"] = [];
 GAME_NAME = "koth1";
+
 c = JSON.parse(fs.readFileSync(__dirname + "/games/" + GAME_NAME + "/cypher.json"), 'utf-8')
 rids = {}
+
 for (var i = 0; i < c["machines"].length; i++) {
     m = c["machines"][i];
-///console.log(m["name"]);
     machine = {};
     machine["data"] = {};
     machine["data"]["id"] = m["name"].replace(/ /g,'');
     machine["data"]["weight"] = 65;
-    
+    machine["data"]["ports"] = [22, 80]
+
     if(valid_teams[m["name"].toLowerCase()] != undefined) { //If this is an entry box
         machine["data"]["color"] = m["name"].toLowerCase();
         machine["data"]["name"] = m["name"];
-        console.log(m); 
+        console.log(m);
         machine["data"]["forwarded"] = m["network_connections"]["forward_ports"];
     } else {
         machine["data"]["color"] = "grey";
         machine["data"]["name"] = "";
-
     }
     if(m["name"] == "Scorebot") {
         //machine["data"]["name"] = m["name"];

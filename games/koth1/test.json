@@ -4,6 +4,10 @@
       "data": {
         "id": "Green",
         "weight": 65,
+        "ports": [
+          22,
+          80
+        ],
         "color": "green",
         "name": "Green",
         "ip": [
@@ -15,6 +19,10 @@
       "data": {
         "id": "Blue",
         "weight": 65,
+        "ports": [
+          22,
+          80
+        ],
         "color": "blue",
         "name": "Blue",
         "ip": [
@@ -26,6 +34,10 @@
       "data": {
         "id": "SecurePivot",
         "weight": 65,
+        "ports": [
+          22,
+          80
+        ],
         "color": "grey",
         "name": "",
         "ip": [
@@ -39,6 +51,10 @@
       "data": {
         "id": "Bee-Box-00001",
         "weight": 65,
+        "ports": [
+          22,
+          80
+        ],
         "color": "grey",
         "name": "",
         "ip": [
@@ -50,6 +66,10 @@
       "data": {
         "id": "Bee-Box-00002",
         "weight": 65,
+        "ports": [
+          22,
+          80
+        ],
         "color": "grey",
         "name": "",
         "ip": [
@@ -61,6 +81,10 @@
       "data": {
         "id": "Metasploitable2-00001",
         "weight": 65,
+        "ports": [
+          22,
+          80
+        ],
         "color": "grey",
         "name": "",
         "ip": [
@@ -72,6 +96,10 @@
       "data": {
         "id": "InsecurePivot",
         "weight": 65,
+        "ports": [
+          22,
+          80
+        ],
         "color": "grey",
         "name": "",
         "ip": [
@@ -85,6 +113,10 @@
       "data": {
         "id": "Metasploitable2-00004",
         "weight": 65,
+        "ports": [
+          22,
+          80
+        ],
         "color": "grey",
         "name": "",
         "ip": [
@@ -96,6 +128,10 @@
       "data": {
         "id": "Metasploitable2-00005",
         "weight": 65,
+        "ports": [
+          22,
+          80
+        ],
         "color": "grey",
         "name": "",
         "ip": [
@@ -107,6 +143,10 @@
       "data": {
         "id": "InsecurePivot2",
         "weight": 65,
+        "ports": [
+          22,
+          80
+        ],
         "color": "grey",
         "name": "",
         "ip": [
@@ -120,6 +160,10 @@
       "data": {
         "id": "Metasploitable2-00003",
         "weight": 65,
+        "ports": [
+          22,
+          80
+        ],
         "color": "grey",
         "name": "",
         "ip": [
@@ -131,6 +175,10 @@
       "data": {
         "id": "Red",
         "weight": 65,
+        "ports": [
+          22,
+          80
+        ],
         "color": "red",
         "name": "Red",
         "ip": [
@@ -142,6 +190,10 @@
       "data": {
         "id": "Metasploitable2-00006",
         "weight": 65,
+        "ports": [
+          22,
+          80
+        ],
         "color": "grey",
         "name": "",
         "ip": [
@@ -153,6 +205,10 @@
       "data": {
         "id": "Bee-Box-00003",
         "weight": 65,
+        "ports": [
+          22,
+          80
+        ],
         "color": "grey",
         "name": "",
         "ip": [
@@ -164,6 +220,10 @@
       "data": {
         "id": "Metasploitable2-00007",
         "weight": 65,
+        "ports": [
+          22,
+          80
+        ],
         "color": "grey",
         "name": "",
         "ip": [

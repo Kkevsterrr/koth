@@ -2,6 +2,12 @@
 <html>
     <head>
         <style>
+            .red {
+                color: red;
+            }
+            .green {
+                color: green;
+            }
             body {
                 overflow:hidden;
             }
@@ -87,7 +93,7 @@
                     $("#network_nav").removeClass("active");
 
                 });*/
-                var chart; 
+                var chart;
             });
             String.prototype.cap = function() {
                 return this.charAt(0).toUpperCase() + this.slice(1);
@@ -96,15 +102,40 @@
                 return (i < 10 ? "0" : "") + i
             }
             var socket = io();
+            socket.on('scan', function(data) {
+                console.log("Received scan data...");
+                chart.load({
+                    columns: data["chart"]
+                });
+                cy.$('#'+data["id"]).data('color', data["color"]);
+                $('.qtip').remove();
+                cy.elements('node').qtip({
+                    content: function() {return get_qtip(this.data("id"), this.data("ip"), data)},
+                    position: {
+                        my: 'top center',
+                        at: 'bottom center'
+                    },
+                    show: {
+                        event: 'mouseover'
+                    },
+                    hide: {
+                        event: 'mouseout'
+                    },
+                    style: {
+                        classes: 'qtip-bootstrap',
+                        tip: {
+                            width: 16,
+                            height: 8
+                        }
+                    }
+                });
+            });
             socket.on('update', function(data) {
                 cy.$('#'+data["id"]).data('color', data["color"]);
-                date = new Date()
+                date = new Date();
                 $("#messages").prepend(pad(date.getHours()) + ":" + pad(date.getMinutes()) + ":" + pad(date.getSeconds()) + " - <span class=\"ui " + data["color"] + " small inverted header\">" + data["color"].cap() + "<\/span> team has claimed " + data["id"] + "<br/>");
-                    chart.load({
-                        columns: data["chart"]
-                    });
-                    $(window).trigger('resize');    
-                });
+                $(window).trigger('resize');
+            });
                 socket.on('data', function(data) {
                     chart = c3.generate({
                         bindto: '#chart',
@@ -118,7 +149,7 @@
                     chart.resize();
                     var cy = window.cy = cytoscape({
                         container: document.getElementById('cy'),
-                        ready: function(){},        
+                        ready: function(){},
                         layout: {
                             name: 'cose',
                             padding: 10
@@ -151,11 +182,12 @@
                         }),
                         elements: data.graph,
                     });
+
                     cy.elements('node').qtip({
-                        content: function() { return "<center><b><u>IPs<\/u><\/b><\/center>" + this.data("ip").join("<br/>") ; },
+                        content: function() {return get_qtip(this.data("id"), this.data("ip"), data)},
                         position: {
                             my: 'top center',
-                            at: 'bottom center'                 
+                            at: 'bottom center'
                         },
                         show: {
                             event: 'mouseover'
@@ -187,6 +219,24 @@
                 });
                 socket.on('error', console.error.bind(console));
                 socket.on('message', console.log.bind(console));
+
+
+                function get_qtip(id, ips, data) {
+                    var p = {};
+                    port_html = "";
+                    if(data["ports"][id] != undefined) {
+                        p[id] = [];
+                        for(port in data["ports"][id]) {
+                            if(data["ports"][id][port] == "closed") {
+                                p[id].push(port + " : <span class='red'>closed</span>");
+                            } else {
+                                p[id].push(port + " : <span class='green'>open</span>");
+                            }
+                        }
+                        port_html = "<br/><br/><b><u>Ports<\/u><\/b><br/>" + p[id].join("<br/>")+ "<\/center>"
+                    }
+                    return "<center><b><u>IPs<\/u><\/b><br/>" + ips.join("<br/>") + port_html;
+                }
             </script>
         </head>
         <body>

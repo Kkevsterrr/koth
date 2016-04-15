@@ -1,24 +1,35 @@
-var http = require('http'),
-    fs = require('fs'),
-    index = fs.readFileSync(__dirname + '/index.html');
+var http = require('http');
+var fs = require('fs');
 var qs = require('querystring');
+var colors = require('colors');
+var evilscan = require("evilscan");
+var async = require('async');
+var e = require('events');
+require('events').EventEmitter.prototype._maxListeners = 0;
+
+
+var GAME_NAME = "koth1";
+var CLAIM_DELAY = 30000;
+
+var index = fs.readFileSync(__dirname + '/index.html');
+var path = __dirname + "/games/" + GAME_NAME + "/saved/network";
+
+var claim_times = {};
+var ports = {};
+var ownership = {};
+var scores = {}
+var messages = []
+var chart_scores = []
+var teams = { "Green" : "green", "Red": "red", "Blue": "blue"}
+var network = initialize_network();
+
+var d = new Date();
 
 var app = http.createServer(function(req, res) {
     res.writeHead(200, {'Content-Type': 'text/html'});
     res.end(index);
 });
-var colors = require('colors');
-var claims = {};
-var GAME_NAME = "koth1";
-var CLAIM_DELAY = 30000;
-var valid_teams = { "green" : "green", "red": "red", "blue": "blue" }
-var path = __dirname + "/games/" + GAME_NAME + "/saved/network";
-var scores = {}
-var messages = []
-var chart_scores = []
-var d = new Date();
-var elements = read_data();
-var evilscan = require("evilscan");
+
 var scorebot = http.createServer(function(req, res) {
     if(req.method=='POST') {
         var body='';
@@ -30,26 +41,27 @@ var scorebot = http.createServer(function(req, res) {
             var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
 
             id = check_valid(ip);
-            if(valid_teams[team] != undefined) {
+            if(teams[team] != undefined) {
                 now = new Date();
 
-                if(id in claims && team in claims[id] && now.getTime() - claims[id][team] < CLAIM_DELAY) { 
+                if(id in claim_times && team in claim_times[id] && now.getTime() - claim_times[id][team] < CLAIM_DELAY) {
                     res.write("Cannot claim box - please wait.");
-                    claims[id][team] = now.getTime()
-                } else if(true) { //TODO: IF TEAM ALREADY OWNS THE BOX!!!!
+                    claim_times[id][team] = now.getTime()
+                } else if(ownership[id] == team) {
                     res.write("Team already owns this box - cannot reclaim.");
-                    claims[id][team] = now.getTime()
+                    claim_times[id][team] = now.getTime()
                 } else {
-                    if(!(ip in claims)) {
-                        claims[id] = {}
+                    if(!(ip in claim_times)) {
+                        claim_times[id] = {}
                     }
-                    claims[id][team] = now.getTime();
+                    claim_times[id][team] = now.getTime();
                     claim_machine(check_valid(ip), team);
-                    messages.push(pad(now.getHours()) + ":" + pad(now.getMinutes()) + ":" + pad(now.getSeconds()) + " - <span class=\"ui " + valid_teams[team] + " small inverted header\">" + team.cap() + "<\/span> team has claimed " + id + "<br/>");
+                    ownership[id] = team;
+                    messages.push(pad(now.getHours()) + ":" + pad(now.getMinutes()) + ":" + pad(now.getSeconds()) + " - <span class=\"ui " + teams[team] + " small inverted header\">" + team.cap() + "<\/span> team has claimed " + id + "<br/>");
                     console.log(messages);
                     res.write("Box claimed for team " + team + ".");
                     console.log("Box " + id + " ("+ip+") claimed for team " + team + ".");
-                    write_network();
+                    save_network();
                 }
             } else {
                 res.write("Unknown team.")
@@ -60,64 +72,91 @@ var scorebot = http.createServer(function(req, res) {
 });
 
 
-
-calculate_score();
 app.listen(3000);
 scorebot.listen(8000);
+scanner = setInterval(function() { scan_net() }, 30000);
+
 var io = require('socket.io').listen(app);
+scan_net()
 String.prototype.cap = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
 
+function scan_net() {
+    io.sockets.emit('scan', { chart: calculate_score(), ports: ports} )
+    console.log("Starting network wide scan...");
+    scans = []
+    for(var i = 0; i< network["nodes"].length; i++) {
+        node = network["nodes"][i];
+        ip = node["data"]["ip"][0];
+        id = node["data"]["id"];
+        if(ip != "::ffff:127.0.0.1" && ip.indexOf("/16") == -1 && teams[id] == undefined) {
+            scan_box(ip, id);
+        }
+    }
+}
+
 function scan_box(ip, id) {
-    console.log("scanning" +ip);
     options = {
         target:ip,
-        port:'22',
+        port:Object.keys(ports[id]),
         status:'TROU', // Timeout, Refused, Open, Unreachable
-        banner:true
+        banner:false
     };
 
     var scanner = new evilscan(options);
 
     scanner.on('result',function(data) {
-        // fired when item is matching options
-        console.log(data);
+        if(data["status"].indexOf("closed") != -1) {
+            ports[id][data["port"]] = "closed";
+        } else {
+            ports[id][data["port"]] = "open";
+        }
     });
     scanner.run();
-
 }
 
 
 function claim_machine(id, team) {
     if(id == "") {
-        return false
+        return false;
     } else {
-        for(var i = 0; i< elements["nodes"].length; i++) {
-            node = elements["nodes"][i]
-                if (node["data"]["id"] == id) { 
-                    node["data"]["color"] = valid_teams[team];
-                    io.sockets.emit('update', { id: id, color: valid_teams[team], chart: calculate_score()} )
-                } 
+        for(var i = 0; i< network["nodes"].length; i++) {
+            node = network["nodes"][i];
+            if (node["data"]["id"] == id) {
+                node["data"]["color"] = teams[team];
+                io.sockets.emit('update', { id: id, color: teams[team] } )
+            }
         }
     }
+    return true;
 }
 
-function pad(i) {
-    return (i < 10 ? "0" : "") + i
-}
-
-
+function pad(i) { return (i < 10 ? "0" : "") + i }
 function first(arr) { return arr[0]; }
+function get_team_by_color(color) {
+    for(team in teams) {
+        if(teams[team] == color) { return team; }
+    }
+    return null;
+}
+
 function calculate_score() {
-    s = {}
-    ret = []
-        for(var i = 0; i < elements["nodes"].length; i++) {
-            node = elements["nodes"][i];
-            if(node["data"]["color"] in valid_teams) {
-                s[node["data"]["color"]] = s[node["data"]["color"]] + 1 || 1
+    console.log("Calculating score..");
+    s = {};
+    ret = [];
+    for(var i = 0; i < network["nodes"].length; i++) {
+        node = network["nodes"][i];
+        color = node["data"]["color"];
+        id = node["data"]["id"];
+
+        if(get_team_by_color(color) in teams) {
+            s[color] = s[color] + 1 || 1
+            for(port in ports[id]) {
+                if(ports[id][port] == "open") {s[color] += 3}
             }
-        } 
+        }
+    }
     console.log(s);
     for(var team in s) {
         if(scores[team] == undefined) {
@@ -127,7 +166,7 @@ function calculate_score() {
         }
     }
     console.log(scores);
-    var i = 0; 
+    var i = 0;
     for(team in scores) {
         ret[i] = [team]
             ret[i] = ret[i].concat(scores[team])
@@ -140,48 +179,59 @@ function calculate_score() {
 
 
 function check_valid(ip) {
-    for(var i = 0; i< elements["nodes"].length; i++) {
-        node = elements["nodes"][i]
-            if (node["data"]["ip"].indexOf(ip) > -1) { return node["data"]["id"]; }
+    for(var i = 0; i< network["nodes"].length; i++) {
+        node = network["nodes"][i];
+        if (node["data"]["ip"].indexOf(ip) > -1) { return node["data"]["id"]; }
     }
-    return ""
+    return "";
 }
 
-function write_network() {
-    fs.writeFile(path, JSON.stringify(elements, null, 4), 'utf-8', function(err) {
-        if(err) {
-            return console.log(err);
-        }
-    }); 
+function save_network() {
+    fs.writeFile(path, JSON.stringify(network, null, 4), 'utf-8', function(err) {
+        if(err) { return console.log(err); }
+    });
 }
-function read_data() {
+
+function initialize_network() {
+    net = {};
     try {
         process.stdout.write("Reading save data file for " + GAME_NAME + "...");
         net = JSON.parse(fs.readFileSync(path, 'utf8'));
         console.log("done".green);
-        return net
     } catch (e) {
         try {
-            console.log("failed".red);
-            init = __dirname + "/games/" + GAME_NAME + "/init.json";
+            console.log("failed".yellow);
             init = __dirname + "/games/" + GAME_NAME + "/test.json";
-
             process.stdout.write("Reading initialization file for " + GAME_NAME + "...");
             net = JSON.parse(fs.readFileSync(init, 'utf8'));
             console.log("done".green);
-            return net
         } catch (e) {
-            console.log(e)
-                console.log("ERROR: No init or save file found.")
-                return {}
+            console.log(e);
+            console.log("ERROR: No init or save file found.");
+            return {};
         }
     }
+
+    // Initialize ports & ownership
+    for(var i = 0; i< net["nodes"].length; i++) {
+        node = net["nodes"][i];
+        ip = node["data"]["ip"][0];
+        id = node["data"]["id"];
+        ownership[id] = "none";
+        if(ip != "::ffff:127.0.0.1" && ip.indexOf("/16") == -1 && teams[id] == undefined) {
+        ports[id] = {};
+        if (node["data"]["name"].indexOf("Router") == -1) {
+            for(j = 0; j < node["data"]["ports"].length; j++) {
+                ports[id][node["data"]["ports"][j]] = "closed";
+            }
+            ownership[id] = (teams[id] != undefined) ? teams[id] : "none";
+        }
+    }
+    }
+    return net;
 }
-
-
 
 // Emit current data on connection
 io.on('connection', function(socket) {
-    socket.emit('data', { graph: elements, chart: chart_scores, colors: chart_scores.map(first), messages: messages });
+    socket.emit('data', { graph: network, chart: chart_scores, colors: chart_scores.map(first), messages: messages, ports: ports });
 });
-
