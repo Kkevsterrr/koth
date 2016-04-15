@@ -2,16 +2,23 @@
 <html>
     <head>
         <style>
+            body {
+                overflow:hidden;
+            }
+            #graph {
+                margin: 20px;
+                height: 65%;
+            }
             #cy, #graph, #info {
                 height: 80%;
-                width: 100%;
+                width: 90%;
                 position: absolute;
                 left: 0;
                 top: 40px;
             }
-            #info, #graph {
-                
+            #info {
                 margin: 50px;
+                width: 90%;
             }
             #myChart {
                 height: 100%;
@@ -53,22 +60,24 @@
             $( document ).ready(function() {
 
                 $("#network_nav").click(function() {
-                    $("#graph").hide(250);
-                    $("#info").hide(250);
-                    $("#cy").show(250);
+                    $("#graph").hide();
+                    $("#info").hide();
+                    $("#cy").show();
                     $("#graph_nav").removeClass("active");
                     $("#info_nav").removeClass("active");
                     $("#network_nav").addClass("active");
+                    $(window).trigger('resize');
                 });
                 $("#graph_nav").click(function() {
-                    $("#info").hide(250);
-                    $("#cy").hide(250);
-                    $("#graph").show(250);
+                    $("#info").hide();
+                    $("#cy").hide();
+                    $("#graph").show();
                     $("#graph_nav").addClass("active");
                     $("#info_nav").removeClass("active");
                     $("#network_nav").removeClass("active");
-
+                    $(window).trigger('resize');
                 });
+                /*
                 $("#info_nav").click(function() {
                     $("#graph").hide(250);
                     $("#cy").hide(250);
@@ -77,7 +86,7 @@
                     $("#info_nav").addClass("active");
                     $("#network_nav").removeClass("active");
 
-                });
+                });*/
                 var chart; 
             });
             String.prototype.cap = function() {
@@ -94,7 +103,7 @@
                     chart.load({
                         columns: data["chart"]
                     });
-                        
+                    $(window).trigger('resize');    
                 });
                 socket.on('data', function(data) {
                     chart = c3.generate({
@@ -106,6 +115,7 @@
                             pattern: data["colors"]
                         }
                     });
+                    chart.resize();
                     var cy = window.cy = cytoscape({
                         container: document.getElementById('cy'),
                         ready: function(){},        
@@ -162,9 +172,14 @@
                         }
                     });
                     $("#graph").hide()
-                    $("#info").hide()
+                   // $("#info").hide()
                     $("#cy").show()
-
+                    console.log(data)
+                    for(var i = 0; i < data["messages"].length; i++) {
+                        console.log(data["messages"][i])
+                        $("#messages").prepend(data["messages"][i])
+                    }
+                    $(window).trigger('resize');
                 });
 
                 socket.on('time', function(data) {
@@ -179,7 +194,7 @@
             <a href="#" class="brand item">King of the Hill</a>
             <a id="network_nav" href="#" class="active item">Network</a>
             <a id="graph_nav" href="#" class="item">Graph</a>
-            <a id="info_nav" href="#" class="item">Info</a>
+            <!--<a id="info_nav" href="#" class="item">Info</a>-->
             </nav>
             <div id="cy"></div>
             <div id="graph">
@@ -191,7 +206,7 @@
                 </h2>
 
                 <div id="chart" class="c3"> </div></div>
-            <div id="info">
+            <!--<div id="info">
                 <h1 class="ui header">Welcome to KOTH</h1>
                 <h2 class="ui dividing header">
                     <i class="info icon"></i>
@@ -214,6 +229,7 @@
                 </h2>
 
             </div>
+            -->
             <div id="messages" class="ui inverted segment"></div>
         </body>
     </html>
