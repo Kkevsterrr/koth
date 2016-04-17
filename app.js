@@ -134,7 +134,7 @@ function claim_machine(id, team) {
 }
 
 function pad(i) { return (i < 10 ? "0" : "") + i }
-function first(arr) { return arr[0]; }
+function first(arr) { return arr[0].toLowerCase(); }
 function get_team_by_color(color) {
     for(team in teams) {
         if(teams[team] == color) { return team; }
@@ -148,13 +148,13 @@ function calculate_score() {
     ret = [];
     for(var i = 0; i < network["nodes"].length; i++) {
         node = network["nodes"][i];
-        color = node["data"]["color"];
+        owner = get_team_by_color(node["data"]["color"]);
         id = node["data"]["id"];
 
-        if(get_team_by_color(color) in teams) {
-            s[color] = s[color] + 1 || 1
+        if(owner in teams) {
+            s[owner] = s[owner] + 1 || 1
             for(port in ports[id]) {
-                if(ports[id][port] == "open") {s[color] += 3}
+                if(ports[id][port] == "open") {s[owner] += 3}
             }
         }
     }
@@ -176,8 +176,6 @@ function calculate_score() {
     chart_scores = ret;
     return chart_scores;
 }
-
-
 
 function check_valid(ip) {
     for(var i = 0; i< network["nodes"].length; i++) {
