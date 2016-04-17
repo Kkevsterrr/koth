@@ -10,6 +10,7 @@ require('events').EventEmitter.prototype._maxListeners = 0;
 
 var GAME_NAME = "koth1";
 var CLAIM_DELAY = 30000;
+var SCAN_DELAY = 60000;
 
 var index = fs.readFileSync(__dirname + '/index.html');
 var path = __dirname + "/games/" + GAME_NAME + "/saved/network";
@@ -74,23 +75,23 @@ var scorebot = http.createServer(function(req, res) {
 
 app.listen(3000);
 scorebot.listen(8000);
-scanner = setInterval(function() { scan_net() }, 30000);
+scanner = setInterval(function() { scan_net() }, SCAN_DELAY);
 
 var io = require('socket.io').listen(app);
-scan_net()
+//scan_net()
 String.prototype.cap = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
 
 function scan_net() {
-    io.sockets.emit('scan', { chart: calculate_score(), ports: ports} )
+    io.sockets.emit('scan', { chart: calculate_score(), ports: ports, graph: network} )
     console.log("Starting network wide scan...");
     scans = []
     for(var i = 0; i< network["nodes"].length; i++) {
         node = network["nodes"][i];
         ip = node["data"]["ip"][0];
         id = node["data"]["id"];
-        if(ip != "::ffff:127.0.0.1" && ip.indexOf("/16") == -1 && teams[id] == undefined) {
+        if(ip != "::ffff:127.0.0.1" && ip.indexOf("/16") == -1 && teams[id] == undefined && node["data"]["name"] != "Scorebot") {
             scan_box(ip, id);
         }
     }
@@ -218,7 +219,7 @@ function initialize_network() {
         ip = node["data"]["ip"][0];
         id = node["data"]["id"];
         ownership[id] = "none";
-        if(ip != "::ffff:127.0.0.1" && ip.indexOf("/16") == -1 && teams[id] == undefined) {
+        if(ip != "::ffff:127.0.0.1" && ip.indexOf("/16") == -1 && teams[id] == undefined && node["data"]["name"] != "Scorebot") {
         ports[id] = {};
         if (node["data"]["name"].indexOf("Router") == -1) {
             for(j = 0; j < node["data"]["ports"].length; j++) {

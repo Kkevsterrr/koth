@@ -79,6 +79,24 @@
     },
     {
       "data": {
+        "id": "Scorebot",
+        "weight": 1000,
+        "ports": [
+          22,
+          80
+        ],
+        "color": "black",
+        "name": "Scorebot",
+        "ip": [
+          "10.3.0.8",
+          "10.2.0.8",
+          "10.1.0.1",
+          "10.4.0.5"
+        ]
+      }
+    },
+    {
+      "data": {
         "id": "Metasploitable2-00001",
         "weight": 65,
         "ports": [
@@ -292,6 +310,14 @@
     },
     {
       "data": {
+        "source": "Scorebot",
+        "target": "router_f05750f3-7d7f-4976-9838-02c6d12781f3",
+        "color": "black",
+        "strength": 1000
+      }
+    },
+    {
+      "data": {
         "source": "InsecurePivot",
         "target": "router_f05750f3-7d7f-4976-9838-02c6d12781f3",
         "color": "black",
@@ -348,6 +374,14 @@
     },
     {
       "data": {
+        "source": "Scorebot",
+        "target": "router_81c60c75-83cc-495c-87a8-7fd5e1306948",
+        "color": "black",
+        "strength": 1000
+      }
+    },
+    {
+      "data": {
         "source": "Metasploitable2-00001",
         "target": "router_81c60c75-83cc-495c-87a8-7fd5e1306948",
         "color": "black",
@@ -384,6 +418,14 @@
         "target": "router_b3786f91-f78f-42f7-9860-62a7c96c5897",
         "color": "black",
         "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "Scorebot",
+        "target": "router_b3786f91-f78f-42f7-9860-62a7c96c5897",
+        "color": "black",
+        "strength": 1000
       }
     },
     {

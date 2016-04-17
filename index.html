@@ -63,6 +63,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js"></script>
 
         <script>
+            var api;
             $( document ).ready(function() {
 
                 $("#network_nav").click(function() {
@@ -107,28 +108,9 @@
                 chart.load({
                     columns: data["chart"]
                 });
-                cy.$('#'+data["id"]).data('color', data["color"]);
                 $('.qtip').remove();
-                cy.elements('node').qtip({
-                    content: function() {return get_qtip(this.data("id"), this.data("ip"), data)},
-                    position: {
-                        my: 'top center',
-                        at: 'bottom center'
-                    },
-                    show: {
-                        event: 'mouseover'
-                    },
-                    hide: {
-                        event: 'mouseout'
-                    },
-                    style: {
-                        classes: 'qtip-bootstrap',
-                        tip: {
-                            width: 16,
-                            height: 8
-                        }
-                    }
-                });
+                cy.destroy()
+                buildcy(data);
             });
             socket.on('update', function(data) {
                 cy.$('#'+data["id"]).data('color', data["color"]);
@@ -147,6 +129,26 @@
                         }
                     });
                     chart.resize();
+                    buildcy(data);
+                    api = cy.elements('node').qtip('api');
+
+                    $("#graph").hide()
+                   // $("#info").hide()
+                    $("#cy").show()
+                    console.log(data)
+                    for(var i = 0; i < data["messages"].length; i++) {
+                        console.log(data["messages"][i])
+                        $("#messages").prepend(data["messages"][i])
+                    }
+                    $(window).trigger('resize');
+                });
+
+                socket.on('time', function(data) {
+                    addMessage(data.time);
+                });
+                socket.on('error', console.error.bind(console));
+                socket.on('message', console.log.bind(console));
+                function buildcy(data) {
                     var cy = window.cy = cytoscape({
                         container: document.getElementById('cy'),
                         ready: function(){},
@@ -203,23 +205,7 @@
                             }
                         }
                     });
-                    $("#graph").hide()
-                   // $("#info").hide()
-                    $("#cy").show()
-                    console.log(data)
-                    for(var i = 0; i < data["messages"].length; i++) {
-                        console.log(data["messages"][i])
-                        $("#messages").prepend(data["messages"][i])
-                    }
-                    $(window).trigger('resize');
-                });
-
-                socket.on('time', function(data) {
-                    addMessage(data.time);
-                });
-                socket.on('error', console.error.bind(console));
-                socket.on('message', console.log.bind(console));
-
+                }
 
                 function get_qtip(id, ips, data) {
                     var p = {};

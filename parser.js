@@ -27,8 +27,11 @@ for (var i = 0; i < c["machines"].length; i++) {
         machine["data"]["name"] = "";
     }
     if(m["name"] == "Scorebot") {
-        //machine["data"]["name"] = m["name"];
-        continue;
+        machine["data"]["name"] = m["name"];
+        machine["data"]["color"] = "black";
+        machine["data"]["weight"] = 1000;
+
+        //continue;
     }
 
     machine["data"]["ip"] = [];
@@ -46,7 +49,7 @@ for (var i = 0; i < c["machines"].length; i++) {
 r = 1;
 for(var i = 0; i < c["networks"].length; i++) {
     router = {"data" : {}}
-    if (rids[c["networks"][i]["id"]] != undefined) {
+    if (rids[c["networks"][i]["id"]] != undefined && rids[c["networks"][i]["id"]].length > 1) {
         router["data"]["ip"] = [c["networks"][i]["ip"]];
         router["data"]["id"] = "router_" + c["networks"][i]["id"];
         router["data"]["name"] = "Router " + r++;
@@ -62,6 +65,11 @@ for(var i = 0; i < c["networks"].length; i++) {
                 edge["data"]["target"] = "router_" + net;
                 edge["data"]["color"] = "black";
                 edge["data"]["strength"] = 10;
+                console.log(rids[net][j]);
+                if(rids[net][j] == "Scorebot") {
+                    console.log("Set");
+                    edge["data"]["strength"] = 1000;
+                }
                 network["edges"].push(edge);
             }
     }
