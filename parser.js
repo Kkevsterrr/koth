@@ -15,7 +15,7 @@ for (var i = 0; i < c["machines"].length; i++) {
     machine["data"] = {};
     machine["data"]["id"] = m["name"].replace(/ /g,'');
     machine["data"]["weight"] = 65;
-    machine["data"]["ports"] = [22, 80]
+    machine["data"]["ports"] = [21, 22, 23, 25, 80, 3306]
 
     if(valid_teams[m["name"].toLowerCase()] != undefined) { //If this is an entry box
         machine["data"]["color"] = m["name"].toLowerCase();
@@ -47,6 +47,7 @@ for (var i = 0; i < c["machines"].length; i++) {
     console.log(machine)
 }
 r = 1;
+scorebot = false;
 for(var i = 0; i < c["networks"].length; i++) {
     router = {"data" : {}}
     if (rids[c["networks"][i]["id"]] != undefined && rids[c["networks"][i]["id"]].length > 1) {
@@ -56,22 +57,27 @@ for(var i = 0; i < c["networks"].length; i++) {
         router["data"]["weight"] = 65;
         router["data"]["color"] = "black";
         network["nodes"].push(router);
-        net = c["networks"][i]["id"]
-            for(var j = 0; j < rids[net].length; j++) {
-                edge = {}
-                edge["data"] = {}
-                edge["data"]["source"] = rids[net][j];
-                console.log(rids[net][j] + " --> " + net);
-                edge["data"]["target"] = "router_" + net;
-                edge["data"]["color"] = "black";
-                edge["data"]["strength"] = 10;
-                console.log(rids[net][j]);
-                if(rids[net][j] == "Scorebot") {
-                    console.log("Set");
-                    edge["data"]["strength"] = 1000;
-                }
-                network["edges"].push(edge);
+        net = c["networks"][i]["id"];
+        for(var j = 0; j < rids[net].length; j++) {
+            if (rids[net][j] == "Scorebot" && scorebot) {
+                continue;
             }
+            edge = {}
+            edge["data"] = {}
+            edge["data"]["source"] = rids[net][j];
+            console.log(rids[net][j] + " --> " + net);
+            edge["data"]["target"] = "router_" + net;
+            edge["data"]["color"] = "black";
+            edge["data"]["strength"] = 10;
+            console.log(rids[net][j]);
+            if(rids[net][j] == "Scorebot") {
+                console.log("Set");
+                edge["data"]["strength"] = 0;
+                scorebot = true;
+            }
+
+            network["edges"].push(edge);
+        }
     }
 }
 fs.writeFile("games/koth1/test.json", JSON.stringify(network, null, 2), 'utf-8');
