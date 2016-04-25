@@ -51,7 +51,7 @@ app.get('/', function (req, res) {
 });
 
 scorebot.get("/", function (req, res) {
-    handle(req, res, req.params.team);
+    handle(req, res, req.param("team"));
 });
 scorebot.post("/", function(req, res) {
     handle(req, res, req.body.team);
