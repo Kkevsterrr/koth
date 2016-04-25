@@ -46,7 +46,7 @@ app.get('/', function (req, res) {
 
 
 var scorebot = http.createServer(function(req, res) {
-    if(req.method=='POST') {
+    //if(req.method=='POST') {
         var body='';
         req.on('data', function (data) {
             body +=data;
@@ -83,7 +83,7 @@ var scorebot = http.createServer(function(req, res) {
             }
             res.end();
         });
-    }
+    //}
 });
 
 
