@@ -11,7 +11,7 @@ rids = {}
 function getPorts(name) {
     console.log(name);
     if(name.toLowerCase().indexOf("gbox") > -1) { //george vm 1
-       return [21, 22, 23, 25, 80];
+       return [21, 22, 25, 80, 81, 587];
     } else if(name.toLowerCase().indexOf("win") > -1) { //windows
        return [22, 80, 3389];
     } else if(name.toLowerCase().indexOf("kvm") > -1) { //windows
