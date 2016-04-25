@@ -48,13 +48,16 @@
           21,
           22,
           37,
+          80,
           587
         ],
         "color": "grey",
         "name": "",
         "ip": [
           "10.1.0.3",
-          "10.4.0.1"
+          "10.4.0.1",
+          "10.2.0.7",
+          "10.3.0.7"
         ]
       }
     },
@@ -539,6 +542,14 @@
     },
     {
       "data": {
+        "source": "KVM1",
+        "target": "router_b6991f19-1283-4088-82a4-c6069126fe4b",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
         "source": "Red1",
         "target": "router_b6991f19-1283-4088-82a4-c6069126fe4b",
         "color": "black",
@@ -612,6 +623,14 @@
     {
       "data": {
         "source": "GBox2",
+        "target": "router_bb8d56b1-5181-4467-a10d-c2c0f86167ae",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "KVM1",
         "target": "router_bb8d56b1-5181-4467-a10d-c2c0f86167ae",
         "color": "black",
         "strength": 10
