@@ -12,9 +12,9 @@ function getPorts(name) {
     console.log(name);
     if(name.toLowerCase().indexOf("gbox") > -1) { //george vm 1
        return [21, 22, 23, 25, 80];
-   } else if(name.toLowerCase().indexOf("win") > -1) { //windows
+    } else if(name.toLowerCase().indexOf("win") > -1) { //windows
        return [22, 80, 3389];
-   } else if(name.toLowerCase().indexOf("internal1") > -1) { //metasploitable
+   } else if(name.toLowerCase().indexOf("internal1") > -1 || name.toLowerCase().indexOf("insecure") > -1 ) { //metasploitable
         return [21, 22, 23, 25, 80, 2049, 3306, 5900];
     } else if(name.toLowerCase().indexOf("internal2") > -1) { //bee-bug
         return [21, 22, 25, 80, 666, 3306];
