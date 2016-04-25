@@ -15,7 +15,9 @@ function getPorts(name) {
         return [21, 22, 23, 25, 80, 3306]
     } else if(name.toLowerCase().indexOf("2") > -1) { //george vm 1
         return [21, 22, 23, 25, 80, 3306]
-    } 
+    } else {
+        return [21, 22, 23, 25, 80, 3306]
+    }
 }
 for (var i = 0; i < c["machines"].length; i++) {
     m = c["machines"][i];

@@ -25,9 +25,9 @@ var ports_path = path + "/saved/ports"
 var claim_times = {};
 var ports = {};
 var ownership = {};
-var scores = {}
-var messages = []
-var chart_scores = []
+var scores = {};
+var messages = [];
+var chart_scores = [];
 var teams = { "Green" : "green", "Red": "red", "Blue": "blue"}
 var network = initialize_network();
 
