@@ -9,14 +9,17 @@ GAME_NAME = "koth2";
 c = JSON.parse(fs.readFileSync(__dirname + "/games/" + GAME_NAME + "/cypher.json"), 'utf-8')
 rids = {}
 function getPorts(name) {
-    if(name.toLowerCase().indexOf("1") > -1) { //metasploitable
-        return [21, 22, 23, 25, 80, 3306]
-    } else if(name.toLowerCase().indexOf("2") > -1) { //bee-bug
-        return [21, 22, 23, 25, 80, 3306]
-    } else if(name.toLowerCase().indexOf("2") > -1) { //george vm 1
-        return [21, 22, 23, 25, 80, 3306]
+    console.log(name);
+    if(name.toLowerCase().indexOf("gbox") > -1) { //george vm 1
+       return [21, 22, 23, 25, 80];
+   } else if(name.toLowerCase().indexOf("win") > -1) { //windows
+       return [22, 80, 3389];
+   } else if(name.toLowerCase().indexOf("internal1") > -1) { //metasploitable
+        return [21, 22, 23, 25, 80, 2049, 3306, 5900];
+    } else if(name.toLowerCase().indexOf("internal2") > -1) { //bee-bug
+        return [21, 22, 25, 80, 666, 3306];
     } else {
-        return [21, 22, 23, 25, 80, 3306]
+        return [21, 22, 23, 25, 80, 3306];
     }
 }
 for (var i = 0; i < c["machines"].length; i++) {
