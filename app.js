@@ -6,6 +6,8 @@ var evilscan = require("evilscan");
 var async = require('async');
 var express = require('express');
 var e = require('events');
+var bodyParser = require("body-parser");
+
 require('events').EventEmitter.prototype._maxListeners = 0;
 
 
@@ -35,60 +37,58 @@ var d = new Date();
 
 var app = require('express')();
 var server = require('http').Server(app);
+var scorebot = require('express')();
+var scorebot_server = require('http').Server(scorebot);
 var io = require('socket.io')(server);
 app.use(express.static(__dirname + '/static'));
-
+scorebot.use(bodyParser.urlencoded({ extended: false }));
+scorebot.use(bodyParser.json());
 server.listen(3000);
+scorebot.listen(8000);
 
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/index.html');
 });
 
-
-var scorebot = http.createServer(function(req, res) {
-    //if(req.method=='POST') {
-        var body='';
-        req.on('data', function (data) {
-            body +=data;
-        });
-        req.on('end',function() {
-            var team = qs.parse(body)["team"];
-            var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
-
-            id = check_valid(ip);
-            if(teams[team] != undefined) {
-                now = new Date();
-
-                if(id in claim_times && team in claim_times[id] && now.getTime() - claim_times[id][team] < CLAIM_DELAY) {
-                    res.write("Cannot claim box - please wait.");
-                    claim_times[id][team] = now.getTime()
-                } else if(ownership[id] == team) {
-                    res.write("Team already owns this box - cannot reclaim.");
-                    claim_times[id][team] = now.getTime()
-                } else {
-                    if(!(ip in claim_times)) {
-                        claim_times[id] = {}
-                    }
-                    claim_times[id][team] = now.getTime();
-                    claim_machine(check_valid(ip), team);
-                    ownership[id] = team;
-                    messages.push(pad(now.getHours()) + ":" + pad(now.getMinutes()) + ":" + pad(now.getSeconds()) + " - <span class=\"ui " + teams[team] + " small inverted header\">" + team.cap() + "<\/span> team has claimed " + id + "<br/>");
-                    console.log(messages);
-                    res.write("Box claimed for team " + team + ".");
-                    console.log("Box " + id + " ("+ip+") claimed for team " + team + ".");
-                    save_network();
-                }
-            } else {
-                res.write("Unknown team.")
-            }
-            res.end();
-        });
-    //}
+scorebot.get("/", function (req, res) {
+    handle(req, res, req.params.team);
+});
+scorebot.post("/", function(req, res) {
+    handle(req, res, req.body.team);
 });
 
+function handle(req, res, team) {
+    var body='';
+    var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
+    id = check_valid(ip);
+    if(teams[team] != undefined && id != "") {
+        now = new Date();
 
-//app.listen(3000);
-scorebot.listen(8000);
+        if(id in claim_times && team in claim_times[id] && now.getTime() - claim_times[id][team] < CLAIM_DELAY) {
+            res.write("Cannot claim box - please wait.");
+            claim_times[id][team] = now.getTime()
+        } else if(ownership[id] == team) {
+            res.write("Team already owns this box - cannot reclaim.");
+            claim_times[id][team] = now.getTime()
+        } else {
+            if(!(ip in claim_times)) {
+                claim_times[id] = {}
+            }
+            claim_times[id][team] = now.getTime();
+            claim_machine(check_valid(ip), team);
+            ownership[id] = team;
+            messages.push(pad(now.getHours()) + ":" + pad(now.getMinutes()) + ":" + pad(now.getSeconds()) + " - <span class=\"ui " + teams[team] + " small inverted header\">" + team.cap() + "<\/span> team has claimed " + id + "<br/>");
+            console.log(messages);
+            res.write("Box claimed for team " + team + ".");
+            console.log("Box " + id + " ("+ip+") claimed for team " + team + ".");
+            save_network();
+        }
+    } else {
+        res.write("Unknown team or machine.")
+    }
+    res.end();
+}
+
 scanner = setInterval(function() { scan_net() }, SCAN_DELAY);
 
 //var io = require('socket.io').listen(app);
