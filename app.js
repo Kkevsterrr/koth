@@ -104,7 +104,14 @@ if (!Array.prototype.last){
         return this[this.length - 1];
     };
 };
-
+function isEntry(name) {
+    for(team in teams) {
+        if (name.indexOf(team) > -1) {
+            return teams[team];
+        }
+    }
+    return undefined;
+}
 function scan_net() {
     io.sockets.emit('scan', { chart: calculate_score(), ports: ports, graph: network} )
     console.log("Starting network wide scan...");
@@ -113,7 +120,7 @@ function scan_net() {
         node = network["nodes"][i];
         ip = node["data"]["ip"][0];
         id = node["data"]["id"];
-        if(ip != "::ffff:127.0.0.1" && ip.indexOf("/16") == -1 && teams[id] == undefined && node["data"]["name"] != "Scorebot") {
+        if(ip != "::ffff:127.0.0.1" && ip.indexOf("/16") == -1 && isEntry(id) == undefined && node["data"]["name"] != "Scorebot") {
             scan_box(ip, id);
         }
     }
@@ -202,6 +209,7 @@ function calculate_score() {
         i++;
     }
     chart_scores = ret;
+    save_network();
     return chart_scores;
 }
 
@@ -260,15 +268,15 @@ function initialize_network() {
         ip = node["data"]["ip"][0];
         id = node["data"]["id"];
         ownership[id] = "none";
-        if(ip != "::ffff:127.0.0.1" && ip.indexOf("/16") == -1 && teams[id] == undefined && node["data"]["name"] != "Scorebot") {
-        ports[id] = {};
-        if (node["data"]["name"].indexOf("Router") == -1) {
-            for(j = 0; j < node["data"]["ports"].length; j++) {
-                ports[id][node["data"]["ports"][j]] = "closed";
+        if(ip != "::ffff:127.0.0.1" && ip.indexOf("/16") == -1 && isEntry(id) == undefined && node["data"]["name"] != "Scorebot") {
+            ports[id] = {};
+            if (node["data"]["name"].indexOf("Router") == -1) {
+                for(j = 0; j < node["data"]["ports"].length; j++) {
+                    ports[id][node["data"]["ports"][j]] = "closed";
+                }
+                ownership[id] = (teams[id] != undefined) ? teams[id] : "none";
             }
-            ownership[id] = (teams[id] != undefined) ? teams[id] : "none";
         }
-    }
     }
     return net;
 }

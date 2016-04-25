@@ -35,16 +35,18 @@ for (var i = 0; i < c["machines"].length; i++) {
     machine["data"] = {};
     machine["data"]["id"] = m["name"].replace(/ /g,'');
     machine["data"]["weight"] = 5;
-    machine["data"]["ports"] = getPorts(machine["data"]["id"]);
 
     if(isEntry(m["name"]) != undefined) { //If this is an entry box
         machine["data"]["color"] = isEntry(m["name"]);
         machine["data"]["name"] = m["name"];
         //console.log(m);
+        machine["data"]["ports"] = [];
         machine["data"]["forwarded"] = m["network_connections"]["forward_ports"];
     } else {
         machine["data"]["color"] = "grey";
         machine["data"]["name"] = "";
+        machine["data"]["ports"] = getPorts(machine["data"]["id"]);
+
     }
     if(m["name"] == "Scorebot") {
         machine["data"]["name"] = m["name"];

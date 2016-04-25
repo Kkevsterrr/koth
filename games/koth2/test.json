@@ -4,6 +4,8 @@
       "data": {
         "id": "GBox1",
         "weight": 5,
+        "color": "grey",
+        "name": "",
         "ports": [
           21,
           22,
@@ -11,8 +13,6 @@
           25,
           80
         ],
-        "color": "grey",
-        "name": "",
         "ip": [
           "10.1.0.1",
           "10.4.0.3"
@@ -23,6 +23,8 @@
       "data": {
         "id": "GBox2",
         "weight": 5,
+        "color": "grey",
+        "name": "",
         "ports": [
           21,
           22,
@@ -31,8 +33,6 @@
           81,
           587
         ],
-        "color": "grey",
-        "name": "",
         "ip": [
           "10.1.0.2",
           "10.2.0.14",
@@ -44,6 +44,8 @@
       "data": {
         "id": "KVM1",
         "weight": 5,
+        "color": "grey",
+        "name": "",
         "ports": [
           7,
           21,
@@ -52,8 +54,6 @@
           80,
           587
         ],
-        "color": "grey",
-        "name": "",
         "ip": [
           "10.1.0.3",
           "10.4.0.1",
@@ -66,16 +66,9 @@
       "data": {
         "id": "Red1",
         "weight": 5,
-        "ports": [
-          21,
-          22,
-          23,
-          25,
-          80,
-          3306
-        ],
         "color": "red",
         "name": "Red1",
+        "ports": [],
         "ip": [
           "10.2.0.1",
           "10.1.0.4"
@@ -86,16 +79,9 @@
       "data": {
         "id": "Green1",
         "weight": 5,
-        "ports": [
-          21,
-          22,
-          23,
-          25,
-          80,
-          3306
-        ],
         "color": "green",
         "name": "Green1",
+        "ports": [],
         "ip": [
           "10.1.0.5",
           "10.3.0.4"
@@ -106,16 +92,9 @@
       "data": {
         "id": "Blue1",
         "weight": 5,
-        "ports": [
-          21,
-          22,
-          23,
-          25,
-          80,
-          3306
-        ],
         "color": "blue",
         "name": "Blue1",
+        "ports": [],
         "ip": [
           "10.2.0.2",
           "10.3.0.1"
@@ -126,16 +105,9 @@
       "data": {
         "id": "Red2",
         "weight": 5,
-        "ports": [
-          21,
-          22,
-          23,
-          25,
-          80,
-          3306
-        ],
         "color": "red",
         "name": "Red2",
+        "ports": [],
         "ip": [
           "10.2.0.3",
           "10.3.0.2"
@@ -146,16 +118,9 @@
       "data": {
         "id": "Blue2",
         "weight": 5,
-        "ports": [
-          21,
-          22,
-          23,
-          25,
-          80,
-          3306
-        ],
         "color": "blue",
         "name": "Blue2",
+        "ports": [],
         "ip": [
           "10.3.0.3",
           "10.1.0.7"
@@ -166,16 +131,9 @@
       "data": {
         "id": "Green2",
         "weight": 5,
-        "ports": [
-          21,
-          22,
-          23,
-          25,
-          80,
-          3306
-        ],
         "color": "green",
         "name": "Green2",
+        "ports": [],
         "ip": [
           "10.1.0.6",
           "10.2.0.4"
@@ -186,6 +144,8 @@
       "data": {
         "id": "Scorebot",
         "weight": 1000,
+        "color": "black",
+        "name": "Scorebot",
         "ports": [
           21,
           22,
@@ -194,8 +154,6 @@
           80,
           3306
         ],
-        "color": "black",
-        "name": "Scorebot",
         "ip": [
           "10.1.0.8",
           "10.3.0.5",
@@ -208,13 +166,13 @@
       "data": {
         "id": "WinPivot",
         "weight": 5,
+        "color": "grey",
+        "name": "",
         "ports": [
           22,
           80,
           3389
         ],
-        "color": "grey",
-        "name": "",
         "ip": [
           "10.1.0.9",
           "10.4.0.4",
@@ -227,6 +185,8 @@
       "data": {
         "id": "InsecurePivot1",
         "weight": 5,
+        "color": "grey",
+        "name": "",
         "ports": [
           21,
           22,
@@ -237,8 +197,6 @@
           3306,
           5900
         ],
-        "color": "grey",
-        "name": "",
         "ip": [
           "10.1.0.10",
           "10.2.0.6",
@@ -250,6 +208,8 @@
       "data": {
         "id": "GInternal2",
         "weight": 5,
+        "color": "grey",
+        "name": "",
         "ports": [
           21,
           22,
@@ -258,8 +218,6 @@
           666,
           3306
         ],
-        "color": "grey",
-        "name": "",
         "ip": [
           "10.1.0.13"
         ]
@@ -269,6 +227,8 @@
       "data": {
         "id": "RInternal2",
         "weight": 5,
+        "color": "grey",
+        "name": "",
         "ports": [
           21,
           22,
@@ -277,8 +237,6 @@
           666,
           3306
         ],
-        "color": "grey",
-        "name": "",
         "ip": [
           "10.2.0.9"
         ]
@@ -288,6 +246,8 @@
       "data": {
         "id": "BInternal2",
         "weight": 5,
+        "color": "grey",
+        "name": "",
         "ports": [
           21,
           22,
@@ -296,8 +256,6 @@
           666,
           3306
         ],
-        "color": "grey",
-        "name": "",
         "ip": [
           "10.3.0.9"
         ]
@@ -307,6 +265,8 @@
       "data": {
         "id": "BInternal1",
         "weight": 5,
+        "color": "grey",
+        "name": "",
         "ports": [
           21,
           22,
@@ -317,8 +277,6 @@
           3306,
           5900
         ],
-        "color": "grey",
-        "name": "",
         "ip": [
           "10.3.0.10"
         ]
@@ -328,6 +286,8 @@
       "data": {
         "id": "RInternal1",
         "weight": 5,
+        "color": "grey",
+        "name": "",
         "ports": [
           21,
           22,
@@ -338,8 +298,6 @@
           3306,
           5900
         ],
-        "color": "grey",
-        "name": "",
         "ip": [
           "10.2.0.10"
         ]
@@ -349,6 +307,8 @@
       "data": {
         "id": "GInternal1",
         "weight": 5,
+        "color": "grey",
+        "name": "",
         "ports": [
           21,
           22,
@@ -359,8 +319,6 @@
           3306,
           5900
         ],
-        "color": "grey",
-        "name": "",
         "ip": [
           "10.1.0.14"
         ]
@@ -370,6 +328,8 @@
       "data": {
         "id": "GBox1R",
         "weight": 5,
+        "color": "grey",
+        "name": "",
         "ports": [
           21,
           22,
@@ -377,8 +337,6 @@
           25,
           80
         ],
-        "color": "grey",
-        "name": "",
         "ip": [
           "10.2.0.13"
         ]
@@ -388,6 +346,8 @@
       "data": {
         "id": "GBox1B",
         "weight": 5,
+        "color": "grey",
+        "name": "",
         "ports": [
           21,
           22,
@@ -395,8 +355,6 @@
           25,
           80
         ],
-        "color": "grey",
-        "name": "",
         "ip": [
           "10.3.0.13"
         ]
