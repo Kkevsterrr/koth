@@ -240,6 +240,9 @@ function initialize_network() {
             init = __dirname + "/games/" + GAME_NAME + "/test.json";
             process.stdout.write("Reading initialization file for " + GAME_NAME + "...");
             net = JSON.parse(fs.readFileSync(init, 'utf8'));
+            scores = {};
+            ports = {};
+            messages = [];
             console.log("done".green);
         } catch (e) {
             console.log(e);
