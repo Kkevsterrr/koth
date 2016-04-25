@@ -4,16 +4,23 @@ var qs = require('querystring');
 var colors = require('colors');
 var evilscan = require("evilscan");
 var async = require('async');
+var express = require('express');
 var e = require('events');
 require('events').EventEmitter.prototype._maxListeners = 0;
 
 
-var GAME_NAME = "koth1";
+var GAME_NAME = "koth2";
 var CLAIM_DELAY = 30000;
 var SCAN_DELAY = 60000;
+var PORT_OPEN_SCORE = 3;
+var PORT_CLOSED_SCORE = 0;
 
 var index = fs.readFileSync(__dirname + '/index.html');
-var path = __dirname + "/games/" + GAME_NAME + "/saved/network";
+var path = __dirname + "/games/" + GAME_NAME;
+var save_path = path + "/saved/network";
+var scores_path = path + "/saved/scores"
+var messages_path = path + "/saved/messages"
+var ports_path = path + "/saved/ports"
 
 var claim_times = {};
 var ports = {};
@@ -26,10 +33,17 @@ var network = initialize_network();
 
 var d = new Date();
 
-var app = http.createServer(function(req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    res.end(index);
+var app = require('express')();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+app.use(express.static(__dirname + '/static'));
+
+server.listen(3000);
+
+app.get('/', function (req, res) {
+  res.sendFile(__dirname + '/index.html');
 });
+
 
 var scorebot = http.createServer(function(req, res) {
     if(req.method=='POST') {
@@ -73,15 +87,20 @@ var scorebot = http.createServer(function(req, res) {
 });
 
 
-app.listen(3000);
+//app.listen(3000);
 scorebot.listen(8000);
 scanner = setInterval(function() { scan_net() }, SCAN_DELAY);
 
-var io = require('socket.io').listen(app);
+//var io = require('socket.io').listen(app);
 //scan_net()
 String.prototype.cap = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
+if (!Array.prototype.last){
+    Array.prototype.last = function(){
+        return this[this.length - 1];
+    };
+};
 
 function scan_net() {
     io.sockets.emit('scan', { chart: calculate_score(), ports: ports, graph: network} )
@@ -154,24 +173,30 @@ function calculate_score() {
         if(owner in teams) {
             s[owner] = s[owner] + 1 || 1
             for(port in ports[id]) {
-                if(ports[id][port] == "open") {s[owner] += 3}
+                if(ports[id][port] == "open") {
+                    s[owner] += PORT_OPEN_SCORE
+                } else {
+                    s[owner] -= PORT_CLOSED_SCORE
+                }
             }
         }
     }
     console.log(s);
     for(var team in s) {
         if(scores[team] == undefined) {
-            scores[team] = [s[team]]
+            scores[team] = [s[team]];
         } else {
-            scores[team].push(s[team])
+            scores[team].push(scores[team].last() + s[team]);
         }
     }
-    console.log(scores);
     var i = 0;
     for(team in scores) {
-        ret[i] = [team]
-            ret[i] = ret[i].concat(scores[team])
-            i++;
+        console.log(team);
+        ret[i] = [team];
+        ret[i] = ret[i].concat(scores[team]);
+        console.log(ret);
+
+        i++;
     }
     chart_scores = ret;
     return chart_scores;
@@ -186,7 +211,16 @@ function check_valid(ip) {
 }
 
 function save_network() {
-    fs.writeFile(path, JSON.stringify(network, null, 4), 'utf-8', function(err) {
+    fs.writeFile(save_path, JSON.stringify(network, null, 4), 'utf-8', function(err) {
+        if(err) { return console.log(err); }
+    });
+    fs.writeFile(scores_path, JSON.stringify(scores, null, 4), 'utf-8', function(err) {
+        if(err) { return console.log(err); }
+    });
+    fs.writeFile(ports_path, JSON.stringify(ports, null, 4), 'utf-8', function(err) {
+        if(err) { return console.log(err); }
+    });
+    fs.writeFile(messages_path, JSON.stringify(messages, null, 4), 'utf-8', function(err) {
         if(err) { return console.log(err); }
     });
 }
@@ -195,7 +229,10 @@ function initialize_network() {
     net = {};
     try {
         process.stdout.write("Reading save data file for " + GAME_NAME + "...");
-        net = JSON.parse(fs.readFileSync(path, 'utf8'));
+        net = JSON.parse(fs.readFileSync(save_path, 'utf8'));
+        scores = JSON.parse(fs.readFileSync(scores_path, 'utf8'));
+        ports = JSON.parse(fs.readFileSync(ports_path, 'utf8'));
+        messages = JSON.parse(fs.readFileSync(messages_path, 'utf8'));
         console.log("done".green);
     } catch (e) {
         try {

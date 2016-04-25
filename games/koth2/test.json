@@ -3,7 +3,7 @@
     {
       "data": {
         "id": "GeorgeVM1",
-        "weight": 65,
+        "weight": 5,
         "ports": [
           21,
           22,
@@ -23,7 +23,7 @@
     {
       "data": {
         "id": "GeorgeVM2",
-        "weight": 65,
+        "weight": 5,
         "ports": [
           21,
           22,
@@ -43,7 +43,7 @@
     {
       "data": {
         "id": "KVM1",
-        "weight": 65,
+        "weight": 5,
         "ports": [
           21,
           22,
@@ -63,7 +63,7 @@
     {
       "data": {
         "id": "Red1",
-        "weight": 65,
+        "weight": 5,
         "ports": [
           21,
           22,
@@ -72,8 +72,8 @@
           80,
           3306
         ],
-        "color": "grey",
-        "name": "",
+        "color": "red",
+        "name": "Red1",
         "ip": [
           "10.2.0.1",
           "10.1.0.4"
@@ -83,7 +83,7 @@
     {
       "data": {
         "id": "Green1",
-        "weight": 65,
+        "weight": 5,
         "ports": [
           21,
           22,
@@ -92,8 +92,8 @@
           80,
           3306
         ],
-        "color": "grey",
-        "name": "",
+        "color": "green",
+        "name": "Green1",
         "ip": [
           "10.1.0.5",
           "10.3.0.4"
@@ -103,7 +103,7 @@
     {
       "data": {
         "id": "Blue1",
-        "weight": 65,
+        "weight": 5,
         "ports": [
           21,
           22,
@@ -112,8 +112,8 @@
           80,
           3306
         ],
-        "color": "grey",
-        "name": "",
+        "color": "blue",
+        "name": "Blue1",
         "ip": [
           "10.2.0.2",
           "10.3.0.1"
@@ -123,7 +123,7 @@
     {
       "data": {
         "id": "Red2",
-        "weight": 65,
+        "weight": 5,
         "ports": [
           21,
           22,
@@ -132,8 +132,8 @@
           80,
           3306
         ],
-        "color": "grey",
-        "name": "",
+        "color": "red",
+        "name": "Red2",
         "ip": [
           "10.2.0.3",
           "10.3.0.2"
@@ -143,7 +143,7 @@
     {
       "data": {
         "id": "Blue2",
-        "weight": 65,
+        "weight": 5,
         "ports": [
           21,
           22,
@@ -152,8 +152,8 @@
           80,
           3306
         ],
-        "color": "grey",
-        "name": "",
+        "color": "blue",
+        "name": "Blue2",
         "ip": [
           "10.3.0.3",
           "10.1.0.7"
@@ -163,7 +163,7 @@
     {
       "data": {
         "id": "Green2",
-        "weight": 65,
+        "weight": 5,
         "ports": [
           21,
           22,
@@ -172,8 +172,8 @@
           80,
           3306
         ],
-        "color": "grey",
-        "name": "",
+        "color": "green",
+        "name": "Green2",
         "ip": [
           "10.1.0.6",
           "10.2.0.4"
@@ -204,7 +204,7 @@
     {
       "data": {
         "id": "Windows7StudentVM-00001",
-        "weight": 65,
+        "weight": 5,
         "ports": [
           21,
           22,
@@ -224,7 +224,7 @@
     {
       "data": {
         "id": "InsecurePivot1",
-        "weight": 65,
+        "weight": 5,
         "ports": [
           21,
           22,
@@ -245,7 +245,7 @@
     {
       "data": {
         "id": "InsecurePivot2",
-        "weight": 65,
+        "weight": 5,
         "ports": [
           21,
           22,
@@ -265,29 +265,8 @@
     },
     {
       "data": {
-        "id": "HiddenPivot2",
-        "weight": 65,
-        "ports": [
-          21,
-          22,
-          23,
-          25,
-          80,
-          3306
-        ],
-        "color": "grey",
-        "name": "",
-        "ip": [
-          "10.1.0.12",
-          "10.2.0.8",
-          "10.3.0.8"
-        ]
-      }
-    },
-    {
-      "data": {
         "id": "GInternal2",
-        "weight": 65,
+        "weight": 5,
         "ports": [
           21,
           22,
@@ -306,7 +285,7 @@
     {
       "data": {
         "id": "RInternal2",
-        "weight": 65,
+        "weight": 5,
         "ports": [
           21,
           22,
@@ -325,7 +304,7 @@
     {
       "data": {
         "id": "BInternal2",
-        "weight": 65,
+        "weight": 5,
         "ports": [
           21,
           22,
@@ -344,7 +323,7 @@
     {
       "data": {
         "id": "BInternal1",
-        "weight": 65,
+        "weight": 5,
         "ports": [
           21,
           22,
@@ -363,7 +342,7 @@
     {
       "data": {
         "id": "RInternal1",
-        "weight": 65,
+        "weight": 5,
         "ports": [
           21,
           22,
@@ -382,7 +361,7 @@
     {
       "data": {
         "id": "GInternal1",
-        "weight": 65,
+        "weight": 5,
         "ports": [
           21,
           22,
@@ -400,33 +379,12 @@
     },
     {
       "data": {
-        "id": "HiddenPivot1",
-        "weight": 65,
-        "ports": [
-          21,
-          22,
-          23,
-          25,
-          80,
-          3306
-        ],
-        "color": "grey",
-        "name": "",
-        "ip": [
-          "10.1.0.15",
-          "10.2.0.11",
-          "10.3.0.11"
-        ]
-      }
-    },
-    {
-      "data": {
         "ip": [
           "10.1.0.254/16"
         ],
         "id": "router_15fb5ed8-7688-4e2d-9309-7d17bbc37101",
         "name": "Router 1",
-        "weight": 65,
+        "weight": 5,
         "color": "black"
       }
     },
@@ -437,7 +395,7 @@
         ],
         "id": "router_b6991f19-1283-4088-82a4-c6069126fe4b",
         "name": "Router 2",
-        "weight": 65,
+        "weight": 5,
         "color": "black"
       }
     },
@@ -448,18 +406,7 @@
         ],
         "id": "router_bb8d56b1-5181-4467-a10d-c2c0f86167ae",
         "name": "Router 3",
-        "weight": 65,
-        "color": "black"
-      }
-    },
-    {
-      "data": {
-        "ip": [
-          "10.4.0.254/16"
-        ],
-        "id": "router_9b21ed12-b165-4465-9081-f0647295105f",
-        "name": "Router 4",
-        "weight": 65,
+        "weight": 5,
         "color": "black"
       }
     }
@@ -555,14 +502,6 @@
     },
     {
       "data": {
-        "source": "HiddenPivot2",
-        "target": "router_15fb5ed8-7688-4e2d-9309-7d17bbc37101",
-        "color": "black",
-        "strength": 10
-      }
-    },
-    {
-      "data": {
         "source": "GInternal2",
         "target": "router_15fb5ed8-7688-4e2d-9309-7d17bbc37101",
         "color": "black",
@@ -572,14 +511,6 @@
     {
       "data": {
         "source": "GInternal1",
-        "target": "router_15fb5ed8-7688-4e2d-9309-7d17bbc37101",
-        "color": "black",
-        "strength": 10
-      }
-    },
-    {
-      "data": {
-        "source": "HiddenPivot1",
         "target": "router_15fb5ed8-7688-4e2d-9309-7d17bbc37101",
         "color": "black",
         "strength": 10
@@ -635,14 +566,6 @@
     },
     {
       "data": {
-        "source": "HiddenPivot2",
-        "target": "router_b6991f19-1283-4088-82a4-c6069126fe4b",
-        "color": "black",
-        "strength": 10
-      }
-    },
-    {
-      "data": {
         "source": "RInternal2",
         "target": "router_b6991f19-1283-4088-82a4-c6069126fe4b",
         "color": "black",
@@ -652,14 +575,6 @@
     {
       "data": {
         "source": "RInternal1",
-        "target": "router_b6991f19-1283-4088-82a4-c6069126fe4b",
-        "color": "black",
-        "strength": 10
-      }
-    },
-    {
-      "data": {
-        "source": "HiddenPivot1",
         "target": "router_b6991f19-1283-4088-82a4-c6069126fe4b",
         "color": "black",
         "strength": 10
@@ -715,14 +630,6 @@
     },
     {
       "data": {
-        "source": "HiddenPivot2",
-        "target": "router_bb8d56b1-5181-4467-a10d-c2c0f86167ae",
-        "color": "black",
-        "strength": 10
-      }
-    },
-    {
-      "data": {
         "source": "BInternal2",
         "target": "router_bb8d56b1-5181-4467-a10d-c2c0f86167ae",
         "color": "black",
@@ -733,46 +640,6 @@
       "data": {
         "source": "BInternal1",
         "target": "router_bb8d56b1-5181-4467-a10d-c2c0f86167ae",
-        "color": "black",
-        "strength": 10
-      }
-    },
-    {
-      "data": {
-        "source": "HiddenPivot1",
-        "target": "router_bb8d56b1-5181-4467-a10d-c2c0f86167ae",
-        "color": "black",
-        "strength": 10
-      }
-    },
-    {
-      "data": {
-        "source": "GeorgeVM1",
-        "target": "router_9b21ed12-b165-4465-9081-f0647295105f",
-        "color": "black",
-        "strength": 10
-      }
-    },
-    {
-      "data": {
-        "source": "GeorgeVM2",
-        "target": "router_9b21ed12-b165-4465-9081-f0647295105f",
-        "color": "black",
-        "strength": 10
-      }
-    },
-    {
-      "data": {
-        "source": "KVM1",
-        "target": "router_9b21ed12-b165-4465-9081-f0647295105f",
-        "color": "black",
-        "strength": 10
-      }
-    },
-    {
-      "data": {
-        "source": "Windows7StudentVM-00001",
-        "target": "router_9b21ed12-b165-4465-9081-f0647295105f",
         "color": "black",
         "strength": 10
       }
