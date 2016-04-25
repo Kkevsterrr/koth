@@ -60,7 +60,10 @@ scorebot.post("/", function(req, res) {
 function handle(req, res, team) {
     var body='';
     var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
+
     id = check_valid(ip);
+
+    console.log("Attempted claim from "+ip+" on machine id " + id + " for team " + team);
     if(teams[team] != undefined && id != "") {
         now = new Date();
 
