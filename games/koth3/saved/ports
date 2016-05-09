@@ -1,0 +1,142 @@
+{
+    "BWinInternal": {
+        "22": "closed",
+        "80": "closed",
+        "135": "closed",
+        "443": "closed",
+        "445": "closed",
+        "3306": "closed",
+        "3389": "closed",
+        "5357": "closed",
+        "5800": "closed",
+        "5900": "closed",
+        "5901": "closed",
+        "5902": "closed"
+    },
+    "[Bitnami]LetsChat-00001": {
+        "22": "closed",
+        "23": "closed",
+        "80": "closed",
+        "587": "closed",
+        "8080": "closed"
+    },
+    "[KOTH]KaliPivot": {
+        "21": "closed",
+        "22": "closed",
+        "54": "closed",
+        "80": "closed",
+        "8080": "closed"
+    },
+    "RWinInternal": {
+        "22": "closed",
+        "80": "closed",
+        "135": "closed",
+        "443": "closed",
+        "445": "closed",
+        "3306": "closed",
+        "3389": "closed",
+        "5357": "closed",
+        "5800": "closed",
+        "5900": "closed",
+        "5901": "closed",
+        "5902": "closed"
+    },
+    "GWinInternal": {
+        "22": "closed",
+        "80": "closed",
+        "135": "closed",
+        "443": "closed",
+        "445": "closed",
+        "3306": "closed",
+        "3389": "closed",
+        "5357": "closed",
+        "5800": "closed",
+        "5900": "closed",
+        "5901": "closed",
+        "5902": "closed"
+    },
+    "WinPivot": {
+        "22": "closed",
+        "80": "closed",
+        "135": "closed",
+        "443": "closed",
+        "445": "closed",
+        "3306": "closed",
+        "3389": "closed",
+        "5357": "closed",
+        "5800": "closed",
+        "5900": "closed",
+        "5901": "closed",
+        "5902": "closed"
+    },
+    "[KOTH]LetsChat-00001": {
+        "22": "closed",
+        "23": "closed",
+        "80": "closed",
+        "587": "closed",
+        "8080": "closed"
+    },
+    "[KOTH]LetsChat-00002": {
+        "22": "closed",
+        "23": "closed",
+        "80": "closed",
+        "587": "closed",
+        "8080": "closed"
+    },
+    "Bee-Box-00001": {
+        "21": "closed",
+        "22": "closed",
+        "23": "closed",
+        "80": "closed",
+        "666": "closed",
+        "8080": "closed"
+    },
+    "Bee-Box-00002": {
+        "21": "closed",
+        "22": "closed",
+        "23": "closed",
+        "80": "closed",
+        "666": "closed",
+        "8080": "closed"
+    },
+    "Bee-Box-00003": {
+        "21": "closed",
+        "22": "closed",
+        "23": "closed",
+        "80": "closed",
+        "666": "closed",
+        "8080": "closed"
+    },
+    "[KOTH]GBox1-00001": {
+        "21": "closed",
+        "22": "closed",
+        "25": "closed",
+        "80": "closed",
+        "81": "closed",
+        "587": "closed"
+    },
+    "[KOTH]GBox1-00002": {
+        "21": "closed",
+        "22": "closed",
+        "25": "closed",
+        "80": "closed",
+        "81": "closed",
+        "587": "closed"
+    },
+    "[KOTH]GBox1-00004": {
+        "21": "closed",
+        "22": "closed",
+        "25": "closed",
+        "80": "closed",
+        "81": "closed",
+        "587": "closed"
+    },
+    "GVM2Pivot": {
+        "21": "closed",
+        "22": "closed",
+        "25": "closed",
+        "80": "closed",
+        "81": "closed",
+        "587": "closed"
+    }
+}

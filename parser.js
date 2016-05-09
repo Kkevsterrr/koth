@@ -4,24 +4,26 @@ var teams = {"Green" : "green", "Blue" : "blue", "Red" : "red" }
 network = {};
 network["nodes"] = [];
 network["edges"] = [];
-GAME_NAME = "koth2";
+GAME_NAME = "koth3";
 
 c = JSON.parse(fs.readFileSync(__dirname + "/games/" + GAME_NAME + "/cypher.json"), 'utf-8')
 rids = {}
 function getPorts(name) {
     console.log(name);
-    if(name.toLowerCase().indexOf("gbox2") > -1) { //george vm 1
+    if(name.toLowerCase().indexOf("gvm2") > -1) { //george vm 1
        return [21, 22, 25, 80, 81, 587];
-   } else if(name.toLowerCase().indexOf("gbox1") > -1) { //windows
-        return [21, 22, 23, 25, 80];
+   } else if(name.toLowerCase().indexOf("gbox1") > -1) { //george vm 2
+        return [21, 22, 25, 80, 81, 587];
     } else if(name.toLowerCase().indexOf("win") > -1) { //windows
-       return [22, 80, 3389];
-    } else if(name.toLowerCase().indexOf("kvm") > -1) { //windows
-       return [7, 21, 22, 37, 80, 587];
-    } else if(name.toLowerCase().indexOf("internal1") > -1 || name.toLowerCase().indexOf("insecure") > -1 ) { //metasploitable
-        return [21, 22, 23, 25, 80, 2049, 3306, 5900];
-    } else if(name.toLowerCase().indexOf("internal2") > -1) { //bee-bug
-        return [21, 22, 25, 80, 666, 3306];
+       return [22, 80, 135, 443, 445, 3306, 3389, 5357, 5800, 5900, 5901, 5902];
+   } else if(name.toLowerCase().indexOf("half") > -1) { //kali half pivots
+       return [7, 22, 23, 37, 80];
+   } else if(name.toLowerCase().indexOf("kali") > -1 ) { //kali full pivots
+        return [21, 22, 54, 80, 8080];
+    } else if(name.toLowerCase().indexOf("lets") > -1) { //lets chat
+        return [22, 23, 80, 587, 8080];
+    } else if(name.toLowerCase().indexOf("bee") > -1) { //bee box
+        return [21, 22, 23, 80, 666, 8080];
     } else {
         return [21, 22, 23, 25, 80, 3306];
     }

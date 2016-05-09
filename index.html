@@ -108,7 +108,8 @@
                     columns: data["chart"]
                 });
                 $('.qtip').remove();
-                cy.destroy()
+                cy.elements('node').qtip('api').destroy();
+                //cy.destroy()
                 buildcy(data);
             });
             socket.on('update', function(data) {
@@ -132,7 +133,7 @@
                     api = cy.elements('node').qtip('api');
 
                     $("#graph").hide()
-                   // $("#info").hide()
+                    $("#info").hide()
                     $("#cy").show()
                     console.log(data)
                     for(var i = 0; i < data["messages"].length; i++) {

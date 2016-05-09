@@ -11,11 +11,14 @@ var bodyParser = require("body-parser");
 require('events').EventEmitter.prototype._maxListeners = 0;
 
 
-var GAME_NAME = "koth2";
+var GAME_NAME = "koth3";
 var CLAIM_DELAY = 30000;
 var SCAN_DELAY = 60000;
 var PORT_OPEN_SCORE = 3;
 var PORT_CLOSED_SCORE = 0;
+var BOX_OWNERSHIP_SCORE = 1;
+var EXP_SCORING = true;
+var EXP_VAL = 60;
 
 var index = fs.readFileSync(__dirname + '/index.html');
 var path = __dirname + "/games/" + GAME_NAME;
@@ -32,6 +35,7 @@ var messages = [];
 var chart_scores = [];
 var teams = { "Green" : "green", "Red": "red", "Blue": "blue"}
 var network = initialize_network();
+var scoring_iteration = 0;
 
 var d = new Date();
 
@@ -170,8 +174,9 @@ function get_team_by_color(color) {
     }
     return null;
 }
-
+calculate_score();
 function calculate_score() {
+    scoring_iteration += 1;
     console.log("Calculating score..");
     s = {};
     ret = [];
@@ -181,13 +186,20 @@ function calculate_score() {
         id = node["data"]["id"];
 
         if(owner in teams) {
-            s[owner] = s[owner] + 1 || 1
+            val = BOX_OWNERSHIP_SCORE;
+            val += scoring_iteration/EXP_VAL*val;
+            val = Math.round(val * 100) / 100
+            s[owner] = s[owner] + val || val
             for(port in ports[id]) {
+                val = 0.0;
                 if(ports[id][port] == "open") {
-                    s[owner] += PORT_OPEN_SCORE
+                    val = PORT_OPEN_SCORE
                 } else {
-                    s[owner] -= PORT_CLOSED_SCORE
+                    val = -1 * PORT_CLOSED_SCORE
                 }
+                val += scoring_iteration/EXP_VAL*val
+                val = Math.round(val * 100) / 100
+                s[owner] += val + scoring_iteration/EXP_VAL*val;
             }
         }
     }
@@ -244,6 +256,7 @@ function initialize_network() {
         scores = JSON.parse(fs.readFileSync(scores_path, 'utf8'));
         ports = JSON.parse(fs.readFileSync(ports_path, 'utf8'));
         messages = JSON.parse(fs.readFileSync(messages_path, 'utf8'));
+        scoring_iteration = scores[0].length
         console.log("done".green);
     } catch (e) {
         try {
@@ -268,6 +281,7 @@ function initialize_network() {
         ip = node["data"]["ip"][0];
         id = node["data"]["id"];
         ownership[id] = "none";
+
         if(ip != "::ffff:127.0.0.1" && ip.indexOf("/16") == -1 && isEntry(id) == undefined && node["data"]["name"] != "Scorebot") {
             ports[id] = {};
             if (node["data"]["name"].indexOf("Router") == -1) {
