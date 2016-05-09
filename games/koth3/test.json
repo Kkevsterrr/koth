@@ -57,14 +57,13 @@
           5902
         ],
         "ip": [
-          "10.2.0.2",
-          "10.4.0.2"
+          "10.2.0.2"
         ]
       }
     },
     {
       "data": {
-        "id": "[Bitnami]LetsChat-00001",
+        "id": "LetsChat",
         "weight": 5,
         "color": "grey",
         "name": "",
@@ -76,8 +75,7 @@
           8080
         ],
         "ip": [
-          "10.1.0.4",
-          "10.4.0.6"
+          "10.1.0.4"
         ]
       }
     },
@@ -105,7 +103,7 @@
     },
     {
       "data": {
-        "id": "[KOTH]KaliPivot",
+        "id": "KaliPivot",
         "weight": 5,
         "color": "grey",
         "name": "",
@@ -119,8 +117,7 @@
         "ip": [
           "10.2.0.8",
           "10.3.0.8",
-          "10.1.0.9",
-          "10.4.0.4"
+          "10.1.0.9"
         ]
       }
     },
@@ -203,7 +200,7 @@
     },
     {
       "data": {
-        "id": "[KOTH]LetsChat-00001",
+        "id": "LetsChatG",
         "weight": 5,
         "color": "grey",
         "name": "",
@@ -221,7 +218,7 @@
     },
     {
       "data": {
-        "id": "[KOTH]LetsChat-00002",
+        "id": "LetsChatB",
         "weight": 5,
         "color": "grey",
         "name": "",
@@ -296,7 +293,7 @@
     },
     {
       "data": {
-        "id": "[KOTH]GBox1-00001",
+        "id": "GBox1G",
         "weight": 5,
         "color": "grey",
         "name": "",
@@ -315,7 +312,7 @@
     },
     {
       "data": {
-        "id": "[KOTH]GBox1-00002",
+        "id": "GBox1",
         "weight": 5,
         "color": "grey",
         "name": "",
@@ -334,7 +331,7 @@
     },
     {
       "data": {
-        "id": "[KOTH]GBox1-00004",
+        "id": "GBox1R",
         "weight": 5,
         "color": "grey",
         "name": "",
@@ -417,7 +414,7 @@
     },
     {
       "data": {
-        "source": "[Bitnami]LetsChat-00001",
+        "source": "LetsChat",
         "target": "router_91b9b48f-68ef-4230-912b-8044f5049c7e",
         "color": "black",
         "strength": 10
@@ -433,7 +430,7 @@
     },
     {
       "data": {
-        "source": "[KOTH]KaliPivot",
+        "source": "KaliPivot",
         "target": "router_91b9b48f-68ef-4230-912b-8044f5049c7e",
         "color": "black",
         "strength": 10
@@ -465,7 +462,7 @@
     },
     {
       "data": {
-        "source": "[KOTH]GBox1-00004",
+        "source": "GBox1R",
         "target": "router_91b9b48f-68ef-4230-912b-8044f5049c7e",
         "color": "black",
         "strength": 10
@@ -497,7 +494,7 @@
     },
     {
       "data": {
-        "source": "[KOTH]KaliPivot",
+        "source": "KaliPivot",
         "target": "router_7faf17ed-eb6b-4885-875c-b7fd88d1ef9b",
         "color": "black",
         "strength": 10
@@ -513,7 +510,7 @@
     },
     {
       "data": {
-        "source": "[KOTH]LetsChat-00002",
+        "source": "LetsChatB",
         "target": "router_7faf17ed-eb6b-4885-875c-b7fd88d1ef9b",
         "color": "black",
         "strength": 10
@@ -529,7 +526,7 @@
     },
     {
       "data": {
-        "source": "[KOTH]GBox1-00002",
+        "source": "GBox1",
         "target": "router_7faf17ed-eb6b-4885-875c-b7fd88d1ef9b",
         "color": "black",
         "strength": 10
@@ -553,7 +550,7 @@
     },
     {
       "data": {
-        "source": "[KOTH]KaliPivot",
+        "source": "KaliPivot",
         "target": "router_81f7a409-e31b-426d-8980-cb2e18c7ce4b",
         "color": "black",
         "strength": 10
@@ -577,7 +574,7 @@
     },
     {
       "data": {
-        "source": "[KOTH]LetsChat-00001",
+        "source": "LetsChatG",
         "target": "router_81f7a409-e31b-426d-8980-cb2e18c7ce4b",
         "color": "black",
         "strength": 10
@@ -593,7 +590,7 @@
     },
     {
       "data": {
-        "source": "[KOTH]GBox1-00001",
+        "source": "GBox1G",
         "target": "router_81f7a409-e31b-426d-8980-cb2e18c7ce4b",
         "color": "black",
         "strength": 10
