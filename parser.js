@@ -10,17 +10,17 @@ c = JSON.parse(fs.readFileSync(__dirname + "/games/" + GAME_NAME + "/cypher.json
 rids = {}
 function getPorts(name) {
     console.log(name);
-    if(name.toLowerCase().indexOf("GVM2") > -1) { //george vm 1
+    if(name.toLowerCase().indexOf("gvm2") > -1) { //george vm 1
        return [7,21,22,80,81];
-   } else if(name.toLowerCase().indexOf("GVM1") > -1) { //george vm 2
+   } else if(name.toLowerCase().indexOf("gvm1") > -1) { //george vm 2
         return [21,22,25,80,587];
-    } else if(name.toLowerCase().indexOf("M3") > -1) { //windows
+    } else if(name.toLowerCase().indexOf("m3") > -1) { //windows
        return [21,22,80,1617,3306,4848,8080,8181];
-   } else if(name.toLowerCase().indexOf("Win7") > -1) { //kali half pivots
+   } else if(name.toLowerCase().indexOf("win7") > -1) { //kali half pivots
        return [22, 80, 3389, 5357, 8080];
    } else if(name.toLowerCase().indexOf("2012") > -1 ) { //kali full pivots
         return [21,22,23,53,80,443,3389];
-    } else if(name.toLowerCase().indexOf("M2") > -1) { //lets chat
+    } else if(name.toLowerCase().indexOf("m2") > -1) { //lets chat
         return [21, 22, 80, 3306, 6667];
     } else {
         return [21, 22, 23, 25, 80, 3306];
