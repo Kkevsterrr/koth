@@ -1,0 +1,1006 @@
+{
+  "nodes": [
+    {
+      "data": {
+        "id": "BlueM3",
+        "weight": 5,
+        "color": "blue",
+        "name": "Blue M3",
+        "ports": [
+          21,
+          22,
+          23,
+          25,
+          80,
+          3306
+        ],
+        "ip": [
+          "10.1.0.1"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "Red1",
+        "weight": 5,
+        "color": "red",
+        "name": "Red 1",
+        "ports": [
+          21,
+          22,
+          23,
+          25,
+          80,
+          3306
+        ],
+        "ip": [
+          "10.1.0.2",
+          null,
+          "10.3.0.2",
+          "10.4.0.1",
+          "10.5.0.3"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "BlueWin7",
+        "weight": 5,
+        "color": "blue",
+        "name": "BlueWin7",
+        "ports": [
+          21,
+          22,
+          23,
+          25,
+          80,
+          3306
+        ],
+        "ip": [
+          "10.1.0.3"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "BlueWin2012",
+        "weight": 5,
+        "color": "blue",
+        "name": "BlueWin2012",
+        "ports": [
+          21,
+          22,
+          23,
+          53,
+          80,
+          443,
+          3389
+        ],
+        "ip": [
+          "10.1.0.4"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "Red2",
+        "weight": 5,
+        "color": "red",
+        "name": "Red 2",
+        "ports": [
+          21,
+          22,
+          23,
+          25,
+          80,
+          3306
+        ],
+        "ip": [
+          "10.1.0.5",
+          null,
+          "10.5.0.6",
+          "10.4.0.6",
+          "10.3.0.6"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "BlueKali",
+        "weight": 5,
+        "color": "blue",
+        "name": "Blue Kali",
+        "ports": [
+          21,
+          22,
+          23,
+          25,
+          80,
+          3306
+        ],
+        "ip": [
+          "10.1.0.6"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "Scorebot",
+        "weight": 1000,
+        "color": "black",
+        "name": "Scorebot",
+        "ports": [
+          21,
+          22,
+          23,
+          25,
+          80,
+          3306
+        ],
+        "ip": [
+          "10.3.0.1",
+          "10.1.0.7",
+          "10.4.0.2",
+          "10.5.0.4",
+          null
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "GreenGVM1",
+        "weight": 5,
+        "color": "green",
+        "name": "Green GVM1",
+        "ports": [
+          21,
+          22,
+          23,
+          25,
+          80,
+          3306
+        ],
+        "ip": [
+          "10.3.0.3"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "GreenGVM2",
+        "weight": 5,
+        "color": "green",
+        "name": "Green GVM2",
+        "ports": [
+          21,
+          22,
+          23,
+          25,
+          80,
+          3306
+        ],
+        "ip": [
+          "10.3.0.4"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "PurpleGVM1",
+        "weight": 5,
+        "color": "purple",
+        "name": "Purple GVM1",
+        "ports": [
+          21,
+          22,
+          23,
+          25,
+          80,
+          3306
+        ],
+        "ip": [
+          "10.4.0.3"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "PurpleGVM2",
+        "weight": 5,
+        "color": "purple",
+        "name": "Purple GVM2",
+        "ports": [
+          21,
+          22,
+          23,
+          25,
+          80,
+          3306
+        ],
+        "ip": [
+          "10.4.0.4"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "BlueGVM1",
+        "weight": 5,
+        "color": "blue",
+        "name": "Blue GVM1",
+        "ports": [
+          21,
+          22,
+          23,
+          25,
+          80,
+          3306
+        ],
+        "ip": [
+          "10.1.0.8"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "BlueGVM2",
+        "weight": 5,
+        "color": "blue",
+        "name": "Blue GVM2",
+        "ports": [
+          21,
+          22,
+          23,
+          25,
+          80,
+          3306
+        ],
+        "ip": [
+          "10.1.0.9"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "YellowGVM1",
+        "weight": 5,
+        "color": "yellow",
+        "name": "Yellow GVM1",
+        "ports": [
+          21,
+          22,
+          23,
+          25,
+          80,
+          3306
+        ],
+        "ip": [
+          "10.5.0.1"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "YellowGVM2",
+        "weight": 5,
+        "color": "yellow",
+        "name": "Yellow GVM2",
+        "ports": [
+          21,
+          22,
+          23,
+          25,
+          80,
+          3306
+        ],
+        "ip": [
+          "10.5.0.2"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "Red3",
+        "weight": 5,
+        "color": "red",
+        "name": "Red 3",
+        "ports": [
+          21,
+          22,
+          23,
+          25,
+          80,
+          3306
+        ],
+        "ip": [
+          null,
+          "10.5.0.5",
+          "10.1.0.10",
+          "10.3.0.5",
+          "10.4.0.5"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "BlueM2",
+        "weight": 5,
+        "color": "blue",
+        "name": "Blue M2",
+        "ports": [
+          21,
+          22,
+          23,
+          25,
+          80,
+          3306
+        ],
+        "ip": [
+          "10.1.0.11"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "GreenM2",
+        "weight": 5,
+        "color": "green",
+        "name": "Green M2",
+        "ports": [
+          21,
+          22,
+          23,
+          25,
+          80,
+          3306
+        ],
+        "ip": [
+          "10.3.0.7"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "PurpleM2",
+        "weight": 5,
+        "color": "purple",
+        "name": "Purple M2",
+        "ports": [
+          21,
+          22,
+          23,
+          25,
+          80,
+          3306
+        ],
+        "ip": [
+          "10.4.0.7"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "YellowM2",
+        "weight": 5,
+        "color": "yellow",
+        "name": "Yellow M2",
+        "ports": [
+          21,
+          22,
+          23,
+          25,
+          80,
+          3306
+        ],
+        "ip": [
+          "10.5.0.7"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "GreenM3",
+        "weight": 5,
+        "color": "green",
+        "name": "Green M3",
+        "ports": [
+          21,
+          22,
+          23,
+          25,
+          80,
+          3306
+        ],
+        "ip": [
+          "10.3.0.8"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "GreenWin2012",
+        "weight": 5,
+        "color": "green",
+        "name": "GreenWin2012",
+        "ports": [
+          21,
+          22,
+          23,
+          53,
+          80,
+          443,
+          3389
+        ],
+        "ip": [
+          "10.3.0.9"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "GreenWin7",
+        "weight": 5,
+        "color": "green",
+        "name": "GreenWin7",
+        "ports": [
+          21,
+          22,
+          23,
+          25,
+          80,
+          3306
+        ],
+        "ip": [
+          "10.3.0.10"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "PurpleM3",
+        "weight": 5,
+        "color": "purple",
+        "name": "Purple M3",
+        "ports": [
+          21,
+          22,
+          23,
+          25,
+          80,
+          3306
+        ],
+        "ip": [
+          "10.4.0.8"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "YellowM3",
+        "weight": 5,
+        "color": "yellow",
+        "name": "Yellow M3",
+        "ports": [
+          21,
+          22,
+          23,
+          25,
+          80,
+          3306
+        ],
+        "ip": [
+          "10.5.0.8"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "YellowWin2012",
+        "weight": 5,
+        "color": "yellow",
+        "name": "YellowWin2012",
+        "ports": [
+          21,
+          22,
+          23,
+          53,
+          80,
+          443,
+          3389
+        ],
+        "ip": [
+          "10.5.0.9"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "PurpleWin2012",
+        "weight": 5,
+        "color": "purple",
+        "name": "PurpleWin2012",
+        "ports": [
+          21,
+          22,
+          23,
+          53,
+          80,
+          443,
+          3389
+        ],
+        "ip": [
+          "10.4.0.9"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "YellowWin7",
+        "weight": 5,
+        "color": "yellow",
+        "name": "YellowWin7",
+        "ports": [
+          21,
+          22,
+          23,
+          25,
+          80,
+          3306
+        ],
+        "ip": [
+          "10.5.0.10"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "PurpleWin7",
+        "weight": 5,
+        "color": "purple",
+        "name": "PurpleWin7",
+        "ports": [
+          21,
+          22,
+          23,
+          25,
+          80,
+          3306
+        ],
+        "ip": [
+          "10.4.0.10"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "GreenKali",
+        "weight": 5,
+        "color": "green",
+        "name": "Green Kali",
+        "ports": [
+          21,
+          22,
+          23,
+          25,
+          80,
+          3306
+        ],
+        "ip": [
+          "10.3.0.11"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "PurpleKali",
+        "weight": 5,
+        "color": "purple",
+        "name": "Purple Kali",
+        "ports": [
+          21,
+          22,
+          23,
+          25,
+          80,
+          3306
+        ],
+        "ip": [
+          "10.4.0.11"
+        ]
+      }
+    },
+    {
+      "data": {
+        "id": "YellowKali",
+        "weight": 5,
+        "color": "yellow",
+        "name": "Yellow Kali",
+        "ports": [
+          21,
+          22,
+          23,
+          25,
+          80,
+          3306
+        ],
+        "ip": [
+          "10.5.0.11"
+        ]
+      }
+    },
+    {
+      "data": {
+        "ip": [
+          "10.1.0.254/16"
+        ],
+        "id": "router_9e6762fa-ab88-4569-94b6-e644fc35b215",
+        "name": "Router 1",
+        "weight": 5,
+        "color": "black"
+      }
+    },
+    {
+      "data": {
+        "ip": [
+          "10.5.0.254/16"
+        ],
+        "id": "router_0aed5cd0-e1f8-4862-9d64-156aa4609b54",
+        "name": "Router 2",
+        "weight": 5,
+        "color": "black"
+      }
+    },
+    {
+      "data": {
+        "ip": [
+          "10.3.0.254/16"
+        ],
+        "id": "router_8671ced9-3d0a-4279-a32e-421049edde47",
+        "name": "Router 3",
+        "weight": 5,
+        "color": "black"
+      }
+    },
+    {
+      "data": {
+        "ip": [
+          "10.4.0.254/16"
+        ],
+        "id": "router_68eed12c-7316-4ad3-b544-3d7e23839f54",
+        "name": "Router 4",
+        "weight": 5,
+        "color": "black"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "data": {
+        "source": "BlueM3",
+        "target": "router_9e6762fa-ab88-4569-94b6-e644fc35b215",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "Red1",
+        "target": "router_9e6762fa-ab88-4569-94b6-e644fc35b215",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "BlueWin7",
+        "target": "router_9e6762fa-ab88-4569-94b6-e644fc35b215",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "BlueWin2012",
+        "target": "router_9e6762fa-ab88-4569-94b6-e644fc35b215",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "Red2",
+        "target": "router_9e6762fa-ab88-4569-94b6-e644fc35b215",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "BlueKali",
+        "target": "router_9e6762fa-ab88-4569-94b6-e644fc35b215",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "Scorebot",
+        "target": "router_9e6762fa-ab88-4569-94b6-e644fc35b215",
+        "color": "black",
+        "strength": 0
+      }
+    },
+    {
+      "data": {
+        "source": "BlueGVM1",
+        "target": "router_9e6762fa-ab88-4569-94b6-e644fc35b215",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "BlueGVM2",
+        "target": "router_9e6762fa-ab88-4569-94b6-e644fc35b215",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "Red3",
+        "target": "router_9e6762fa-ab88-4569-94b6-e644fc35b215",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "BlueM2",
+        "target": "router_9e6762fa-ab88-4569-94b6-e644fc35b215",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "Red1",
+        "target": "router_0aed5cd0-e1f8-4862-9d64-156aa4609b54",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "Red2",
+        "target": "router_0aed5cd0-e1f8-4862-9d64-156aa4609b54",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "YellowGVM1",
+        "target": "router_0aed5cd0-e1f8-4862-9d64-156aa4609b54",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "YellowGVM2",
+        "target": "router_0aed5cd0-e1f8-4862-9d64-156aa4609b54",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "Red3",
+        "target": "router_0aed5cd0-e1f8-4862-9d64-156aa4609b54",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "YellowM2",
+        "target": "router_0aed5cd0-e1f8-4862-9d64-156aa4609b54",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "YellowM3",
+        "target": "router_0aed5cd0-e1f8-4862-9d64-156aa4609b54",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "YellowWin2012",
+        "target": "router_0aed5cd0-e1f8-4862-9d64-156aa4609b54",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "YellowWin7",
+        "target": "router_0aed5cd0-e1f8-4862-9d64-156aa4609b54",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "YellowKali",
+        "target": "router_0aed5cd0-e1f8-4862-9d64-156aa4609b54",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "Red1",
+        "target": "router_8671ced9-3d0a-4279-a32e-421049edde47",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "Red2",
+        "target": "router_8671ced9-3d0a-4279-a32e-421049edde47",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "GreenGVM1",
+        "target": "router_8671ced9-3d0a-4279-a32e-421049edde47",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "GreenGVM2",
+        "target": "router_8671ced9-3d0a-4279-a32e-421049edde47",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "Red3",
+        "target": "router_8671ced9-3d0a-4279-a32e-421049edde47",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "GreenM2",
+        "target": "router_8671ced9-3d0a-4279-a32e-421049edde47",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "GreenM3",
+        "target": "router_8671ced9-3d0a-4279-a32e-421049edde47",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "GreenWin2012",
+        "target": "router_8671ced9-3d0a-4279-a32e-421049edde47",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "GreenWin7",
+        "target": "router_8671ced9-3d0a-4279-a32e-421049edde47",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "GreenKali",
+        "target": "router_8671ced9-3d0a-4279-a32e-421049edde47",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "Red1",
+        "target": "router_68eed12c-7316-4ad3-b544-3d7e23839f54",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "Red2",
+        "target": "router_68eed12c-7316-4ad3-b544-3d7e23839f54",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "PurpleGVM1",
+        "target": "router_68eed12c-7316-4ad3-b544-3d7e23839f54",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "PurpleGVM2",
+        "target": "router_68eed12c-7316-4ad3-b544-3d7e23839f54",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "Red3",
+        "target": "router_68eed12c-7316-4ad3-b544-3d7e23839f54",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "PurpleM2",
+        "target": "router_68eed12c-7316-4ad3-b544-3d7e23839f54",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "PurpleM3",
+        "target": "router_68eed12c-7316-4ad3-b544-3d7e23839f54",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "PurpleWin2012",
+        "target": "router_68eed12c-7316-4ad3-b544-3d7e23839f54",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "PurpleWin7",
+        "target": "router_68eed12c-7316-4ad3-b544-3d7e23839f54",
+        "color": "black",
+        "strength": 10
+      }
+    },
+    {
+      "data": {
+        "source": "PurpleKali",
+        "target": "router_68eed12c-7316-4ad3-b544-3d7e23839f54",
+        "color": "black",
+        "strength": 10
+      }
+    }
+  ]
+}

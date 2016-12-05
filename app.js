@@ -11,7 +11,7 @@ var bodyParser = require("body-parser");
 require('events').EventEmitter.prototype._maxListeners = 0;
 
 
-var GAME_NAME = "koth3";
+var GAME_NAME = "redblue1";
 var CLAIM_DELAY = 30000;
 var SCAN_DELAY = 60000;
 var PORT_OPEN_SCORE = 3;
@@ -33,7 +33,7 @@ var ownership = {};
 var scores = {};
 var messages = [];
 var chart_scores = [];
-var teams = { "Green" : "green", "Red": "red", "Blue": "blue"}
+var teams = {"Red" : "red", "Blue" : "blue", "Green" : "green", "Purple" : "purple", "Yellow": "yellow"}
 var network = initialize_network();
 var scoring_iteration = 0;
 
@@ -124,7 +124,7 @@ function scan_net() {
         node = network["nodes"][i];
         ip = node["data"]["ip"][0];
         id = node["data"]["id"];
-        if(ip != "::ffff:127.0.0.1" && ip.indexOf("/16") == -1 && isEntry(id) == undefined && node["data"]["name"] != "Scorebot") {
+        if(ip != "::ffff:127.0.0.1" && ip.indexOf("/16") == -1 && node["data"]["name"].indexOf("Red") == -1 && node["data"]["name"] != "Scorebot") { // && isEntry(id) == undefined &&
             scan_box(ip, id);
         }
     }
@@ -278,11 +278,11 @@ function initialize_network() {
     // Initialize ports & ownership
     for(var i = 0; i< net["nodes"].length; i++) {
         node = net["nodes"][i];
-        ip = node["data"]["ip"][0];
+        ip = get_ip(node);
         id = node["data"]["id"];
         ownership[id] = "none";
 
-        if(ip != "::ffff:127.0.0.1" && ip.indexOf("/16") == -1 && isEntry(id) == undefined && node["data"]["name"] != "Scorebot") {
+        if(ip != "::ffff:127.0.0.1" && ip.indexOf("/16") == -1 && node["data"]["name"].indexOf("Red") == -1 && node["data"]["name"] != "Scorebot") { // isEntry(id) == undefined &&
             ports[id] = {};
             if (node["data"]["name"].indexOf("Router") == -1) {
                 for(j = 0; j < node["data"]["ports"].length; j++) {
@@ -294,7 +294,13 @@ function initialize_network() {
     }
     return net;
 }
-
+function get_ip(node) {
+    for (j = 0; j < node["data"]["ip"].length; j++) {
+        if (node["data"]["ip"][j] != null) {
+            return node["data"]["ip"][j];
+        }
+    }
+}
 // Emit current data on connection
 io.on('connection', function(socket) {
     socket.emit('data', { graph: network, chart: chart_scores, colors: chart_scores.map(first), messages: messages, ports: ports });

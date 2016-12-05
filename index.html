@@ -83,16 +83,7 @@
                     $("#network_nav").removeClass("active");
                     $(window).trigger('resize');
                 });
-                /*
-                $("#info_nav").click(function() {
-                    $("#graph").hide(250);
-                    $("#cy").hide(250);
-                    $("#info").show(250);
-                    $("#graph_nav").removeClass("active");
-                    $("#info_nav").addClass("active");
-                    $("#network_nav").removeClass("active");
 
-                });*/
                 var chart;
             });
             String.prototype.cap = function() {
@@ -131,7 +122,7 @@
                     chart.resize();
                     buildcy(data);
                     api = cy.elements('node').qtip('api');
-
+                    cy.elements('node').qtip('api').destroy();
                     $("#graph").hide()
                     $("#info").hide()
                     $("#cy").show()
@@ -189,7 +180,8 @@
                         }),
                         elements: data.graph,
                     });
-                    cy.layout(defaults)
+                    cy.layout(defaults);
+
                     cy.elements('node').qtip({
                         content: function() {return get_qtip(this.data("id"), this.data("ip"), data)},
                         position: {
@@ -229,6 +221,8 @@
                     }
                     return "<center><b><u>IPs<\/u><\/b><br/>" + ips.join("<br/>") + port_html;
                 }
+
+
             </script>
         </head>
         <body>

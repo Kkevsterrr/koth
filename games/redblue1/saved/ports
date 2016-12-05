@@ -1,0 +1,230 @@
+{
+    "BlueM3": {
+        "21": "closed",
+        "22": "closed",
+        "23": "closed",
+        "25": "closed",
+        "80": "closed",
+        "3306": "closed"
+    },
+    "BlueWin7": {
+        "21": "closed",
+        "22": "closed",
+        "23": "closed",
+        "25": "closed",
+        "80": "closed",
+        "3306": "closed"
+    },
+    "BlueWin2012": {
+        "21": "closed",
+        "22": "closed",
+        "23": "closed",
+        "53": "closed",
+        "80": "closed",
+        "443": "closed",
+        "3389": "closed"
+    },
+    "BlueKali": {
+        "21": "closed",
+        "22": "closed",
+        "23": "closed",
+        "25": "closed",
+        "80": "closed",
+        "3306": "closed"
+    },
+    "GreenGVM1": {
+        "21": "closed",
+        "22": "closed",
+        "23": "closed",
+        "25": "closed",
+        "80": "closed",
+        "3306": "closed"
+    },
+    "GreenGVM2": {
+        "21": "closed",
+        "22": "closed",
+        "23": "closed",
+        "25": "closed",
+        "80": "closed",
+        "3306": "closed"
+    },
+    "PurpleGVM1": {
+        "21": "closed",
+        "22": "closed",
+        "23": "closed",
+        "25": "closed",
+        "80": "closed",
+        "3306": "closed"
+    },
+    "PurpleGVM2": {
+        "21": "closed",
+        "22": "closed",
+        "23": "closed",
+        "25": "closed",
+        "80": "closed",
+        "3306": "closed"
+    },
+    "BlueGVM1": {
+        "21": "closed",
+        "22": "closed",
+        "23": "closed",
+        "25": "closed",
+        "80": "closed",
+        "3306": "closed"
+    },
+    "BlueGVM2": {
+        "21": "closed",
+        "22": "closed",
+        "23": "closed",
+        "25": "closed",
+        "80": "closed",
+        "3306": "closed"
+    },
+    "YellowGVM1": {
+        "21": "closed",
+        "22": "closed",
+        "23": "closed",
+        "25": "closed",
+        "80": "closed",
+        "3306": "closed"
+    },
+    "YellowGVM2": {
+        "21": "closed",
+        "22": "closed",
+        "23": "closed",
+        "25": "closed",
+        "80": "closed",
+        "3306": "closed"
+    },
+    "BlueM2": {
+        "21": "closed",
+        "22": "closed",
+        "23": "closed",
+        "25": "closed",
+        "80": "closed",
+        "3306": "closed"
+    },
+    "GreenM2": {
+        "21": "closed",
+        "22": "closed",
+        "23": "closed",
+        "25": "closed",
+        "80": "closed",
+        "3306": "closed"
+    },
+    "PurpleM2": {
+        "21": "closed",
+        "22": "closed",
+        "23": "closed",
+        "25": "closed",
+        "80": "closed",
+        "3306": "closed"
+    },
+    "YellowM2": {
+        "21": "closed",
+        "22": "closed",
+        "23": "closed",
+        "25": "closed",
+        "80": "closed",
+        "3306": "closed"
+    },
+    "GreenM3": {
+        "21": "closed",
+        "22": "closed",
+        "23": "closed",
+        "25": "closed",
+        "80": "closed",
+        "3306": "closed"
+    },
+    "GreenWin2012": {
+        "21": "closed",
+        "22": "closed",
+        "23": "closed",
+        "53": "closed",
+        "80": "closed",
+        "443": "closed",
+        "3389": "closed"
+    },
+    "GreenWin7": {
+        "21": "closed",
+        "22": "closed",
+        "23": "closed",
+        "25": "closed",
+        "80": "closed",
+        "3306": "closed"
+    },
+    "PurpleM3": {
+        "21": "closed",
+        "22": "closed",
+        "23": "closed",
+        "25": "closed",
+        "80": "closed",
+        "3306": "closed"
+    },
+    "YellowM3": {
+        "21": "closed",
+        "22": "closed",
+        "23": "closed",
+        "25": "closed",
+        "80": "closed",
+        "3306": "closed"
+    },
+    "YellowWin2012": {
+        "21": "closed",
+        "22": "closed",
+        "23": "closed",
+        "53": "closed",
+        "80": "closed",
+        "443": "closed",
+        "3389": "closed"
+    },
+    "PurpleWin2012": {
+        "21": "closed",
+        "22": "closed",
+        "23": "closed",
+        "53": "closed",
+        "80": "closed",
+        "443": "closed",
+        "3389": "closed"
+    },
+    "YellowWin7": {
+        "21": "closed",
+        "22": "closed",
+        "23": "closed",
+        "25": "closed",
+        "80": "closed",
+        "3306": "closed"
+    },
+    "PurpleWin7": {
+        "21": "closed",
+        "22": "closed",
+        "23": "closed",
+        "25": "closed",
+        "80": "closed",
+        "3306": "closed"
+    },
+    "GreenKali": {
+        "21": "closed",
+        "22": "closed",
+        "23": "closed",
+        "25": "closed",
+        "80": "closed",
+        "3306": "closed"
+    },
+    "PurpleKali": {
+        "21": "closed",
+        "22": "closed",
+        "23": "closed",
+        "25": "closed",
+        "80": "closed",
+        "3306": "closed"
+    },
+    "YellowKali": {
+        "21": "closed",
+        "22": "closed",
+        "23": "closed",
+        "25": "closed",
+        "80": "closed",
+        "3306": "closed"
+    }
+}
