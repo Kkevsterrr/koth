@@ -122,7 +122,7 @@ function scan_net() {
     scans = []
     for(var i = 0; i< network["nodes"].length; i++) {
         node = network["nodes"][i];
-        ip = node["data"]["ip"][0];
+        ip = get_ip(node);
         id = node["data"]["id"];
         if(ip != "::ffff:127.0.0.1" && ip.indexOf("/16") == -1 && node["data"]["name"].indexOf("Red") == -1 && node["data"]["name"] != "Scorebot") { // && isEntry(id) == undefined &&
             scan_box(ip, id);
