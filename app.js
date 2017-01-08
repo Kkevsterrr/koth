@@ -10,7 +10,6 @@ var bodyParser = require("body-parser");
 
 require('events').EventEmitter.prototype._maxListeners = 0;
 
-
 var GAME_NAME = "redblue1";
 var CLAIM_DELAY = 30000;
 var SCAN_DELAY = 60000;
@@ -120,7 +119,7 @@ function scan_net() {
     io.sockets.emit('scan', { chart: calculate_score(), ports: ports, graph: network} )
     console.log("Starting network wide scan...");
     scans = []
-    for(var i = 0; i< network["nodes"].length; i++) {
+    for(var i = 0; i < network["nodes"].length; i++) {
         node = network["nodes"][i];
         ip = get_ip(node);
         id = node["data"]["id"];
