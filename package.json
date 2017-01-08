@@ -20,6 +20,7 @@
     "express": "latest",
     "native-dns": "latest",
     "net-ping": "latest",
+    "portscanner": "latest",
     "scp2": "latest",
     "simple-ssh": "latest"
   },
