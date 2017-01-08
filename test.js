@@ -28,6 +28,13 @@ import_checks(path1).then(function (cs) {
     node["data"] = {};
     node["data"]["ip"] = "127.0.0.1";
     node["data"]["port"] = 22;
+    node["data"]["dns"] = {
+      question: {
+        name: "mail.aces.local",
+        type: "A"
+      },
+      answer: "10.10.10.13"
+    }
     var options = {};
     options["scorebot_username"] = "scorebot";
     options["scorebot_password"] = "password";
@@ -36,7 +43,7 @@ import_checks(path1).then(function (cs) {
         console.log(check_name);
         mod = new cs[check_name](node, options);
         console.log(mod);
-        mod.check().then(function(res) { // TODO - BY THE TIME THE PROMISE COMPLETES< CHECK_NAME IS SSH, SO NEED TO RETURN THE NAME OF THE CHECK TOO!! 
+        mod.check().then(function(res) { // TODO - BY THE TIME THE PROMISE COMPLETES< CHECK_NAME IS SSH, SO NEED TO RETURN THE NAME OF THE CHECK TOO!!
             process.stdout.write("Checking " + check_name + ": ")
             console.log(res)
         }, function (error) {
