@@ -13,7 +13,7 @@
   "bugs": {
     "url": "https://github.com/Kkevsterrr/koth/issues"
   },
-  "dependenies": {
+  "dependencies": {
     "async": "latest",
     "colors": "latest",
     "evilscan": "latest",
