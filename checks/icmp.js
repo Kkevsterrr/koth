@@ -7,7 +7,6 @@ function CheckICMP(node, options) {
 
 CheckICMP.prototype.check = function() {
     ip = this.ip;
-    CheckPort = this.checkport;
     return new Promise(function (fulfill, reject) {
         var session = ping.createSession();
         session.pingHost(ip, function (error, target) {
