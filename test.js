@@ -52,7 +52,7 @@ import_checks(path1).then(function (cs) {
 });
 
 function fulfill_factory(name){
-  return function(res) { // TODO - BY THE TIME THE PROMISE COMPLETES< CHECK_NAME IS SSH, SO NEED TO RETURN THE NAME OF THE CHECK TOO!!
+  return function(res) {
       process.stdout.write("Checking " + name + ": ");
       console.log(res);
   };
