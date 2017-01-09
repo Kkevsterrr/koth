@@ -6,12 +6,12 @@ function CheckDNS(node, options) {
   this.ip = node.data.ip;
   this.question = node.data.dns.question;
   this.answer = node.data.dns.answer;
-  this.name = "CheckICMP";
+  this.name = "CheckDNS";
 }
 
 CheckDNS.prototype.check = function() {
     var ip = this.ip;
-    var question = this.question;
+    var question = dns.Question(this.question);
     var answer = this.answer;
     return new Promise(function (fulfill, reject) {
         var req = dns.Request({
