@@ -116,7 +116,6 @@ function count_open_ports(ports) {
 function scan_net() {
     io.sockets.emit('scan', {
         chart: calculate_score(),
-        ports: environment["ports"],
         graph: environment["graph"],
         machines: environment["machines"]
     });
@@ -266,13 +265,15 @@ function initialize_network() {
                 id = machine["id"]
                 environment["ownership"][id] = machine["owner"];
                 for(var j = 0; j < machine["connections"].length; j++) {
-                    edge = {}
-                    edge["data"] = {}
-                    edge["data"]["source"] = machine["connections"][j];
-                    edge["data"]["target"] = id;
-                    edge["data"]["color"] = "black";
-                    edge["data"]["strength"] = 10;
-                    graph["edges"].push(edge);
+                    if(machine["connections"][j] in network["routers"]) {
+                        edge = {}
+                        edge["data"] = {}
+                        edge["data"]["source"] = machine["connections"][j];
+                        edge["data"]["target"] = id;
+                        edge["data"]["color"] = "black";
+                        edge["data"]["strength"] = 10;
+                        graph["edges"].push(edge);
+                    }
                 }
                 node = {};
                 node["data"] = {};

@@ -17,11 +17,15 @@
             #graph {
                 margin: 20px;
                 height: 65%;
+                width: calc(100% - 100px);
                 display: none;
+            }
+            #cy {
+                width: 100%;
             }
             #cy, #graph, #ports {
                 height: 100%;
-                width: 100%;
+
                 position: absolute;
                 left: 0;
                 top: 40px;
@@ -116,7 +120,7 @@
                         (function loop(data) {
                             var rand = Math.round(Math.random() * (9000 - 500)) + 500;
                             setTimeout(function() {
-                                    randomUpdate(data);
+                                    randomScan(data);
                                     loop(data);
                             }, rand);
                         }(json));
@@ -133,11 +137,12 @@
             socket.on('scan', function(data) { scan(data) });
             socket.on('update', function(data) { update(data); });
             socket.on('data', function(data) { initial(data); });
-            //socket.on('time', function(data) { addMessage(data.time); });
             socket.on('error', console.error.bind(console));
             socket.on('message', console.log.bind(console));
 
-            function buildTables(teams, machines) {
+            function buildTables(data) {
+                teams = data["teams"];
+                machines = data["machines"];
                 for(var team_name in teams) {
                     color = teams[team_name];
                     $("#tables").append("<table class=\"ui " + color + " fixed table\"><thead><tr><th>"+team_name+" Machines</th><th>Status</th><th>Services</th></tr></thead><tbody id=\""+ color+"_machines\"></tbody></table>");
@@ -148,7 +153,7 @@
                     id = machine["id"]
                     color = machine["color"];
                     console.log(machine);
-                    $("#" + color + "_machines").append("<tr onclick=\"javascript:$('."+color + "_" + id.toLowerCase() + "').toggle('fast');\" class='" + color + "_" + name + "_control machine_row'><td><i class=\"chevron down icon\"></i>" + name + "</td><td><div class=\"ui indicating progress active\" data-percent=\""+machine["percentage"]+"\" style=\"margin-bottom: 0px;\"><div class=\"bar\" style=\"transition-duration: 300ms; width: "+machine["percentage"]+";\"></div></div></td><td>" + machine["status"] + "</td></tr>");
+                    $("#" + color + "_machines").append("<tr onclick=\"javascript:$('."+color + "_" + id.toLowerCase() + "').toggle('fast');\" class='" + color + "_" + id.toLowerCase() + "_control machine_row'><td><i class=\"chevron down icon\"></i>" + name + "</td><td><div id='" + color + "_" + id.toLowerCase() + "_bar' class=\"ui indicating progress active\" data-percent=\""+machine["percentage"] + "\" style=\"margin-bottom: 0px;\"><div id='" + color + "_" + id.toLowerCase() + "_bar_inner' class=\"bar\" style=\"transition-duration: 300ms; width: "+machine["percentage"]+"%;\"></div></div></td><td id=\"" + color + "_" + id.toLowerCase() + "_status\">" + machine["status"] + "</td></tr>");
                     for(var port in machine["ports"]) {
                         status = machine["ports"][port];
                         if(status == "open") {
@@ -164,31 +169,66 @@
                             icon = "warning";
                             icon_color = "yellow";
                         }
-                        $("#" + color + "_machines").append("<tr class=\"" + category + " " + color + "_" + id.toLowerCase() + "\"><td class=\"center aligned\"><i class=\"large " + icon_color + " " + icon + " icon\"></i> </td><td>" + port + "</td><td>"+status+"</td></tr>");
+                        $("#" + color + "_machines").append("<tr id=\"" + color + "_" + id.toLowerCase() + "_" + port + "\" class=\"" + category + " " + color + "_" + id.toLowerCase() + "\"><td class=\"center aligned\"><i id=\"" + color + "_" + id.toLowerCase() + "_" + port + "_icon\" class=\"large " + icon_color + " " + icon + " icon\"></i> </td><td>" + port + "</td><td id=\"" + color + "_" + id.toLowerCase() + "_" + port + "_status\">"+status+"</td></tr>");
                     }
                     $("."+color + "_" + id.toLowerCase()).hide();
                 }
             }
+            function updateTables(data) {
+                machines = data["machines"];
 
+                console.log(machines);
+                for(var name in machines) {
+                    machine = machines[name];
+                    id = machine["id"]
+                    color = machine["color"];
+                    $("#"+color+"_"+id.toLowerCase() + "_status").html(machine["status"])
+                    $("#"+color+"_"+id.toLowerCase() +"_bar").attr('data-percent', machine["percentage"])
+                    $("#"+color+"_"+id.toLowerCase() +"_bar_inner").css("width", machine["percentage"] + "%")
+
+                    for(var port in machine["ports"]) {
+                        status = machine["ports"][port];
+                        $("#" + color + "_" + id.toLowerCase() + "_" + port).removeClass("positive").removeClass("negative").removeClass("warning");
+                        $("#" + color + "_" + id.toLowerCase() + "_" + port + "_icon").removeClass("green").removeClass("yellow").removeClass("red");
+                        $("#" + color + "_" + id.toLowerCase() + "_" + port + "_icon").removeClass("checkmark").removeClass("remove").removeClass("warning");
+                        if(status == "open") {
+                            category = "positive";
+                            icon = "checkmark";
+                            icon_color = "green"
+                        } else if (status == "closed") {
+                            category = "negative";
+                            icon = "remove";
+                            icon_color = "red";
+                        } else if (status == "issue") {
+                            category = "warning";
+                            icon = "warning";
+                            icon_color = "yellow";
+                        }
+                        $("#" + color + "_" + id.toLowerCase() + "_" + port).addClass(category);
+                        $("#" + color + "_" + id.toLowerCase() + "_" + port + "_icon").addClass(icon).addClass(icon_color);
+                        $("#" + color + "_" + id.toLowerCase() + "_" + port + "_status").html(status);
+                    }
+                }
+            }
             function scan(data) {
                 console.log("Received scan data...");
                 chart.load({ columns: data["chart"] });
+                updateTables(data);
             }
 
             function update(data) {
                 cy.$('#'+data["id"]).data('color', data["color"]);
                 date = new Date();
                 $("#messages").prepend(pad(date.getHours()) + ":" + pad(date.getMinutes()) + ":" + pad(date.getSeconds()) + " - <span class=\"ui " + data["color"] + " small inverted header\">" + data["color"].cap() + "<\/span> team has claimed " + data["id"] + "<br/>");
+                updateTables(data);
                 $(window).trigger('resize');
             }
 
             function initial(data) {
-                if (initialized) {
-                    return
-                }
+                //if (initialized) { return; }
                 initialized = true;
                 console.log(data);
-                buildTables(data["teams"], data["machines"]);
+                buildTables(data);
                 buildChart(data);
                 buildMessages(data);
                 buildcy(data);
