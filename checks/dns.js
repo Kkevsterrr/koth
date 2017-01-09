@@ -25,9 +25,8 @@ CheckDNS.prototype.check = function() {
           fulfill("timeout");
         });
 
-        req.on('message', function (err, answer){
-          console.log(answer);
-          if (answer.answer.reduce((a,b) => {console.log(b.address); a || b.address === answer;}, false)) {
+        req.on('message', function (err, result){
+          if (result.answer.reduce((a,b) => {a || b.address === answer;}, false)) {
             fulfill("open");
           } else {
             fulfill("closed");
