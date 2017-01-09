@@ -1,0 +1,1572 @@
+{
+    "graph": {
+        "nodes": [
+            {
+                "data": {
+                    "id": "9e6762fa-ab88-4569-94b6-e644fc35b215",
+                    "name": "Router 1",
+                    "weight": 5,
+                    "color": "black",
+                    "ip": [
+                        "10.1.0.254/16"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "id": "0aed5cd0-e1f8-4862-9d64-156aa4609b54",
+                    "name": "Router 2",
+                    "weight": 5,
+                    "color": "black",
+                    "ip": [
+                        "10.5.0.254/16"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "id": "8671ced9-3d0a-4279-a32e-421049edde47",
+                    "name": "Router 3",
+                    "weight": 5,
+                    "color": "black",
+                    "ip": [
+                        "10.3.0.254/16"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "id": "68eed12c-7316-4ad3-b544-3d7e23839f54",
+                    "name": "Router 4",
+                    "weight": 5,
+                    "color": "black",
+                    "ip": [
+                        "10.4.0.254/16"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Blue M3",
+                    "id": "BlueM3",
+                    "weight": 5,
+                    "color": "blue",
+                    "ip": [
+                        "10.1.0.1"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Red 1",
+                    "id": "Red1",
+                    "weight": 5,
+                    "color": "red",
+                    "ip": [
+                        "10.1.0.2",
+                        null,
+                        "10.3.0.2",
+                        "10.4.0.1",
+                        "10.5.0.3"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "BlueWin7",
+                    "id": "BlueWin7",
+                    "weight": 5,
+                    "color": "blue",
+                    "ip": [
+                        "10.1.0.3"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "BlueWin2012",
+                    "id": "BlueWin2012",
+                    "weight": 5,
+                    "color": "blue",
+                    "ip": [
+                        "10.1.0.4"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Red 2",
+                    "id": "Red2",
+                    "weight": 5,
+                    "color": "red",
+                    "ip": [
+                        "10.1.0.5",
+                        null,
+                        "10.5.0.6",
+                        "10.4.0.6",
+                        "10.3.0.6"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Blue Kali",
+                    "id": "BlueKali",
+                    "weight": 5,
+                    "color": "blue",
+                    "ip": [
+                        "10.1.0.6"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Scorebot",
+                    "id": "Scorebot",
+                    "weight": 5,
+                    "color": "black",
+                    "ip": [
+                        "10.3.0.1",
+                        "10.1.0.7",
+                        "10.4.0.2",
+                        "10.5.0.4",
+                        null
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Green GVM1",
+                    "id": "GreenGVM1",
+                    "weight": 5,
+                    "color": "green",
+                    "ip": [
+                        "10.3.0.3"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Green GVM2",
+                    "id": "GreenGVM2",
+                    "weight": 5,
+                    "color": "green",
+                    "ip": [
+                        "10.3.0.4"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Purple GVM1",
+                    "id": "PurpleGVM1",
+                    "weight": 5,
+                    "color": "purple",
+                    "ip": [
+                        "10.4.0.3"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Purple GVM2",
+                    "id": "PurpleGVM2",
+                    "weight": 5,
+                    "color": "purple",
+                    "ip": [
+                        "10.4.0.4"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Blue GVM1",
+                    "id": "BlueGVM1",
+                    "weight": 5,
+                    "color": "blue",
+                    "ip": [
+                        "10.1.0.8"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Blue GVM2",
+                    "id": "BlueGVM2",
+                    "weight": 5,
+                    "color": "blue",
+                    "ip": [
+                        "10.1.0.9"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Yellow GVM1",
+                    "id": "YellowGVM1",
+                    "weight": 5,
+                    "color": "yellow",
+                    "ip": [
+                        "10.5.0.1"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Yellow GVM2",
+                    "id": "YellowGVM2",
+                    "weight": 5,
+                    "color": "yellow",
+                    "ip": [
+                        "10.5.0.2"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Red 3",
+                    "id": "Red3",
+                    "weight": 5,
+                    "color": "red",
+                    "ip": [
+                        null,
+                        "10.5.0.5",
+                        "10.1.0.10",
+                        "10.3.0.5",
+                        "10.4.0.5"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Blue M2",
+                    "id": "BlueM2",
+                    "weight": 5,
+                    "color": "blue",
+                    "ip": [
+                        "10.1.0.11"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Green M2",
+                    "id": "GreenM2",
+                    "weight": 5,
+                    "color": "green",
+                    "ip": [
+                        "10.3.0.7"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Purple M2",
+                    "id": "PurpleM2",
+                    "weight": 5,
+                    "color": "purple",
+                    "ip": [
+                        "10.4.0.7"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Yellow M2",
+                    "id": "YellowM2",
+                    "weight": 5,
+                    "color": "yellow",
+                    "ip": [
+                        "10.5.0.7"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Green M3",
+                    "id": "GreenM3",
+                    "weight": 5,
+                    "color": "green",
+                    "ip": [
+                        "10.3.0.8"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "GreenWin2012",
+                    "id": "GreenWin2012",
+                    "weight": 5,
+                    "color": "green",
+                    "ip": [
+                        "10.3.0.9"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "GreenWin7",
+                    "id": "GreenWin7",
+                    "weight": 5,
+                    "color": "green",
+                    "ip": [
+                        "10.3.0.10"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Purple M3",
+                    "id": "PurpleM3",
+                    "weight": 5,
+                    "color": "purple",
+                    "ip": [
+                        "10.4.0.8"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Yellow M3",
+                    "id": "YellowM3",
+                    "weight": 5,
+                    "color": "yellow",
+                    "ip": [
+                        "10.5.0.8"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "YellowWin2012",
+                    "id": "YellowWin2012",
+                    "weight": 5,
+                    "color": "yellow",
+                    "ip": [
+                        "10.5.0.9"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "PurpleWin2012",
+                    "id": "PurpleWin2012",
+                    "weight": 5,
+                    "color": "purple",
+                    "ip": [
+                        "10.4.0.9"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "YellowWin7",
+                    "id": "YellowWin7",
+                    "weight": 5,
+                    "color": "yellow",
+                    "ip": [
+                        "10.5.0.10"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "PurpleWin7",
+                    "id": "PurpleWin7",
+                    "weight": 5,
+                    "color": "purple",
+                    "ip": [
+                        "10.4.0.10"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Green Kali",
+                    "id": "GreenKali",
+                    "weight": 5,
+                    "color": "green",
+                    "ip": [
+                        "10.3.0.11"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Purple Kali",
+                    "id": "PurpleKali",
+                    "weight": 5,
+                    "color": "purple",
+                    "ip": [
+                        "10.4.0.11"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Yellow Kali",
+                    "id": "YellowKali",
+                    "weight": 5,
+                    "color": "yellow",
+                    "ip": [
+                        "10.5.0.11"
+                    ]
+                }
+            }
+        ],
+        "edges": [
+            {
+                "data": {
+                    "source": "9e6762fa-ab88-4569-94b6-e644fc35b215",
+                    "target": "BlueM3",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "9e6762fa-ab88-4569-94b6-e644fc35b215",
+                    "target": "Red1",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "e82404d4-24cf-405d-9122-3a5ecc980444",
+                    "target": "Red1",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "8671ced9-3d0a-4279-a32e-421049edde47",
+                    "target": "Red1",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "68eed12c-7316-4ad3-b544-3d7e23839f54",
+                    "target": "Red1",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "0aed5cd0-e1f8-4862-9d64-156aa4609b54",
+                    "target": "Red1",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "9e6762fa-ab88-4569-94b6-e644fc35b215",
+                    "target": "BlueWin7",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "9e6762fa-ab88-4569-94b6-e644fc35b215",
+                    "target": "BlueWin2012",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "9e6762fa-ab88-4569-94b6-e644fc35b215",
+                    "target": "Red2",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "e82404d4-24cf-405d-9122-3a5ecc980444",
+                    "target": "Red2",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "0aed5cd0-e1f8-4862-9d64-156aa4609b54",
+                    "target": "Red2",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "68eed12c-7316-4ad3-b544-3d7e23839f54",
+                    "target": "Red2",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "8671ced9-3d0a-4279-a32e-421049edde47",
+                    "target": "Red2",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "9e6762fa-ab88-4569-94b6-e644fc35b215",
+                    "target": "BlueKali",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "8671ced9-3d0a-4279-a32e-421049edde47",
+                    "target": "Scorebot",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "9e6762fa-ab88-4569-94b6-e644fc35b215",
+                    "target": "Scorebot",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "68eed12c-7316-4ad3-b544-3d7e23839f54",
+                    "target": "Scorebot",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "0aed5cd0-e1f8-4862-9d64-156aa4609b54",
+                    "target": "Scorebot",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "e82404d4-24cf-405d-9122-3a5ecc980444",
+                    "target": "Scorebot",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "8671ced9-3d0a-4279-a32e-421049edde47",
+                    "target": "GreenGVM1",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "8671ced9-3d0a-4279-a32e-421049edde47",
+                    "target": "GreenGVM2",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "68eed12c-7316-4ad3-b544-3d7e23839f54",
+                    "target": "PurpleGVM1",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "68eed12c-7316-4ad3-b544-3d7e23839f54",
+                    "target": "PurpleGVM2",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "9e6762fa-ab88-4569-94b6-e644fc35b215",
+                    "target": "BlueGVM1",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "9e6762fa-ab88-4569-94b6-e644fc35b215",
+                    "target": "BlueGVM2",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "0aed5cd0-e1f8-4862-9d64-156aa4609b54",
+                    "target": "YellowGVM1",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "0aed5cd0-e1f8-4862-9d64-156aa4609b54",
+                    "target": "YellowGVM2",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "e82404d4-24cf-405d-9122-3a5ecc980444",
+                    "target": "Red3",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "0aed5cd0-e1f8-4862-9d64-156aa4609b54",
+                    "target": "Red3",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "9e6762fa-ab88-4569-94b6-e644fc35b215",
+                    "target": "Red3",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "8671ced9-3d0a-4279-a32e-421049edde47",
+                    "target": "Red3",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "68eed12c-7316-4ad3-b544-3d7e23839f54",
+                    "target": "Red3",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "9e6762fa-ab88-4569-94b6-e644fc35b215",
+                    "target": "BlueM2",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "8671ced9-3d0a-4279-a32e-421049edde47",
+                    "target": "GreenM2",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "68eed12c-7316-4ad3-b544-3d7e23839f54",
+                    "target": "PurpleM2",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "0aed5cd0-e1f8-4862-9d64-156aa4609b54",
+                    "target": "YellowM2",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "8671ced9-3d0a-4279-a32e-421049edde47",
+                    "target": "GreenM3",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "8671ced9-3d0a-4279-a32e-421049edde47",
+                    "target": "GreenWin2012",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "8671ced9-3d0a-4279-a32e-421049edde47",
+                    "target": "GreenWin7",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "68eed12c-7316-4ad3-b544-3d7e23839f54",
+                    "target": "PurpleM3",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "0aed5cd0-e1f8-4862-9d64-156aa4609b54",
+                    "target": "YellowM3",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "0aed5cd0-e1f8-4862-9d64-156aa4609b54",
+                    "target": "YellowWin2012",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "68eed12c-7316-4ad3-b544-3d7e23839f54",
+                    "target": "PurpleWin2012",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "0aed5cd0-e1f8-4862-9d64-156aa4609b54",
+                    "target": "YellowWin7",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "68eed12c-7316-4ad3-b544-3d7e23839f54",
+                    "target": "PurpleWin7",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "8671ced9-3d0a-4279-a32e-421049edde47",
+                    "target": "GreenKali",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "68eed12c-7316-4ad3-b544-3d7e23839f54",
+                    "target": "PurpleKali",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "0aed5cd0-e1f8-4862-9d64-156aa4609b54",
+                    "target": "YellowKali",
+                    "color": "black",
+                    "strength": 10
+                }
+            }
+        ]
+    },
+    "chart": [
+        [
+            "Blue",
+            134.27416666666653
+        ],
+        [
+            "Red",
+            58.87500000000001
+        ],
+        [
+            "Green",
+            134.27416666666653
+        ],
+        [
+            "Purple",
+            134.27416666666653
+        ],
+        [
+            "Yellow",
+            134.27416666666653
+        ]
+    ],
+    "teams": {
+        "Red": "red",
+        "Blue": "blue",
+        "Green": "green",
+        "Purple": "purple",
+        "Yellow": "yellow"
+    },
+    "messages": [],
+    "ports": {},
+    "machines": {
+        "Blue M3": {
+            "name": "Blue M3",
+            "id": "BlueM3",
+            "ports": {
+                "21": "open",
+                "22": "open",
+                "80": "open",
+                "1617": "open",
+                "3306": "open",
+                "4848": "open",
+                "8080": "open",
+                "8181": "open"
+            },
+            "color": "blue",
+            "status": "8/8",
+            "percentage": "100%",
+            "ip": [
+                "10.1.0.1"
+            ],
+            "owner": "Blue",
+            "connections": [
+                "9e6762fa-ab88-4569-94b6-e644fc35b215"
+            ]
+        },
+        "Red 1": {
+            "name": "Red 1",
+            "id": "Red1",
+            "ports": {
+                "21": "open",
+                "22": "open",
+                "23": "open",
+                "25": "open",
+                "80": "open",
+                "3306": "open"
+            },
+            "color": "red",
+            "status": "6/6",
+            "percentage": "100%",
+            "ip": [
+                "10.1.0.2",
+                null,
+                "10.3.0.2",
+                "10.4.0.1",
+                "10.5.0.3"
+            ],
+            "owner": "Red",
+            "connections": [
+                "9e6762fa-ab88-4569-94b6-e644fc35b215",
+                "e82404d4-24cf-405d-9122-3a5ecc980444",
+                "8671ced9-3d0a-4279-a32e-421049edde47",
+                "68eed12c-7316-4ad3-b544-3d7e23839f54",
+                "0aed5cd0-e1f8-4862-9d64-156aa4609b54"
+            ]
+        },
+        "BlueWin7": {
+            "name": "BlueWin7",
+            "id": "BlueWin7",
+            "ports": {
+                "22": "open",
+                "80": "open",
+                "3389": "open",
+                "5357": "open",
+                "8080": "open"
+            },
+            "color": "blue",
+            "status": "5/5",
+            "percentage": "100%",
+            "ip": [
+                "10.1.0.3"
+            ],
+            "owner": "Blue",
+            "connections": [
+                "9e6762fa-ab88-4569-94b6-e644fc35b215"
+            ]
+        },
+        "BlueWin2012": {
+            "name": "BlueWin2012",
+            "id": "BlueWin2012",
+            "ports": {
+                "21": "open",
+                "22": "open",
+                "23": "open",
+                "53": "open",
+                "80": "open",
+                "443": "open",
+                "3389": "open"
+            },
+            "color": "blue",
+            "status": "7/7",
+            "percentage": "100%",
+            "ip": [
+                "10.1.0.4"
+            ],
+            "owner": "Blue",
+            "connections": [
+                "9e6762fa-ab88-4569-94b6-e644fc35b215"
+            ]
+        },
+        "Red 2": {
+            "name": "Red 2",
+            "id": "Red2",
+            "ports": {
+                "21": "open",
+                "22": "open",
+                "23": "open",
+                "25": "open",
+                "80": "open",
+                "3306": "open"
+            },
+            "color": "red",
+            "status": "6/6",
+            "percentage": "100%",
+            "ip": [
+                "10.1.0.5",
+                null,
+                "10.5.0.6",
+                "10.4.0.6",
+                "10.3.0.6"
+            ],
+            "owner": "Red",
+            "connections": [
+                "9e6762fa-ab88-4569-94b6-e644fc35b215",
+                "e82404d4-24cf-405d-9122-3a5ecc980444",
+                "0aed5cd0-e1f8-4862-9d64-156aa4609b54",
+                "68eed12c-7316-4ad3-b544-3d7e23839f54",
+                "8671ced9-3d0a-4279-a32e-421049edde47"
+            ]
+        },
+        "Blue Kali": {
+            "name": "Blue Kali",
+            "id": "BlueKali",
+            "ports": {
+                "21": "open",
+                "22": "open",
+                "23": "open",
+                "25": "open",
+                "80": "open",
+                "3306": "open"
+            },
+            "color": "blue",
+            "status": "6/6",
+            "percentage": "100%",
+            "ip": [
+                "10.1.0.6"
+            ],
+            "owner": "Blue",
+            "connections": [
+                "9e6762fa-ab88-4569-94b6-e644fc35b215"
+            ]
+        },
+        "Scorebot": {
+            "name": "Scorebot",
+            "id": "Scorebot",
+            "ports": {
+                "21": "open",
+                "22": "open",
+                "23": "open",
+                "25": "open",
+                "80": "open",
+                "3306": "open"
+            },
+            "color": "black",
+            "status": "6/6",
+            "percentage": "100%",
+            "ip": [
+                "10.3.0.1",
+                "10.1.0.7",
+                "10.4.0.2",
+                "10.5.0.4",
+                null
+            ],
+            "owner": "none",
+            "connections": [
+                "8671ced9-3d0a-4279-a32e-421049edde47",
+                "9e6762fa-ab88-4569-94b6-e644fc35b215",
+                "68eed12c-7316-4ad3-b544-3d7e23839f54",
+                "0aed5cd0-e1f8-4862-9d64-156aa4609b54",
+                "e82404d4-24cf-405d-9122-3a5ecc980444"
+            ]
+        },
+        "Green GVM1": {
+            "name": "Green GVM1",
+            "id": "GreenGVM1",
+            "ports": {
+                "21": "open",
+                "22": "open",
+                "25": "open",
+                "80": "open",
+                "587": "open"
+            },
+            "color": "green",
+            "status": "5/5",
+            "percentage": "100%",
+            "ip": [
+                "10.3.0.3"
+            ],
+            "owner": "Green",
+            "connections": [
+                "8671ced9-3d0a-4279-a32e-421049edde47"
+            ]
+        },
+        "Green GVM2": {
+            "name": "Green GVM2",
+            "id": "GreenGVM2",
+            "ports": {
+                "7": "open",
+                "21": "open",
+                "22": "open",
+                "80": "open",
+                "81": "open"
+            },
+            "color": "green",
+            "status": "5/5",
+            "percentage": "100%",
+            "ip": [
+                "10.3.0.4"
+            ],
+            "owner": "Green",
+            "connections": [
+                "8671ced9-3d0a-4279-a32e-421049edde47"
+            ]
+        },
+        "Purple GVM1": {
+            "name": "Purple GVM1",
+            "id": "PurpleGVM1",
+            "ports": {
+                "21": "open",
+                "22": "open",
+                "25": "open",
+                "80": "open",
+                "587": "open"
+            },
+            "color": "purple",
+            "status": "5/5",
+            "percentage": "100%",
+            "ip": [
+                "10.4.0.3"
+            ],
+            "owner": "Purple",
+            "connections": [
+                "68eed12c-7316-4ad3-b544-3d7e23839f54"
+            ]
+        },
+        "Purple GVM2": {
+            "name": "Purple GVM2",
+            "id": "PurpleGVM2",
+            "ports": {
+                "7": "open",
+                "21": "open",
+                "22": "open",
+                "80": "open",
+                "81": "open"
+            },
+            "color": "purple",
+            "status": "5/5",
+            "percentage": "100%",
+            "ip": [
+                "10.4.0.4"
+            ],
+            "owner": "Purple",
+            "connections": [
+                "68eed12c-7316-4ad3-b544-3d7e23839f54"
+            ]
+        },
+        "Blue GVM1": {
+            "name": "Blue GVM1",
+            "id": "BlueGVM1",
+            "ports": {
+                "21": "open",
+                "22": "open",
+                "25": "open",
+                "80": "open",
+                "587": "open"
+            },
+            "color": "blue",
+            "status": "5/5",
+            "percentage": "100%",
+            "ip": [
+                "10.1.0.8"
+            ],
+            "owner": "Blue",
+            "connections": [
+                "9e6762fa-ab88-4569-94b6-e644fc35b215"
+            ]
+        },
+        "Blue GVM2": {
+            "name": "Blue GVM2",
+            "id": "BlueGVM2",
+            "ports": {
+                "7": "open",
+                "21": "open",
+                "22": "open",
+                "80": "open",
+                "81": "open"
+            },
+            "color": "blue",
+            "status": "5/5",
+            "percentage": "100%",
+            "ip": [
+                "10.1.0.9"
+            ],
+            "owner": "Blue",
+            "connections": [
+                "9e6762fa-ab88-4569-94b6-e644fc35b215"
+            ]
+        },
+        "Yellow GVM1": {
+            "name": "Yellow GVM1",
+            "id": "YellowGVM1",
+            "ports": {
+                "21": "open",
+                "22": "open",
+                "25": "open",
+                "80": "open",
+                "587": "open"
+            },
+            "color": "yellow",
+            "status": "5/5",
+            "percentage": "100%",
+            "ip": [
+                "10.5.0.1"
+            ],
+            "owner": "Yellow",
+            "connections": [
+                "0aed5cd0-e1f8-4862-9d64-156aa4609b54"
+            ]
+        },
+        "Yellow GVM2": {
+            "name": "Yellow GVM2",
+            "id": "YellowGVM2",
+            "ports": {
+                "7": "open",
+                "21": "open",
+                "22": "open",
+                "80": "open",
+                "81": "open"
+            },
+            "color": "yellow",
+            "status": "5/5",
+            "percentage": "100%",
+            "ip": [
+                "10.5.0.2"
+            ],
+            "owner": "Yellow",
+            "connections": [
+                "0aed5cd0-e1f8-4862-9d64-156aa4609b54"
+            ]
+        },
+        "Red 3": {
+            "name": "Red 3",
+            "id": "Red3",
+            "ports": {
+                "21": "open",
+                "22": "open",
+                "23": "open",
+                "25": "open",
+                "80": "open",
+                "3306": "open"
+            },
+            "color": "red",
+            "status": "6/6",
+            "percentage": "100%",
+            "ip": [
+                null,
+                "10.5.0.5",
+                "10.1.0.10",
+                "10.3.0.5",
+                "10.4.0.5"
+            ],
+            "owner": "Red",
+            "connections": [
+                "e82404d4-24cf-405d-9122-3a5ecc980444",
+                "0aed5cd0-e1f8-4862-9d64-156aa4609b54",
+                "9e6762fa-ab88-4569-94b6-e644fc35b215",
+                "8671ced9-3d0a-4279-a32e-421049edde47",
+                "68eed12c-7316-4ad3-b544-3d7e23839f54"
+            ]
+        },
+        "Blue M2": {
+            "name": "Blue M2",
+            "id": "BlueM2",
+            "ports": {
+                "21": "open",
+                "22": "open",
+                "80": "open",
+                "3306": "open",
+                "6667": "open"
+            },
+            "color": "blue",
+            "status": "5/5",
+            "percentage": "100%",
+            "ip": [
+                "10.1.0.11"
+            ],
+            "owner": "Blue",
+            "connections": [
+                "9e6762fa-ab88-4569-94b6-e644fc35b215"
+            ]
+        },
+        "Green M2": {
+            "name": "Green M2",
+            "id": "GreenM2",
+            "ports": {
+                "21": "open",
+                "22": "open",
+                "80": "open",
+                "3306": "open",
+                "6667": "open"
+            },
+            "color": "green",
+            "status": "5/5",
+            "percentage": "100%",
+            "ip": [
+                "10.3.0.7"
+            ],
+            "owner": "Green",
+            "connections": [
+                "8671ced9-3d0a-4279-a32e-421049edde47"
+            ]
+        },
+        "Purple M2": {
+            "name": "Purple M2",
+            "id": "PurpleM2",
+            "ports": {
+                "21": "open",
+                "22": "open",
+                "80": "open",
+                "3306": "open",
+                "6667": "open"
+            },
+            "color": "purple",
+            "status": "5/5",
+            "percentage": "100%",
+            "ip": [
+                "10.4.0.7"
+            ],
+            "owner": "Purple",
+            "connections": [
+                "68eed12c-7316-4ad3-b544-3d7e23839f54"
+            ]
+        },
+        "Yellow M2": {
+            "name": "Yellow M2",
+            "id": "YellowM2",
+            "ports": {
+                "21": "open",
+                "22": "open",
+                "80": "open",
+                "3306": "open",
+                "6667": "open"
+            },
+            "color": "yellow",
+            "status": "5/5",
+            "percentage": "100%",
+            "ip": [
+                "10.5.0.7"
+            ],
+            "owner": "Yellow",
+            "connections": [
+                "0aed5cd0-e1f8-4862-9d64-156aa4609b54"
+            ]
+        },
+        "Green M3": {
+            "name": "Green M3",
+            "id": "GreenM3",
+            "ports": {
+                "21": "open",
+                "22": "open",
+                "80": "open",
+                "1617": "open",
+                "3306": "open",
+                "4848": "open",
+                "8080": "open",
+                "8181": "open"
+            },
+            "color": "green",
+            "status": "8/8",
+            "percentage": "100%",
+            "ip": [
+                "10.3.0.8"
+            ],
+            "owner": "Green",
+            "connections": [
+                "8671ced9-3d0a-4279-a32e-421049edde47"
+            ]
+        },
+        "GreenWin2012": {
+            "name": "GreenWin2012",
+            "id": "GreenWin2012",
+            "ports": {
+                "21": "open",
+                "22": "open",
+                "23": "open",
+                "53": "open",
+                "80": "open",
+                "443": "open",
+                "3389": "open"
+            },
+            "color": "green",
+            "status": "7/7",
+            "percentage": "100%",
+            "ip": [
+                "10.3.0.9"
+            ],
+            "owner": "Green",
+            "connections": [
+                "8671ced9-3d0a-4279-a32e-421049edde47"
+            ]
+        },
+        "GreenWin7": {
+            "name": "GreenWin7",
+            "id": "GreenWin7",
+            "ports": {
+                "22": "open",
+                "80": "open",
+                "3389": "open",
+                "5357": "open",
+                "8080": "open"
+            },
+            "color": "green",
+            "status": "5/5",
+            "percentage": "100%",
+            "ip": [
+                "10.3.0.10"
+            ],
+            "owner": "Green",
+            "connections": [
+                "8671ced9-3d0a-4279-a32e-421049edde47"
+            ]
+        },
+        "Purple M3": {
+            "name": "Purple M3",
+            "id": "PurpleM3",
+            "ports": {
+                "21": "open",
+                "22": "open",
+                "80": "open",
+                "1617": "open",
+                "3306": "open",
+                "4848": "open",
+                "8080": "open",
+                "8181": "open"
+            },
+            "color": "purple",
+            "status": "8/8",
+            "percentage": "100%",
+            "ip": [
+                "10.4.0.8"
+            ],
+            "owner": "Purple",
+            "connections": [
+                "68eed12c-7316-4ad3-b544-3d7e23839f54"
+            ]
+        },
+        "Yellow M3": {
+            "name": "Yellow M3",
+            "id": "YellowM3",
+            "ports": {
+                "21": "open",
+                "22": "open",
+                "80": "open",
+                "1617": "open",
+                "3306": "open",
+                "4848": "open",
+                "8080": "open",
+                "8181": "open"
+            },
+            "color": "yellow",
+            "status": "8/8",
+            "percentage": "100%",
+            "ip": [
+                "10.5.0.8"
+            ],
+            "owner": "Yellow",
+            "connections": [
+                "0aed5cd0-e1f8-4862-9d64-156aa4609b54"
+            ]
+        },
+        "YellowWin2012": {
+            "name": "YellowWin2012",
+            "id": "YellowWin2012",
+            "ports": {
+                "21": "open",
+                "22": "open",
+                "23": "open",
+                "53": "open",
+                "80": "open",
+                "443": "open",
+                "3389": "open"
+            },
+            "color": "yellow",
+            "status": "7/7",
+            "percentage": "100%",
+            "ip": [
+                "10.5.0.9"
+            ],
+            "owner": "Yellow",
+            "connections": [
+                "0aed5cd0-e1f8-4862-9d64-156aa4609b54"
+            ]
+        },
+        "PurpleWin2012": {
+            "name": "PurpleWin2012",
+            "id": "PurpleWin2012",
+            "ports": {
+                "21": "open",
+                "22": "open",
+                "23": "open",
+                "53": "open",
+                "80": "open",
+                "443": "open",
+                "3389": "open"
+            },
+            "color": "purple",
+            "status": "7/7",
+            "percentage": "100%",
+            "ip": [
+                "10.4.0.9"
+            ],
+            "owner": "Purple",
+            "connections": [
+                "68eed12c-7316-4ad3-b544-3d7e23839f54"
+            ]
+        },
+        "YellowWin7": {
+            "name": "YellowWin7",
+            "id": "YellowWin7",
+            "ports": {
+                "22": "open",
+                "80": "open",
+                "3389": "open",
+                "5357": "open",
+                "8080": "open"
+            },
+            "color": "yellow",
+            "status": "5/5",
+            "percentage": "100%",
+            "ip": [
+                "10.5.0.10"
+            ],
+            "owner": "Yellow",
+            "connections": [
+                "0aed5cd0-e1f8-4862-9d64-156aa4609b54"
+            ]
+        },
+        "PurpleWin7": {
+            "name": "PurpleWin7",
+            "id": "PurpleWin7",
+            "ports": {
+                "22": "open",
+                "80": "open",
+                "3389": "open",
+                "5357": "open",
+                "8080": "open"
+            },
+            "color": "purple",
+            "status": "5/5",
+            "percentage": "100%",
+            "ip": [
+                "10.4.0.10"
+            ],
+            "owner": "Purple",
+            "connections": [
+                "68eed12c-7316-4ad3-b544-3d7e23839f54"
+            ]
+        },
+        "Green Kali": {
+            "name": "Green Kali",
+            "id": "GreenKali",
+            "ports": {
+                "21": "open",
+                "22": "open",
+                "23": "open",
+                "25": "open",
+                "80": "open",
+                "3306": "open"
+            },
+            "color": "green",
+            "status": "6/6",
+            "percentage": "100%",
+            "ip": [
+                "10.3.0.11"
+            ],
+            "owner": "Green",
+            "connections": [
+                "8671ced9-3d0a-4279-a32e-421049edde47"
+            ]
+        },
+        "Purple Kali": {
+            "name": "Purple Kali",
+            "id": "PurpleKali",
+            "ports": {
+                "21": "open",
+                "22": "open",
+                "23": "open",
+                "25": "open",
+                "80": "open",
+                "3306": "open"
+            },
+            "color": "purple",
+            "status": "6/6",
+            "percentage": "100%",
+            "ip": [
+                "10.4.0.11"
+            ],
+            "owner": "Purple",
+            "connections": [
+                "68eed12c-7316-4ad3-b544-3d7e23839f54"
+            ]
+        },
+        "Yellow Kali": {
+            "name": "Yellow Kali",
+            "id": "YellowKali",
+            "ports": {
+                "21": "open",
+                "22": "open",
+                "23": "open",
+                "25": "open",
+                "80": "open",
+                "3306": "open"
+            },
+            "color": "yellow",
+            "status": "6/6",
+            "percentage": "100%",
+            "ip": [
+                "10.5.0.11"
+            ],
+            "owner": "Yellow",
+            "connections": [
+                "0aed5cd0-e1f8-4862-9d64-156aa4609b54"
+            ]
+        }
+    },
+    "ignore": [
+        "Red"
+    ]
+}
