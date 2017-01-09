@@ -114,12 +114,6 @@
                             var rand = Math.round(Math.random() * (9000 - 500)) + 500;
                             setTimeout(function() {
                                     randomUpdate(data);
-                                    loop(data);
-                            }, rand);
-                        }(json));
-                        (function loop(data) {
-                            var rand = Math.round(Math.random() * (9000 - 500)) + 500;
-                            setTimeout(function() {
                                     randomScan(data);
                                     loop(data);
                             }, rand);
