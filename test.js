@@ -1,5 +1,6 @@
 var CheckSSH = require("./checks/ssh");
 var CheckICMP = require('./checks/icmp');
+var CheckDNS = require('./checks/dns');
 var fs = require("fs");
 var path_module = require('path');
 
@@ -25,21 +26,21 @@ function import_checks(path) {
 }
 import_checks(path1).then(function (cs) {
     var node = {};
-    node["data"] = {};
-    node["data"]["ip"] = "127.0.0.1";
-    node["data"]["port"] = 22;
-    node["data"]["dns"] = {
+    node.data = {};
+    node.data.ip = "127.0.0.1";
+    node.data.port = 22;
+    node.data.dns = {
       question: {
         name: "mail.aces.local",
         type: "A"
       },
       answer: "10.10.10.13"
-    }
+    };
     var options = {};
-    options["scorebot_username"] = "scorebot";
-    options["scorebot_password"] = "password";
+    options.scorebot_username = "student";
+    options.scorebot_password = "student1@";
     console.log(cs);
-    for(check_name in cs) {
+    for(var check_name in cs) {
         console.log(check_name);
         mod = new cs[check_name](node, options);
         console.log(mod);
