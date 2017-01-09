@@ -306,7 +306,7 @@ function get_ip(node) {
 }
 // Emit current data on connection
 io.on('connection', function(socket) {
-    socket.emit('data', {
+    /*socket.emit('data', {
         graph: environment["graph"],
         chart: environment["chart_scores"],
         teams: environment["teams"],
@@ -314,5 +314,5 @@ io.on('connection', function(socket) {
         ports: environment["ports"],
         machines: environment["machines"],
         ignore: environment["ignore"]
-    });
+    });*/
 });

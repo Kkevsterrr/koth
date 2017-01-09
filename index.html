@@ -67,8 +67,11 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js"></script>
         <script src="https://cdn.rawgit.com/cytoscape/cytoscape.js-cose-bilkent/master/cytoscape-cose-bilkent.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js"></script>
+        <script src="js/dummy.js"></script>
         <script>
             var api;
+            var initialized = false;
+            var DEMO_MODE = true;
             $( document ).ready(function() {
 
                 $("#network_nav").click(function() {
@@ -99,9 +102,42 @@
                     $(window).trigger('resize');
                 });
                 var chart;
-            });
-            function buildTables(teams, machines) {
+                if (DEMO_MODE) {
+                    $.getJSON("js/environment.json", function(json){
+                        window.data = json;
+                        initial(json);
+                        (function loop(data) {
+                            var rand = Math.round(Math.random() * (9000 - 500)) + 500;
+                            setTimeout(function() {
+                                    randomUpdate(data);
+                                    loop(data);
+                            }, rand);
+                        }(json));
+                        (function loop(data) {
+                            var rand = Math.round(Math.random() * (9000 - 500)) + 500;
+                            setTimeout(function() {
+                                    randomUpdate(data);
+                                    loop(data);
+                            }, rand);
+                        }(json));
+                    });
 
+                }
+            });
+            //randomUpdate();
+            String.prototype.cap = function() { return this.charAt(0).toUpperCase() + this.slice(1); }
+            function pad(i) { return (i < 10 ? "0" : "") + i }
+            function first(arr) { return arr[0].toLowerCase(); }
+
+            var socket = io();
+            socket.on('scan', function(data) { scan(data) });
+            socket.on('update', function(data) { update(data); });
+            socket.on('data', function(data) { initial(data); });
+            //socket.on('time', function(data) { addMessage(data.time); });
+            socket.on('error', console.error.bind(console));
+            socket.on('message', console.log.bind(console));
+
+            function buildTables(teams, machines) {
                 for(var team_name in teams) {
                     color = teams[team_name];
                     $("#tables").append("<table class=\"ui " + color + " fixed table\"><thead><tr><th>"+team_name+" Machines</th><th>Status</th><th>Services</th></tr></thead><tbody id=\""+ color+"_machines\"></tbody></table>");
@@ -130,20 +166,9 @@
                         }
                         $("#" + color + "_machines").append("<tr class=\"" + category + " " + color + "_" + id.toLowerCase() + "\"><td class=\"center aligned\"><i class=\"large " + icon_color + " " + icon + " icon\"></i> </td><td>" + port + "</td><td>"+status+"</td></tr>");
                     }
-                    $("."+color + "_" + id.toLowerCase()).toggle();
+                    $("."+color + "_" + id.toLowerCase()).hide();
                 }
             }
-            String.prototype.cap = function() { return this.charAt(0).toUpperCase() + this.slice(1); }
-            function pad(i) { return (i < 10 ? "0" : "") + i }
-            function first(arr) { return arr[0].toLowerCase(); }
-
-            var socket = io();
-            socket.on('scan', function(data) { scan(data) });
-            socket.on('update', function(data) { update(data); });
-            socket.on('data', function(data) { initial(data); });
-            socket.on('time', function(data) { addMessage(data.time); });
-            socket.on('error', console.error.bind(console));
-            socket.on('message', console.log.bind(console));
 
             function scan(data) {
                 console.log("Received scan data...");
@@ -158,6 +183,10 @@
             }
 
             function initial(data) {
+                if (initialized) {
+                    return
+                }
+                initialized = true;
                 console.log(data);
                 buildTables(data["teams"], data["machines"]);
                 buildChart(data);
