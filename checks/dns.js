@@ -26,7 +26,7 @@ CheckDNS.prototype.check = function() {
         });
 
         req.on('message', function (err, result){
-          if (result.answer.reduce((a,b) => {a || b.address === answer;}, false)) {
+          if (result.answer.reduce((a,b) => {return a || b.address === answer;}, false)) {
             fulfill("open");
           } else {
             fulfill("closed");
