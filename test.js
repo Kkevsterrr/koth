@@ -44,15 +44,23 @@ import_checks(path1).then(function (cs) {
         console.log(check_name);
         mod = new cs[check_name](node, options);
         console.log(mod);
-        mod.check().then(function(res) { // TODO - BY THE TIME THE PROMISE COMPLETES< CHECK_NAME IS SSH, SO NEED TO RETURN THE NAME OF THE CHECK TOO!!
-            process.stdout.write("Checking " + check_name + ": ")
-            console.log(res)
-        }, function (error) {
-            console.log(error.stack)
-            console.error('uh oh: ', error);   // 'uh oh: something bad happened’
-        });
+        mod.check().then(fulfill_factory(check_name), reject_factory(check_name));
     }
 
 }, function (error) {
     console.log('Failed to import checks: ', error);
 });
+
+function fulfill_factory(name){
+  return function(res) { // TODO - BY THE TIME THE PROMISE COMPLETES< CHECK_NAME IS SSH, SO NEED TO RETURN THE NAME OF THE CHECK TOO!!
+      process.stdout.write("Checking " + name + ": ");
+      console.log(res);
+  };
+}
+
+function reject_factory(name){
+  return function (error) {
+      console.log(error.stack);
+      console.error('uh oh: ', error);   // 'uh oh: something bad happened’
+  };
+}
