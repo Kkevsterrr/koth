@@ -52,34 +52,33 @@ app.get('/', function (req, res) { res.sendFile(__dirname + '/index.html'); });
 scorebot.get("/", function (req, res) { handle(req, res, req.param("team")); });
 scorebot.post("/", function(req, res) { handle(req, res, req.body.team); });
 
-function handle(req, res, team) {
+function handle(req, res, team_name) {
     var body='';
     var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
-
+    claim_times = environment["claim_times"];
     id = check_valid(ip);
 
-    console.log("Attempted claim from " + ip + " on machine id " + id + " for team " + team);
-    if(teams[team] != undefined && id != "") {
+    console.log("Attempted claim from " + ip + " on machine id " + id + " for team " + team_name);
+    if(team_name in teams && id != "") {
         now = new Date();
 
-        if(id in claim_times && team in claim_times[id] && now.getTime() - claim_times[id][team] < CLAIM_DELAY) {
+        if(id in claim_times && team_name in claim_times[id] && now.getTime() - claim_times[id][team_name] < CLAIM_DELAY) {
             res.write("Cannot claim box - please wait.");
-            claim_times[id][team] = now.getTime()
-        } else if(ownership[id] == team) {
+            claim_times[id][team_name] = now.getTime()
+        } else if(environment["machines"][id]["owner"] == team_name) {
             res.write("Team already owns this box - cannot reclaim.");
-            claim_times[id][team] = now.getTime()
+            claim_times[id][team_name] = now.getTime()
         } else {
-            if(!(ip in claim_times)) {
+            if(!(id in claim_times)) {
                 claim_times[id] = {}
             }
-            claim_times[id][team] = now.getTime();
-            claim_machine(check_valid(ip), team);
-            ownership[id] = team;
+            claim_times[id][team_name] = now.getTime();
+            claim_machine(id, team_name);
+            environment["machines"][id]["owner"] == team_name;
             messages.push(pad(now.getHours()) + ":" + pad(now.getMinutes()) + ":" + pad(now.getSeconds()) + " - <span class=\"ui " + teams[team] + " small inverted header\">" + team.cap() + "<\/span> team has claimed " + id + "<br/>");
             console.log(messages);
-            res.write("Box claimed for team " + team + ".");
-            console.log("Box " + id + " ("+ip+") claimed for team " + team + ".");
-            save_network();
+            res.write("Box claimed for team " + team_name + ".");
+            console.log("Box " + id + " ("+ip+") claimed for team " + team_name + ".");
         }
     } else {
         res.write("Unknown team or machine.")
@@ -123,7 +122,7 @@ function scan_net() {
     console.log("Starting network wide scan...");
     for(var name in environment["machines"]) {
         machine = environment["machines"][name];
-        ip = get_ip(node);
+        ip = get_ip(machine);
         id = machine["id"];
         if(ip != "::ffff:127.0.0.1" && ip.indexOf("/16") == -1 && name.indexOf("Red") == -1 && name != "Scorebot") { // && isEntry(id) == undefined &&
             scan_box(machine, ip, id);
@@ -231,7 +230,7 @@ function check_valid(ip) {
 }
 
 function save_network() {
-    /*fs.writeFile(save_path, JSON.stringify(environment, null, 4), 'utf-8', function(err) {
+    /*fs.writeFileSync(save_path, JSON.stringify(environment, null, 4), 'utf-8', function(err) {
         if(err) { return console.log(err); }
     });*/
 }
@@ -298,10 +297,10 @@ function initialize_network() {
 
 }
 
-function get_ip(node) {
-    for (j = 0; j < node["ip"].length; j++) {
-        if (node["ip"][j] != null) {
-            return node["ip"][j];
+function get_ip(machine) {
+    for (j = 0; j < machine["ip"].length; j++) {
+        if (machine["ip"][j] != null) {
+            return machine["ip"][j];
         }
     }
 }
