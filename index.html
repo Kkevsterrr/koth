@@ -100,7 +100,7 @@
                 });
                 var chart;
             });
-            function generateTables(teams, machines) {
+            function buildTables(teams, machines) {
 
                 for(var team_name in teams) {
                     color = teams[team_name];
@@ -138,42 +138,47 @@
             function first(arr) { return arr[0].toLowerCase(); }
 
             var socket = io();
-            socket.on('scan', function(data) {
+            socket.on('scan', function(data) { scan(data) });
+            socket.on('update', function(data) { update(data); });
+            socket.on('data', function(data) { initial(data); });
+            socket.on('time', function(data) { addMessage(data.time); });
+            socket.on('error', console.error.bind(console));
+            socket.on('message', console.log.bind(console));
+
+            function scan(data) {
                 console.log("Received scan data...");
                 chart.load({ columns: data["chart"] });
-                buildcy(data);
-            });
-            socket.on('update', function(data) {
+            }
+
+            function update(data) {
                 cy.$('#'+data["id"]).data('color', data["color"]);
                 date = new Date();
                 $("#messages").prepend(pad(date.getHours()) + ":" + pad(date.getMinutes()) + ":" + pad(date.getSeconds()) + " - <span class=\"ui " + data["color"] + " small inverted header\">" + data["color"].cap() + "<\/span> team has claimed " + data["id"] + "<br/>");
                 $(window).trigger('resize');
-            });
-            socket.on('data', function(data) {
+            }
+
+            function initial(data) {
                 console.log(data);
-                generateTables(data["teams"], data["machines"]);
+                buildTables(data["teams"], data["machines"]);
+                buildChart(data);
+                buildMessages(data);
+                buildcy(data);
+                $(window).trigger('resize');
+            }
+            function buildMessages(data) {
+                for(var i = 0; i < data["messages"].length; i++) {
+                    console.log(data["messages"][i])
+                    $("#messages").prepend(data["messages"][i])
+                }
+            }
+            function buildChart(data) {
                 chart = c3.generate({
                     bindto: '#chart',
                     data: { columns: data["chart"] },
                     color: { pattern: data["chart"].map(first) }
                 });
                 chart.resize();
-                buildcy(data);
-
-                console.log(data)
-                for(var i = 0; i < data["messages"].length; i++) {
-                    console.log(data["messages"][i])
-                    $("#messages").prepend(data["messages"][i])
-                }
-                $(window).trigger('resize');
-            });
-
-            socket.on('time', function(data) {
-                addMessage(data.time);
-            });
-            socket.on('error', console.error.bind(console));
-            socket.on('message', console.log.bind(console));
-
+            }
 
             function buildcy(data) {
                 var defaults = {
@@ -219,7 +224,7 @@
                 cy.layout(defaults);
 
                 cy.elements('node').qtip({
-                    content: function() {return "<center><b><u>"+this.data("name")+"<\/u><\/b><br/>" + this.data("ip").join("<br/>") },
+                    content: function() { return "<center><b><u>"+this.data("name")+"<\/u><\/b><br/>" + this.data("ip").join("<br/>") },
                     position: {
                         my: 'top center',
                         at: 'bottom center'
