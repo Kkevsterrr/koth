@@ -28,6 +28,13 @@ import_checks(path1).then(function (cs) {
     node["data"] = {};
     node["data"]["ip"] = "127.0.0.1";
     node["data"]["port"] = 22;
+    node["data"]["dns"] = {
+      question: {
+        name: "mail.aces.local",
+        type: "A"
+      },
+      answer: "10.10.10.13"
+    }
     var options = {};
     options["scorebot_username"] = "scorebot";
     options["scorebot_password"] = "password";
