@@ -27,7 +27,7 @@ function import_checks(path) {
 import_checks(path1).then(function (cs) {
     var node = {};
     node.data = {};
-    node.data.ip = "127.0.0.1";
+    node.data.ip = "10.1.1.11";
     node.data.port = 22;
     node.data.dns = {
       question: {
