@@ -42,7 +42,7 @@ var scorebot = require('express')();
 var scorebot_server = require('http').Server(scorebot);
 var io = require('socket.io')(server);
 
-app.use(express.static(__dirname + '/static'));
+app.use('/static', express.static('./static'));
 scorebot.use(bodyParser.urlencoded({ extended: false }));
 scorebot.use(bodyParser.json());
 server.listen(3000);
