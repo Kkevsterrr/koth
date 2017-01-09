@@ -2,13 +2,14 @@ var fs = require('fs');
 var teams = {"Red" : "red", "Blue" : "blue", "Green" : "green", "Purple" : "purple", "Yellow": "yellow"}
 
 network = {};
-network["nodes"] = [];
-network["edges"] = [];
-GAME_NAME = "redblue1";
 
-c = JSON.parse(fs.readFileSync(__dirname + "/games/" + GAME_NAME + "/cypher.json"), 'utf-8')
+GAME_NAME = "redblue1";
+DEFAULT_PORT_STATE = "open";
+cipherpath_json = JSON.parse(fs.readFileSync("./cypher.json"), 'utf-8');
 rids = {}
-function getPorts(name) {
+machines = {};
+
+function get_ports(name) {
     console.log(name);
     if(name.toLowerCase().indexOf("gvm2") > -1) { //george vm 1
        return [7,21,22,80,81];
@@ -26,60 +27,124 @@ function getPorts(name) {
         return [21, 22, 23, 25, 80, 3306];
     }
 }
-for (var i = 0; i < c["machines"].length; i++) {
-    m = c["machines"][i];
-    if (m["name"].indexOf("Hidden") != -1) { continue; }
-    machine = {};
-    machine["data"] = {};
-    machine["data"]["id"] = m["name"].replace(/ /g,'');
-    machine["data"]["weight"] = 5;
+//console.log(cipherpath_json["machines"])
+machines = {}
+for (var i = 0; i < cipherpath_json["machines"].length; i++) {
+    cm = cipherpath_json["machines"][i];
+    name = cm["name"];
+    if (name.indexOf("Hidden") != -1) { continue; }
 
+    m = {}
+    m["name"] = name
+    m["id"] = name.replace(/ /g,'');
+    m["forwarded_ports"] = cm["network_connections"]["forward_ports"];
+    ports = get_ports(name);
+    m["ports"] = {};
+    for(var j = 0; j < ports.length; j++) {
+        m["ports"][ports[j]] = DEFAULT_PORT_STATE;
+    }
+    color = get_color(name);
+    m["color"] = color;
+    m["status"] = ports.length+"/"+ports.length;
+    m["percentage"] = "100%";
+    m["ip"] = [];
+    m["owner"] = get_owner(name);
+    for(var j = 0; j < cm["connections"].length; j++) {
+        connection = cm["connections"][j];
+        m["ip"].push(connection["ip"]);
+        (m["connections"] = m["connections"] || []).push(connection["network"]);
+        (rids[connection["network"]] = rids[connection["network"]] || []).push(m["id"]);
+    }
+    machines[name] = m;
+}
+console.log(rids)
+console.log(machines)
+routers = {}
+r = 1
+for(var i = 0; i < cipherpath_json["networks"].length; i++) {
+    network = cipherpath_json["networks"][i];
+    router = {}
+    if (rids[network["id"]] != undefined && network["physical_network"] == null && network["mode"] != 'physical') { // if someone is connected and it's not a physical network
+        router["ip"] = [network["ip"]];
+        router["id"] = network["id"];
+        router["name"] = "Router " + r++;
+        routers[router["id"]] = router;
+    }
+}
+console.log(routers);
+network["machines"] = machines;
+network["routers"] = routers;
+fs.writeFileSync("network.json", JSON.stringify(network, null, 2), 'utf-8');
+
+exit()
+
+
+
+
+
+network["nodes"] = [];
+network["edges"] = [];
+
+for (var i = 0; i < cipherpath_json["machines"].length; i++) {
+    m = cipherpath_json["machines"][i];
+    name = m["name"];
+    if (name.indexOf("Hidden") != -1) { continue; }
+    machines[m] = {};
+    node = {};
+    node["data"] = {};
+    node["data"]["id"] = m["name"].replace(/ /g,'');
+    node["data"]["weight"] = 5;
+    color = get_color(m["name"]);
     //if(isEntry(m["name"]) != undefined) { //If this is an entry box
-        machine["data"]["color"] = isEntry(m["name"]);
-        machine["data"]["name"] = m["name"];
+
+        node["data"]["name"] = m["name"];
         //console.log(m);
         //machine["data"]["ports"] = [];
-        machine["data"]["forwarded"] = m["network_connections"]["forward_ports"];
-        machine["data"]["ports"] = getPorts(machine["data"]["id"]);
+        node["data"]["forwarded"] = m["network_connections"]["forward_ports"];
+        node["data"]["ports"] = getPorts(node["data"]["id"]); // returns a list of ports to hold open as linked by machine name
+        node[m]["ports"] = {};
+        for(var port in node["data"]["ports"]) {
+            machines[m]["ports"][port] = "open";
+        }
 /*    } else {
         machine["data"]["color"] = "grey";
         machine["data"]["name"] = "";
         machine["data"]["ports"] = getPorts(machine["data"]["id"]);
 
     }*/
-    if(m["name"] == "Scorebot") {
-        machine["data"]["name"] = m["name"];
-        machine["data"]["color"] = "black";
-        machine["data"]["weight"] = 1000;
+    if(name == "Scorebot") {
+        node["data"]["name"] = m["name"];
+        color = "black";
+        node["data"]["weight"] = 1000;
 
         //continue;
     }
-
-    machine["data"]["ip"] = [];
+    node["data"]["color"] = color;
+    node["data"]["ip"] = [];
 
     for(var j = 0; j < m["connections"].length; j++) {
-        machine["data"]["ip"].push(m["connections"][j]["ip"]);
+        node["data"]["ip"].push(m["connections"][j]["ip"]);
         if(rids[m["connections"][j]["network"]] == undefined) {
             rids[m["connections"][j]["network"]] = [];
         }
         rids[m["connections"][j]["network"]].push(m["name"].replace(/ /g,''));
     }
-    network["nodes"].push(machine);
+    network["nodes"].push(node);
     //console.log(machine)
 }
 r = 1;
-scorebot = false;
-for(var i = 0; i < c["networks"].length; i++) {
+scorebot = false; // so the scorebot is only connected visually once
+for(var i = 0; i < cipherpath_json["networks"].length; i++) {
     router = {"data" : {}}
-    if (rids[c["networks"][i]["id"]] != undefined && c["networks"][i]["physical_network"] == null && c["networks"][i]["mode"] != 'physical') {
-        router["data"]["ip"] = [c["networks"][i]["ip"]];
-        console.log(c["networks"][i]);
-        router["data"]["id"] = "router_" + c["networks"][i]["id"];
+    if (rids[cipherpath_json["networks"][i]["id"]] != undefined && cipherpath_json["networks"][i]["physical_network"] == null && cipherpath_json["networks"][i]["mode"] != 'physical') {
+        router["data"]["ip"] = [cipherpath_json["networks"][i]["ip"]];
+        console.log(cipherpath_json["networks"][i]);
+        router["data"]["id"] = "router_" + cipherpath_json["networks"][i]["id"];
         router["data"]["name"] = "Router " + r++;
         router["data"]["weight"] = 5;
         router["data"]["color"] = "black";
         network["nodes"].push(router);
-        net = c["networks"][i]["id"];
+        net = cipherpath_json["networks"][i]["id"];
         for(var j = 0; j < rids[net].length; j++) {
             if (rids[net][j] == "Scorebot" && scorebot) {
                 continue;
@@ -102,14 +167,29 @@ for(var i = 0; i < c["networks"].length; i++) {
         }
     }
 }
-fs.writeFile("games/"+GAME_NAME+"/test.json", JSON.stringify(network, null, 2), 'utf-8');
-//console.log(network);
+fs.writeFile("test.json", JSON.stringify(network, null, 2), 'utf-8');
+console.log(network);
 
-function isEntry(name) {
+function get_owner(name) {
+    if(name == "Scorebot") {
+        return "none";
+    }
+    for(team in teams) {
+        if (name.indexOf(team) > -1) {
+            return team;
+        }
+    }
+    return "none";
+}
+
+function get_color(name) {
+    if(name == "Scorebot") {
+        return "black";
+    }
     for(team in teams) {
         if (name.indexOf(team) > -1) {
             return teams[team];
         }
     }
-    return undefined;
+    return "grey";
 }

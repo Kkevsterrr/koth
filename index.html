@@ -11,20 +11,27 @@
             body {
                 overflow:hidden;
             }
+            .machine_row:hover {
+                cursor: pointer;
+            }
             #graph {
                 margin: 20px;
                 height: 65%;
+                display: none;
             }
-            #cy, #graph, #info {
-                height: 80%;
-                width: 90%;
+            #cy, #graph, #ports {
+                height: 100%;
+                width: 100%;
                 position: absolute;
                 left: 0;
                 top: 40px;
             }
-            #info {
-                margin: 50px;
-                width: 90%;
+            #ports {
+                margin: 20px;
+                width: calc(100% - 40px);
+                height: calc(100% - 100px);
+                overflow-y: auto;
+                display: none;
             }
             #myChart {
                 height: 100%;
@@ -61,46 +68,79 @@
         <script src="https://cdn.rawgit.com/cytoscape/cytoscape.js-cose-bilkent/master/cytoscape-cose-bilkent.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js"></script>
         <script>
-
             var api;
             $( document ).ready(function() {
 
                 $("#network_nav").click(function() {
                     $("#graph").hide();
-                    $("#info").hide();
+                    $("#ports").hide();
                     $("#cy").show();
                     $("#graph_nav").removeClass("active");
-                    $("#info_nav").removeClass("active");
+                    $("#ports_nav").removeClass("active");
                     $("#network_nav").addClass("active");
                     $(window).trigger('resize');
                 });
                 $("#graph_nav").click(function() {
-                    $("#info").hide();
+                    $("#ports").hide();
                     $("#cy").hide();
                     $("#graph").show();
                     $("#graph_nav").addClass("active");
-                    $("#info_nav").removeClass("active");
+                    $("#ports_nav").removeClass("active");
                     $("#network_nav").removeClass("active");
                     $(window).trigger('resize');
                 });
-
+                $("#ports_nav").click(function() {
+                    $("#ports").show();
+                    $("#cy").hide();
+                    $("#graph").hide();
+                    $("#graph_nav").removeClass("active");
+                    $("#ports_nav").addClass("active");
+                    $("#network_nav").removeClass("active");
+                    $(window).trigger('resize');
+                });
                 var chart;
             });
-            String.prototype.cap = function() {
-                return this.charAt(0).toUpperCase() + this.slice(1);
+            function generateTables(teams, machines) {
+
+                for(var team_name in teams) {
+                    color = teams[team_name];
+                    $("#tables").append("<table class=\"ui " + color + " fixed table\"><thead><tr><th>"+team_name+" Machines</th><th>Status</th><th>Services</th></tr></thead><tbody id=\""+ color+"_machines\"></tbody></table>");
+                }
+                console.log(machines);
+                for(var name in machines) {
+                    machine = machines[name];
+                    id = machine["id"]
+                    color = machine["color"];
+                    console.log(machine);
+                    $("#" + color + "_machines").append("<tr onclick=\"javascript:$('."+color + "_" + id.toLowerCase() + "').toggle('fast');\" class='" + color + "_" + name + "_control machine_row'><td><i class=\"chevron down icon\"></i>" + name + "</td><td><div class=\"ui indicating progress active\" data-percent=\""+machine["percentage"]+"\" style=\"margin-bottom: 0px;\"><div class=\"bar\" style=\"transition-duration: 300ms; width: "+machine["percentage"]+";\"></div></div></td><td>" + machine["status"] + "</td></tr>");
+                    for(var port in machine["ports"]) {
+                        status = machine["ports"][port];
+                        if(status == "open") {
+                            category = "positive";
+                            icon = "checkmark";
+                            icon_color = "green"
+                        } else if (status == "closed") {
+                            category = "negative";
+                            icon = "remove";
+                            icon_color = "red";
+                        } else if (status == "issue") {
+                            category = "warning";
+                            icon = "warning";
+                            icon_color = "yellow";
+                        }
+                        $("#" + color + "_machines").append("<tr class=\"" + category + " " + color + "_" + id.toLowerCase() + "\"><td class=\"center aligned\"><i class=\"large " + icon_color + " " + icon + " icon\"></i> </td><td>" + port + "</td><td>"+status+"</td></tr>");
+                    }
+                    $("."+color + "_" + id.toLowerCase()).toggle();
+                }
             }
-            function pad(i) {
-                return (i < 10 ? "0" : "") + i
-            }
+            String.prototype.cap = function() { return this.charAt(0).toUpperCase() + this.slice(1); }
+            function pad(i) { return (i < 10 ? "0" : "") + i }
+            function first(arr) { return arr[0].toLowerCase(); }
+
             var socket = io();
             socket.on('scan', function(data) {
                 console.log("Received scan data...");
-                chart.load({
-                    columns: data["chart"]
-                });
-                $('.qtip').remove();
-                cy.elements('node').qtip('api').destroy();
-                //cy.destroy()
+                chart.load({ columns: data["chart"] });
                 buildcy(data);
             });
             socket.on('update', function(data) {
@@ -109,128 +149,106 @@
                 $("#messages").prepend(pad(date.getHours()) + ":" + pad(date.getMinutes()) + ":" + pad(date.getSeconds()) + " - <span class=\"ui " + data["color"] + " small inverted header\">" + data["color"].cap() + "<\/span> team has claimed " + data["id"] + "<br/>");
                 $(window).trigger('resize');
             });
-                socket.on('data', function(data) {
-                    chart = c3.generate({
-                        bindto: '#chart',
-                        data: {
-                            columns: data["chart"]
-                        },
-                        color: {
-                            pattern: data["colors"]
-                        }
-                    });
-                    chart.resize();
-                    buildcy(data);
-                    api = cy.elements('node').qtip('api');
-                    cy.elements('node').qtip('api').destroy();
-                    $("#graph").hide()
-                    $("#info").hide()
-                    $("#cy").show()
-                    console.log(data)
-                    for(var i = 0; i < data["messages"].length; i++) {
-                        console.log(data["messages"][i])
-                        $("#messages").prepend(data["messages"][i])
-                    }
-                    $(window).trigger('resize');
+            socket.on('data', function(data) {
+                console.log(data);
+                generateTables(data["teams"], data["machines"]);
+                chart = c3.generate({
+                    bindto: '#chart',
+                    data: { columns: data["chart"] },
+                    color: { pattern: data["chart"].map(first) }
                 });
+                chart.resize();
+                buildcy(data);
 
-                socket.on('time', function(data) {
-                    addMessage(data.time);
+                console.log(data)
+                for(var i = 0; i < data["messages"].length; i++) {
+                    console.log(data["messages"][i])
+                    $("#messages").prepend(data["messages"][i])
+                }
+                $(window).trigger('resize');
+            });
+
+            socket.on('time', function(data) {
+                addMessage(data.time);
+            });
+            socket.on('error', console.error.bind(console));
+            socket.on('message', console.log.bind(console));
+
+
+            function buildcy(data) {
+                var defaults = {
+                    name: 'cose-bilkent',
+                    idealEdgeLength: 10,
+                    nodeRepulsion: 400000,
+                    nodeOverlap : 10,
+                    padding: 10,
+                    gravity: 80,
+                    animate: false,
+                };
+                var cy = window.cy = cytoscape({
+                    container: document.getElementById('cy'),
+                    ready: function(){},
+
+                    style: cytoscape.stylesheet()
+                    .selector('node')
+                    .css({
+                        'content': 'data(name)',
+                        'text-valign': 'center',
+                        'text-outline-width': 2,
+                        'text-outline-color': 'data(color)',
+                        'background-color': 'data(color)',
+                        'color': '#fff'
+                    })
+                    .selector(':selected')
+                    .css({
+                        'border-width': 3,
+                        'border-color': '#333'
+                    })
+                    .selector('edge')
+                    .css({
+                        'opacity': 0.666,
+                        'line-color': 'data(color)',
+                    })
+                    .selector('.faded')
+                    .css({
+                        'opacity': 0.25,
+                        'text-opacity': 0
+                    }),
+                    elements: data["graph"],
                 });
-                socket.on('error', console.error.bind(console));
-                socket.on('message', console.log.bind(console));
-                function buildcy(data) {
-                    var defaults = {
-                        name: 'cose-bilkent',
-                        idealEdgeLength: 10,
-                        nodeRepulsion: 400000,
-                        nodeOverlap : 10,
-                        padding: 10,
-                        gravity: 80,
-                        animate: false,
-                    };
-                    var cy = window.cy = cytoscape({
-                        container: document.getElementById('cy'),
-                        ready: function(){},
+                cy.layout(defaults);
 
-                        style: cytoscape.stylesheet()
-                        .selector('node')
-                        .css({
-                            'content': 'data(name)',
-                            'text-valign': 'center',
-                            'text-outline-width': 2,
-                            'text-outline-color': 'data(color)',
-                            'background-color': 'data(color)',
-                            'color': '#fff'
-                        })
-                        .selector(':selected')
-                        .css({
-                            'border-width': 3,
-                            'border-color': '#333'
-                        })
-                        .selector('edge')
-                        .css({
-                            'opacity': 0.666,
-                            'line-color': 'data(color)',
-                        })
-                        .selector('.faded')
-                        .css({
-                            'opacity': 0.25,
-                            'text-opacity': 0
-                        }),
-                        elements: data.graph,
-                    });
-                    cy.layout(defaults);
-
-                    cy.elements('node').qtip({
-                        content: function() {return get_qtip(this.data("id"), this.data("ip"), data)},
-                        position: {
-                            my: 'top center',
-                            at: 'bottom center'
+                cy.elements('node').qtip({
+                    content: function() {return "<center><b><u>"+this.data("name")+"<\/u><\/b><br/>" + this.data("ip").join("<br/>") },
+                    position: {
+                        my: 'top center',
+                        at: 'bottom center'
+                    },
+                    show: {
+                        event: 'mouseover'
+                    },
+                    hide: {
+                        event: 'mouseout'
+                    },
+                    style: {
+                        classes: 'qtip-bootstrap',
+                        tip: {
+                            width: 16,
+                            height: 8
                         },
-                        show: {
-                            event: 'mouseover'
-                        },
-                        hide: {
-                            event: 'mouseout'
-                        },
-                        style: {
-                            classes: 'qtip-bootstrap',
-                            tip: {
-                                width: 16,
-                                height: 8
-                            },
-                            "font-size": "14px"
-                        }
-                    });
-                }
-
-                function get_qtip(id, ips, data) {
-                    var p = {};
-                    port_html = "";
-                    if(data["ports"][id] != undefined) {
-                        p[id] = [];
-                        for(port in data["ports"][id]) {
-                            if(data["ports"][id][port] == "closed") {
-                                p[id].push(port + " : <span class='red'>closed</span>");
-                            } else {
-                                p[id].push(port + " : <span class='green'>open</span>");
-                            }
-                        }
-                        port_html = "<br/><br/><b><u>Ports<\/u><\/b><br/>" + p[id].join("<br/>")+ "<\/center>"
+                        "font-size": "14px"
                     }
-                    return "<center><b><u>IPs<\/u><\/b><br/>" + ips.join("<br/>") + port_html;
-                }
+                });
+            }
 
-
-            </script>
+        </script>
         </head>
         <body>
             <nav class="ui fixed menu inverted navbar">
             <a href="#" class="brand item">King of the Hill</a>
             <a id="network_nav" href="#" class="active item">Network</a>
             <a id="graph_nav" href="#" class="item">Graph</a>
-            <!--<a id="info_nav" href="#" class="item">Info</a>-->
+            <a id="ports_nav" href="#" class="item">Ports</a>
             </nav>
             <div id="cy"></div>
             <div id="graph">
@@ -240,32 +258,17 @@
                         Leaderboard
                     </div>
                 </h2>
-
-                <div id="chart" class="c3"> </div></div>
-            <!--<div id="info">
-                <h1 class="ui header">Welcome to KOTH</h1>
-                <h2 class="ui dividing header">
-                    <i class="info icon"></i>
-                    <div class="content">
-                        What is KOTH?
-                    </div>
-                </h2>
-                <h5>KOTH stands for "King of the Hill", and is a new type of cybersecurity competition. </h5>
-                <h2 class="ui dividing header">
-                    <i class="sitemap icon"></i>
-                    <div class="content">
-                        Network Map
-                    </div>
-                </h2>
-                <h2 class="ui dividing header">
-                    <i class="line chart icon"></i>
-                    <div class="content">
-                        Graph Map
-                    </div>
-                </h2>
-
+                <div id="chart" class="c3"> </div>
             </div>
-            -->
+
+            <div id="ports">
+                <h2 class="ui dividing header">
+                    <i class="table icon"></i>
+                    <div class="content">
+                        Ports List
+                    </div>
+                </h2>
+                <div id="tables"></div></div>
             <div id="messages" class="ui inverted segment"></div>
         </body>
     </html>

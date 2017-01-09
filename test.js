@@ -19,10 +19,10 @@ function import_checks(path) {
                 console.log(checks);
             }
             fulfill(checks);
-
         });
     });
 }
+
 import_checks(path1).then(function (cs) {
     var node = {};
     node["data"] = {};
@@ -36,7 +36,7 @@ import_checks(path1).then(function (cs) {
         console.log(check_name);
         mod = new cs[check_name](node, options);
         console.log(mod);
-        mod.check().then(function(res) { // TODO - BY THE TIME THE PROMISE COMPLETES< CHECK_NAME IS SSH, SO NEED TO RETURN THE NAME OF THE CHECK TOO!! 
+        mod.check().then(function(res) { // TODO - BY THE TIME THE PROMISE COMPLETES< CHECK_NAME IS SSH, SO NEED TO RETURN THE NAME OF THE CHECK TOO!!
             process.stdout.write("Checking " + check_name + ": ")
             console.log(res)
         }, function (error) {

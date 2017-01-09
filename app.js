@@ -12,53 +12,45 @@ require('events').EventEmitter.prototype._maxListeners = 0;
 
 var GAME_NAME = "redblue1";
 var CLAIM_DELAY = 30000;
-var SCAN_DELAY = 60000;
+var SCAN_DELAY = 600000;
 var PORT_OPEN_SCORE = 3;
 var PORT_CLOSED_SCORE = 0;
 var BOX_OWNERSHIP_SCORE = 1;
 var EXP_SCORING = true;
 var EXP_VAL = 60;
-
-var index = fs.readFileSync(__dirname + '/index.html');
-var path = __dirname + "/games/" + GAME_NAME;
-var save_path = path + "/saved/network";
-var scores_path = path + "/saved/scores"
-var messages_path = path + "/saved/messages"
-var ports_path = path + "/saved/ports"
-
-var claim_times = {};
-var ports = {};
-var ownership = {};
-var scores = {};
-var messages = [];
-var chart_scores = [];
-var teams = {"Red" : "red", "Blue" : "blue", "Green" : "green", "Purple" : "purple", "Yellow": "yellow"}
-var network = initialize_network();
-var scoring_iteration = 0;
-
 var d = new Date();
 
+var path = __dirname + "/games/" + GAME_NAME;
+var save_path = path + "/saved/network";
+
+var environment = {};
+environment["ownership"] = {};
+environment["claim_times"] = {}
+environment["scores"] = {};
+environment["ports"] = {};
+environment["messages"] = [];
+environment["scoring_iteration"] = 0;
+environment["chart_scores"] = [];
+environment["teams"] = {"Red" : "red", "Blue" : "blue", "Green" : "green", "Purple" : "purple", "Yellow": "yellow"};
+environment["ignore"] = ["Red"];
+initialize_network();
+
+var index = fs.readFileSync(__dirname + '/index.html');
 var app = require('express')();
 var server = require('http').Server(app);
 var scorebot = require('express')();
 var scorebot_server = require('http').Server(scorebot);
 var io = require('socket.io')(server);
+
 app.use(express.static(__dirname + '/static'));
 scorebot.use(bodyParser.urlencoded({ extended: false }));
 scorebot.use(bodyParser.json());
 server.listen(3000);
 scorebot.listen(8000);
 
-app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/index.html');
-});
-
-scorebot.get("/", function (req, res) {
-    handle(req, res, req.param("team"));
-});
-scorebot.post("/", function(req, res) {
-    handle(req, res, req.body.team);
-});
+app.get('/', function (req, res) { res.sendFile(__dirname + '/index.html'); });
+scorebot.get("/", function (req, res) { handle(req, res, req.param("team")); });
+scorebot.post("/", function(req, res) { handle(req, res, req.body.team); });
 
 function handle(req, res, team) {
     var body='';
@@ -66,7 +58,7 @@ function handle(req, res, team) {
 
     id = check_valid(ip);
 
-    console.log("Attempted claim from "+ip+" on machine id " + id + " for team " + team);
+    console.log("Attempted claim from " + ip + " on machine id " + id + " for team " + team);
     if(teams[team] != undefined && id != "") {
         now = new Date();
 
@@ -97,16 +89,11 @@ function handle(req, res, team) {
 
 scanner = setInterval(function() { scan_net() }, SCAN_DELAY);
 
-//var io = require('socket.io').listen(app);
-//scan_net()
-String.prototype.cap = function() {
-    return this.charAt(0).toUpperCase() + this.slice(1);
-}
-if (!Array.prototype.last){
-    Array.prototype.last = function(){
-        return this[this.length - 1];
-    };
-};
+String.prototype.cap = function() { return this.charAt(0).toUpperCase() + this.slice(1); }
+Array.prototype.last = function() { return this[this.length - 1]; }
+function pad(i) { return (i < 10 ? "0" : "") + i }
+function first(arr) { return arr[0].toLowerCase(); }
+
 function isEntry(name) {
     for(team in teams) {
         if (name.indexOf(team) > -1) {
@@ -115,192 +102,217 @@ function isEntry(name) {
     }
     return undefined;
 }
+
+function count_open_ports(ports) {
+    var num_open = 0;
+    for(var port in ports) {
+        if(ports[port] == "open") {
+            num_open += 1;
+        }
+    }
+    return num_open;
+}
+
 function scan_net() {
-    io.sockets.emit('scan', { chart: calculate_score(), ports: ports, graph: network} )
+    io.sockets.emit('scan', {
+        chart: calculate_score(),
+        ports: environment["ports"],
+        graph: environment["graph"],
+        machines: environment["machines"]
+    });
+
     console.log("Starting network wide scan...");
-    scans = []
-    for(var i = 0; i < network["nodes"].length; i++) {
-        node = network["nodes"][i];
+    for(var name in environment["machines"]) {
+        machine = environment["machines"][name];
         ip = get_ip(node);
-        id = node["data"]["id"];
-        if(ip != "::ffff:127.0.0.1" && ip.indexOf("/16") == -1 && node["data"]["name"].indexOf("Red") == -1 && node["data"]["name"] != "Scorebot") { // && isEntry(id) == undefined &&
-            scan_box(ip, id);
+        id = machine["id"];
+        if(ip != "::ffff:127.0.0.1" && ip.indexOf("/16") == -1 && name.indexOf("Red") == -1 && name != "Scorebot") { // && isEntry(id) == undefined &&
+            scan_box(machine, ip, id);
         }
     }
 }
 
-function scan_box(ip, id) {
+function scan_box(machine, ip, id) {
     options = {
         target:ip,
-        port:Object.keys(ports[id]),
+        port:Object.keys(machine["ports"]),
         status:'TROU', // Timeout, Refused, Open, Unreachable
         banner:false
     };
 
     var scanner = new evilscan(options);
 
-    scanner.on('result',function(data) {
+    scanner.on('result', function(data) {
         if(data["status"].indexOf("closed") != -1) {
-            ports[id][data["port"]] = "closed";
+            machine[data["port"]] = "closed"; // ports open/closed set for ports {}
         } else {
-            ports[id][data["port"]] = "open";
+            machine[data["port"]] = "open";
         }
     });
     scanner.run();
 }
 
-
-function claim_machine(id, team) {
-    if(id == "") {
-        return false;
+function claim_machine(id, team_name) {
+    if(id in environment["machines"]) {
+        environment["machines"][id]["color"] = teams[team_name];
+        environment["machines"][id]["owner"] = team_name;
+        io.sockets.emit('update', { id: id, color: teams[team_name] });
+        return true;
     } else {
-        for(var i = 0; i< network["nodes"].length; i++) {
-            node = network["nodes"][i];
-            if (node["data"]["id"] == id) {
-                node["data"]["color"] = teams[team];
-                io.sockets.emit('update', { id: id, color: teams[team] } )
-            }
-        }
+        return false;
     }
-    return true;
 }
 
-function pad(i) { return (i < 10 ? "0" : "") + i }
-function first(arr) { return arr[0].toLowerCase(); }
 function get_team_by_color(color) {
     for(team in teams) {
         if(teams[team] == color) { return team; }
     }
     return null;
 }
+
 calculate_score();
 function calculate_score() {
-    scoring_iteration += 1;
-    console.log("Calculating score..");
+    environment["scoring_iteration"] += 1;
+    console.log("Calculating score...");
     s = {};
     ret = [];
-    for(var i = 0; i < network["nodes"].length; i++) {
-        node = network["nodes"][i];
-        owner = get_team_by_color(node["data"]["color"]);
-        id = node["data"]["id"];
+    for(var name in environment["machines"]) {
+        machine = environment["machines"][name];
+        owner = machine["owner"];
+        id = machine["id"];
 
-        if(owner in teams) {
+        if(owner in environment["teams"]) {
             val = BOX_OWNERSHIP_SCORE;
-            val += scoring_iteration/EXP_VAL*val;
+            val += environment["scoring_iteration"] / EXP_VAL*val;
             val = Math.round(val * 100) / 100
+
             s[owner] = s[owner] + val || val
-            for(port in ports[id]) {
+            num_open = 0;
+            for(port in machine["ports"]) {
                 val = 0.0;
-                if(ports[id][port] == "open") {
+                if(machine["ports"][port] == "open") {
                     val = PORT_OPEN_SCORE
+                    num_open += 1;
                 } else {
                     val = -1 * PORT_CLOSED_SCORE
                 }
-                val += scoring_iteration/EXP_VAL*val
+                val += environment["scoring_iteration"] / EXP_VAL*val
                 val = Math.round(val * 100) / 100
-                s[owner] += val + scoring_iteration/EXP_VAL*val;
+                s[owner] += val + environment["scoring_iteration"]/EXP_VAL*val;
             }
+            m = id;
         }
     }
-    console.log(s);
     for(var team in s) {
-        if(scores[team] == undefined) {
-            scores[team] = [s[team]];
+        if(environment["scores"][team] == undefined) {
+            environment["scores"][team] = [s[team]];
         } else {
-            scores[team].push(scores[team].last() + s[team]);
+            environment["scores"][team].push(environment["scores"][team].last() + s[team]);
         }
     }
     var i = 0;
-    for(team in scores) {
-        console.log(team);
+    for(team in environment["scores"]) {
         ret[i] = [team];
-        ret[i] = ret[i].concat(scores[team]);
-        console.log(ret);
-
+        ret[i] = ret[i].concat(environment["scores"][team]);
         i++;
     }
-    chart_scores = ret;
+    console.log(ret);
+    environment["chart_scores"] = ret;
+
     save_network();
-    return chart_scores;
+    return environment["chart_scores"];
 }
 
 function check_valid(ip) {
-    for(var i = 0; i< network["nodes"].length; i++) {
-        node = network["nodes"][i];
-        if (node["data"]["ip"].indexOf(ip) > -1) { return node["data"]["id"]; }
+    for(var name in environment["machines"]) {
+        machine = environment["machines"][name];
+        if (machine["ip"].indexOf(ip) > -1) { return machine["id"]; }
     }
     return "";
 }
 
 function save_network() {
-    fs.writeFile(save_path, JSON.stringify(network, null, 4), 'utf-8', function(err) {
+    /*fs.writeFile(save_path, JSON.stringify(environment, null, 4), 'utf-8', function(err) {
         if(err) { return console.log(err); }
-    });
-    fs.writeFile(scores_path, JSON.stringify(scores, null, 4), 'utf-8', function(err) {
-        if(err) { return console.log(err); }
-    });
-    fs.writeFile(ports_path, JSON.stringify(ports, null, 4), 'utf-8', function(err) {
-        if(err) { return console.log(err); }
-    });
-    fs.writeFile(messages_path, JSON.stringify(messages, null, 4), 'utf-8', function(err) {
-        if(err) { return console.log(err); }
-    });
+    });*/
 }
 
 function initialize_network() {
-    net = {};
-    try {
+    if (fs.existsSync(save_path)) {
         process.stdout.write("Reading save data file for " + GAME_NAME + "...");
-        net = JSON.parse(fs.readFileSync(save_path, 'utf8'));
-        scores = JSON.parse(fs.readFileSync(scores_path, 'utf8'));
-        ports = JSON.parse(fs.readFileSync(ports_path, 'utf8'));
-        messages = JSON.parse(fs.readFileSync(messages_path, 'utf8'));
-        scoring_iteration = scores[0].length
+        environment = JSON.parse(fs.readFileSync(save_path, 'utf8'));
         console.log("done".green);
-    } catch (e) {
+    } else {
         try {
-            console.log("failed".yellow);
-            init = __dirname + "/games/" + GAME_NAME + "/test.json";
+            //init = ; // /games/" + GAME_NAME +
             process.stdout.write("Reading initialization file for " + GAME_NAME + "...");
-            net = JSON.parse(fs.readFileSync(init, 'utf8'));
-            scores = {};
-            ports = {};
-            messages = [];
+            network = JSON.parse(fs.readFileSync("network.json", 'utf8'));
+            graph = {};
+            graph["nodes"] = [];
+            graph["edges"] = [];
+            for(var router_id in network["routers"]) {
+                router = network["routers"][router_id];
+                node = {};
+                node["data"] = {};
+                node["data"]["id"] = router["id"];
+                node["data"]["name"] = router["name"];
+                node["data"]["weight"] = 5;
+                node["data"]["color"] = "black";
+                node["data"]["ip"] = router["ip"];
+                graph["nodes"].push(node);
+            }
+            for(var name in network["machines"]) {
+                machine = network["machines"][name];
+                id = machine["id"]
+                environment["ownership"][id] = machine["owner"];
+                for(var j = 0; j < machine["connections"].length; j++) {
+                    edge = {}
+                    edge["data"] = {}
+                    edge["data"]["source"] = machine["connections"][j];
+                    edge["data"]["target"] = id;
+                    edge["data"]["color"] = "black";
+                    edge["data"]["strength"] = 10;
+                    graph["edges"].push(edge);
+                }
+                node = {};
+                node["data"] = {};
+                node["data"]["name"] = name;
+                node["data"]["id"] = machine["id"];
+                node["data"]["weight"] = 5;
+                node["data"]["color"] = machine["color"];
+                node["data"]["ip"] = machine["ip"];
+                graph["nodes"].push(node);
+            }
+            environment["graph"] = graph;
+            environment["machines"] = network["machines"];
             console.log("done".green);
         } catch (e) {
             console.log(e);
+            console.log(e.stack);
             console.log("ERROR: No init or save file found.");
             return {};
         }
     }
 
-    // Initialize ports & ownership
-    for(var i = 0; i< net["nodes"].length; i++) {
-        node = net["nodes"][i];
-        ip = get_ip(node);
-        id = node["data"]["id"];
-        ownership[id] = "none";
 
-        if(ip != "::ffff:127.0.0.1" && ip.indexOf("/16") == -1 && node["data"]["name"].indexOf("Red") == -1 && node["data"]["name"] != "Scorebot") { // isEntry(id) == undefined &&
-            ports[id] = {};
-            if (node["data"]["name"].indexOf("Router") == -1) {
-                for(j = 0; j < node["data"]["ports"].length; j++) {
-                    ports[id][node["data"]["ports"][j]] = "closed";
-                }
-                ownership[id] = (teams[id] != undefined) ? teams[id] : "none";
-            }
-        }
-    }
-    return net;
 }
+
 function get_ip(node) {
-    for (j = 0; j < node["data"]["ip"].length; j++) {
-        if (node["data"]["ip"][j] != null) {
-            return node["data"]["ip"][j];
+    for (j = 0; j < node["ip"].length; j++) {
+        if (node["ip"][j] != null) {
+            return node["ip"][j];
         }
     }
 }
 // Emit current data on connection
 io.on('connection', function(socket) {
-    socket.emit('data', { graph: network, chart: chart_scores, colors: chart_scores.map(first), messages: messages, ports: ports });
+    socket.emit('data', {
+        graph: environment["graph"],
+        chart: environment["chart_scores"],
+        teams: environment["teams"],
+        messages: environment["messages"],
+        ports: environment["ports"],
+        machines: environment["machines"],
+        ignore: environment["ignore"]
+    });
 });
