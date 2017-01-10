@@ -1,21 +1,9 @@
-var fs = require('fs');
+var fs = require("fs");
 var path_module = require('path');
-var winston = require('winston');
-var as = require('async');
 
 
-var path1 = './checks';
+var path1 = "./checks";
 var checks = {};
-
-var hosts_file = './test_targets';
-var hosts = {};
-
-winston.level = 'debug';
-
-function initialize(){
-   hosts = JSON.parse(fs.readFileSync(hosts_file));
-   import_checks(path1);
-}
 
 function import_checks(path) {
    var files = fs.readdirSync(path);
@@ -23,43 +11,10 @@ function import_checks(path) {
       f = path_module.join(path, file);
       mod = require("./" + f);
       checks[mod.name] = mod;
+      console.log(checks);
    });
-   winston.info(checks.toString());
+   fulfill(checks);
 }
-
-function run_checks(callback){
-
-   if(hosts === {}){
-      winston.warn("Module was not initialized or hosts file is empty, non-existent, or failed to load");
-      return {};
-   }
-
-   if(checks === {}){
-      winston.error("Checks not loaded");
-      throw "No checks";
-   }
-
-   hosts.hosts.forEach(function(host){
-
-   });
-}
-
-function check_host(host) {
-   return function(callback){
-
-   };
-}
-
-function check_service(service, ip){
-   return function(callback){
-      var result = {
-         name:service.name,
-         checks:{}
-      };
-      service.checks.forEach
-   }
-}
-
 import_checks(path1).then(function (cs) {
    var node = {};
    node.data = {};
@@ -71,6 +26,9 @@ import_checks(path1).then(function (cs) {
       type: "A"
      },
      answer: "10.10.10.13"
+   };
+   node.data.rt = {
+      ip:8080
    };
    var options = {};
    options.scorebot_username = "student";

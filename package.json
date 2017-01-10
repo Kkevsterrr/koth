@@ -22,6 +22,7 @@
     "express": "latest",
     "native-dns": "latest",
     "net-ping": "latest",
+    "nightmare": "^2.9.1",
     "portscanner": "latest",
     "scp2": "latest",
     "simple-ssh": "latest",
