@@ -1,8 +1,8 @@
 var portscanner = require('portscanner');
 
 function CheckPort(node, options) {
-  this.ip = node["data"]["ip"];
-  this.port = node["data"]["port"];
+  this.ip = node.data.ip;
+  this.port = node.data.port;
   this.name = "CheckPort";
 }
 

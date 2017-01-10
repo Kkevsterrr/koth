@@ -32,7 +32,7 @@ options.scorebot_password = "student1@";
 console.log(checks);
 for(var check_name in checks) {
    console.log(check_name);
-   mod = checks[check_name](node, options);
+   mod = new checks[check_name](node, options);
    console.log(mod);
    mod.check().then(fulfill_factory(check_name), reject_factory(check_name));
 }
