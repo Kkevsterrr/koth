@@ -10,6 +10,7 @@ function CheckRT(node, options) {
 CheckRT.prototype.check = function() {
     ip = this.ip;
     return new Promise(function (fulfill, reject) {
+      console.log("starting");
       nightmare
           .goto('http:10.1.1.16:8080')
           .type("[name='user']", 'scorebot')
