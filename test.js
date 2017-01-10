@@ -11,7 +11,6 @@ files.forEach(function(file){
    f = path_module.join(path, file);
    mod = require("./" + f);
    checks[mod.name] = mod;
-   console.log(checks);
 });
 var node = {};
 node.data = {};
