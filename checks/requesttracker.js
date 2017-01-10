@@ -12,7 +12,7 @@ CheckRT.prototype.check = function() {
     return new Promise(function (fulfill, reject) {
       console.log("starting");
       nightmare
-          .goto('http:10.1.1.15:8080')
+          .goto('http:10.1.1.16:8080')
           .type("[name='user']", 'scorebot')
           .type("[name='pass']", 'scorebot')
           .click('.button')
