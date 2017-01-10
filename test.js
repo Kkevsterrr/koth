@@ -2,7 +2,7 @@ var fs = require("fs");
 var path_module = require('path');
 
 
-var path1 = "./checks";
+var path = "./checks";
 var checks = {};
 
 
@@ -30,10 +30,10 @@ node.data.rt = {
 var options = {};
 options.scorebot_username = "student";
 options.scorebot_password = "student1@";
-console.log(cs);
-for(var check_name in cs) {
+console.log(checks);
+for(var check_name in checks) {
    console.log(check_name);
-   mod = new cs[check_name](node, options);
+   mod = new checks[check_name](node, options);
    console.log(mod);
    mod.check().then(fulfill_factory(check_name), reject_factory(check_name));
 }

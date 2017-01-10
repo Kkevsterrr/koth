@@ -7,7 +7,7 @@ function CheckRT(node, options) {
   this.name = "CheckRT";
 }
 
-CheckICMP.prototype.check = function() {
+CheckRT.prototype.check = function() {
     ip = this.ip;
     return new Promise(function (fulfill, reject) {
       nightmare
@@ -26,4 +26,4 @@ CheckICMP.prototype.check = function() {
           });
     });
 };
-module.exports = CheckICMP;
+module.exports = CheckRT;
