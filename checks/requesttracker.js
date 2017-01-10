@@ -1,5 +1,5 @@
 var Nightmare = require('nightmare');
-var nightmare = Nightmare({ show: true });
+var nightmare = Nightmare();
 
 function CheckRT(node, options) {
   this.ip = node.data.ip;
