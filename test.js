@@ -24,7 +24,7 @@ node.data.dns = {
   answer: "10.10.10.13"
 };
 node.data.rt = {
-   ip:8080
+   port:8080
 };
 var options = {};
 options.scorebot_username = "student";
