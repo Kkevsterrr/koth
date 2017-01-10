@@ -3,7 +3,7 @@ var nightmare = Nightmare({ show: true });
 
 function CheckRT(node, options) {
   this.ip = node.data.ip;
-  this.port = node.data.rt.port
+  this.port = node.data.rt.port;
   this.name = "CheckRT";
 }
 

@@ -18,5 +18,5 @@ CheckICMP.prototype.check = function() {
             }
         });
     });
-}
+};
 module.exports = CheckICMP;
