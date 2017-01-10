@@ -23,6 +23,7 @@ CheckRT.prototype.check = function() {
              fulfill("open");
           })
           .catch(function(error){
+             console.log("error");
              fulfill("closed");
           });
     });
