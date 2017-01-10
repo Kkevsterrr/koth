@@ -37,6 +37,10 @@ for(var check_name in checks) {
    mod.check().then(fulfill_factory(check_name), reject_factory(check_name));
 }
 
+setTimeout(function() {
+   console.log("exiting");
+}, 3000);
+
 
 function fulfill_factory(name){
   return function(res) {
