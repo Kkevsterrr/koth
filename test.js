@@ -1,8 +1,5 @@
-var CheckSSH = require("./checks/ssh");
-var CheckICMP = require('./checks/icmp');
 var fs = require("fs");
 var path_module = require('path');
-
 
 var path1 = "./checks";
 var module_holder = {};
@@ -14,10 +11,12 @@ function import_checks(path) {
             var f, l = files.length;
             for (var i = 0; i < l; i++) {
                 f = path_module.join(path, files[i]);
-                mod = require("./" + f);
-                checks[mod.name] = mod
-                console.log(checks);
+                if (fs.lstatSync(f).isFile()) {
+                    mod = require("./" + f);
+                    checks[mod.name] = mod
+                }
             }
+            console.log(checks);
             fulfill(checks);
         });
     });
@@ -29,28 +28,33 @@ import_checks(path1).then(function (cs) {
     node["data"]["ip"] = "127.0.0.1";
     node["data"]["port"] = 22;
     node["data"]["dns"] = {
-      question: {
-        name: "mail.aces.local",
-        type: "A"
+      "question": {
+        "name": "mail.aces.local",
+        "type": "A"
       },
-      answer: "10.10.10.13"
+      "answer": "10.10.10.13"
     }
     var options = {};
     options["scorebot_username"] = "scorebot";
     options["scorebot_password"] = "password";
-    console.log(cs);
+    promises = [];
+    console.log("====Starting Checks====");
     for(check_name in cs) {
-        console.log(check_name);
         mod = new cs[check_name](node, options);
-        console.log(mod);
-        mod.check().then(function(res) { // TODO - BY THE TIME THE PROMISE COMPLETES< CHECK_NAME IS SSH, SO NEED TO RETURN THE NAME OF THE CHECK TOO!!
-            process.stdout.write("Checking " + check_name + ": ")
-            console.log(res)
-        }, function (error) {
-            console.log(error.stack)
-            console.error('uh oh: ', error);   // 'uh oh: something bad happened’
-        });
+        console.log(mod.name);
+        promises.push(mod.check());
     }
+    console.log(promises);
+    Promise.all(promises).then(function(res) {
+        console.log("====Collecting Results====");
+        console.log(promises[0].name == promises[1].name)
+        console.log(promises);
+        //process.stdout.write("Checking " + res.name + ": ")
+        console.log(res)
+    }, function (error) {
+        console.log(error.stack)
+        console.error('uh oh: ', error);
+    });
 
 }, function (error) {
     console.log('Failed to import checks: ', error);
