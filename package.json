@@ -3,9 +3,11 @@
   "version": "0.0.1",
   "description": "A scorebot for Koth exercises",
   "author": "https://github.com/Kkevsterrr",
-  "contributors": [{
-    "name": "https://github.com/ciler819"
-    }],
+  "contributors": [
+    {
+      "name": "https://github.com/ciler819"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/Kkevsterrr/koth"
@@ -21,9 +23,13 @@
     "native-dns": "latest",
     "net-ping": "latest",
     "portscanner": "latest",
+    "promise-spread": "^0.1.0",
     "scp2": "latest",
-    "simple-ssh": "latest"
+    "simple-ssh": "latest",
+    "body-parser": "latest",
+    "socket.io": "latest"
   },
   "license": "UNLICENSED",
-  "private": true
+  "private": true,
+  "optionalDependencies": {}
 }

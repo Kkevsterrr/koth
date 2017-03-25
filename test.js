@@ -1,8 +1,7 @@
 var fs = require("fs");
 var path_module = require('path');
-
+var async = require('async');
 var path1 = "./checks";
-var module_holder = {};
 
 function import_checks(path) {
     checks = {}
@@ -37,25 +36,21 @@ import_checks(path1).then(function (cs) {
     var options = {};
     options["scorebot_username"] = "scorebot";
     options["scorebot_password"] = "password";
-    promises = [];
-    console.log("====Starting Checks====");
+    checks = [];
+    ids = [];
     for(check_name in cs) {
         mod = new cs[check_name](node, options);
-        console.log(mod.name);
-        promises.push(mod.check());
+        ids.push(mod.name);
+        checks.push(mod.check());
     }
-    console.log(promises);
-    Promise.all(promises).then(function(res) {
-        console.log("====Collecting Results====");
-        console.log(promises[0].name == promises[1].name)
-        console.log(promises);
-        //process.stdout.write("Checking " + res.name + ": ")
-        console.log(res)
-    }, function (error) {
-        console.log(error.stack)
-        console.error('uh oh: ', error);
+    async.parallel(checks, function(err, result) {
+        stats = {}
+        for (i = 0; i < result.length; i++) {
+            stats[ids[i]] = result[i];
+        }
+        console.log(stats)
     });
-
-}, function (error) {
-    console.log('Failed to import checks: ', error);
+}).catch(function(err) {
+    console.log(err);
+    console.log('Failed to import checks: ');
 });

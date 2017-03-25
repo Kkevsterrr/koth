@@ -2,17 +2,17 @@ var http = require('http');
 var fs = require('fs');
 var qs = require('querystring');
 var colors = require('colors');
-var evilscan = require("evilscan");
-var async = require('async');
+var evilscan = require("evilscan");var async = require('async');
 var express = require('express');
 var e = require('events');
 var bodyParser = require("body-parser");
+var path_module = require('path');
 
 require('events').EventEmitter.prototype._maxListeners = 0;
 
 var GAME_NAME = "redblue1";
 var CLAIM_DELAY = 30000;
-var SCAN_DELAY = 600000;
+var SCAN_DELAY = 500;
 var PORT_OPEN_SCORE = 3;
 var PORT_CLOSED_SCORE = 0;
 var BOX_OWNERSHIP_SCORE = 1;
@@ -22,7 +22,12 @@ var d = new Date();
 
 var path = __dirname + "/games/" + GAME_NAME;
 var save_path = path + "/saved/network";
-
+var checks_path = "./checks";
+var services = {
+    "FTP": "CheckPort",
+    "SSH": "CheckPort",
+    "HTTP": "CheckPort",
+};
 var environment = {};
 environment["ownership"] = {};
 environment["claim_times"] = {}
@@ -31,9 +36,9 @@ environment["ports"] = {};
 environment["messages"] = [];
 environment["scoring_iteration"] = 0;
 environment["chart_scores"] = [];
-environment["teams"] = {"Red" : "red", "Blue" : "blue", "Green" : "green", "Purple" : "purple", "Yellow": "yellow"};
-environment["ignore"] = ["Red"];
-initialize_network();
+environment["teams"] = {"Red Team" : "red", "Blue Team" : "blue", "Green Team" : "green", "Purple Team" : "purple", "Yellow Team": "yellow"};
+environment["ignore"] = ["Red Team"];
+initialize_network(); //generate the gui graph
 
 var index = fs.readFileSync(__dirname + '/index.html');
 var app = require('express')();
@@ -41,7 +46,18 @@ var server = require('http').Server(app);
 var scorebot = require('express')();
 var scorebot_server = require('http').Server(scorebot);
 var io = require('socket.io')(server);
+//var checks = import_checks(checks_path);
+//console.log(checks);
 
+import_checks(checks_path).then(function (cs) {
+    var checks = cs;
+    var scanner = setInterval(function() { scan_net() }, SCAN_DELAY);
+}).catch(function(err) {
+    console.log(err);
+    console.log('Failed to import checks: ');
+});
+
+//set up routing information
 app.use('/static', express.static('./static'));
 scorebot.use(bodyParser.urlencoded({ extended: false }));
 scorebot.use(bodyParser.json());
@@ -51,6 +67,20 @@ scorebot.listen(8000);
 app.get('/', function (req, res) { res.sendFile(__dirname + '/index.html'); });
 scorebot.get("/", function (req, res) { handle(req, res, req.param("team")); });
 scorebot.post("/", function(req, res) { handle(req, res, req.body.team); });
+
+calculate_score();
+// Emit current data on connection
+io.on('connection', function(socket) {
+    socket.emit('data', {
+        graph: environment["graph"],
+        chart: environment["chart_scores"],
+        teams: environment["teams"],
+        messages: environment["messages"],
+        ports: environment["ports"], //TODO UPDATE THIS TO SERVICES
+        machines: environment["machines"],
+        ignore: environment["ignore"]
+    });
+});
 
 function handle(req, res, team_name) {
     var body='';
@@ -86,8 +116,6 @@ function handle(req, res, team_name) {
     res.end();
 }
 
-scanner = setInterval(function() { scan_net() }, SCAN_DELAY);
-
 String.prototype.cap = function() { return this.charAt(0).toUpperCase() + this.slice(1); }
 Array.prototype.last = function() { return this[this.length - 1]; }
 function pad(i) { return (i < 10 ? "0" : "") + i }
@@ -112,6 +140,24 @@ function count_open_ports(ports) {
     return num_open;
 }
 
+function import_checks(path) {
+    checks = {}
+    return new Promise(function (fulfill, reject) {
+        fs.readdir(path, function(err, files) {
+            var f, l = files.length;
+            for (var i = 0; i < l; i++) {
+                f = path_module.join(path, files[i]);
+                if (fs.lstatSync(f).isFile()) {
+                    mod = require("./" + f);
+                    checks[mod.name] = mod
+                }
+            }
+            console.log(checks);
+            fulfill(checks);
+        });
+    });
+}
+
 function scan_net() {
     io.sockets.emit('scan', {
         chart: calculate_score(),
@@ -120,14 +166,37 @@ function scan_net() {
     });
 
     console.log("Starting network wide scan...");
-    for(var name in environment["machines"]) {
-        machine = environment["machines"][name];
+    all_services = [];
+    check_funcs = [];
+    machines = Object.keys(environment["machines"]);
+    for(i = 0; i < machines.length; i++) {
+        machine = environment["machines"][machines[i]];
+        local_services = Object.keys(machine["services"]);
+        all_services = all_services.concat(local_services);
+        for (j = 0; j < local_services.length; j++) {
+            check_name = services[local_services[j]];
+            console.log("[*] Instantiating service check for machine "+ machine["name"]+" for service " + local_services[j] + " with check " + check_name)
+            mod = new checks[check_name](machine["name"], machine["ip"][0], machine["services"][local_services[j]]); //TODO ensure ip isn't empty
+            console.log(mod);
+            check_funcs.push(mod.check());
+        }
+    }
+    console.log("[*] List of services in order that we're checking:")
+    console.log(all_services)
+    async.parallel(check_funcs, function(err, result) {
+        console.log("[*] But my output is clobbered for no reason and looks like this: ")
+        console.log(result);
+        for (i = 0; i < result.length; i++) {
+            //environment["machines"][result[i]["name"]]["services"][all_services[i]]["status"] = result[i]["status"];
+        }
+    });
+        /*
         ip = get_ip(machine);
         id = machine["id"];
         if(ip != "::ffff:127.0.0.1" && ip.indexOf("/16") == -1 && name.indexOf("Red") == -1 && name != "Scorebot") { // && isEntry(id) == undefined &&
             scan_box(machine, ip, id);
-        }
-    }
+        }*/
+
 }
 
 function scan_box(machine, ip, id) {
@@ -168,7 +237,6 @@ function get_team_by_color(color) {
     return null;
 }
 
-calculate_score();
 function calculate_score() {
     environment["scoring_iteration"] += 1;
     console.log("Calculating score...");
@@ -186,9 +254,10 @@ function calculate_score() {
 
             s[owner] = s[owner] + val || val
             num_open = 0;
-            for(port in machine["ports"]) {
+            for(service in machine["services"]) {
+
                 val = 0.0;
-                if(machine["ports"][port] == "open") {
+                if(machine["services"][service]["status"] == "open") {
                     val = PORT_OPEN_SCORE
                     num_open += 1;
                 } else {
@@ -304,15 +373,3 @@ function get_ip(machine) {
         }
     }
 }
-// Emit current data on connection
-io.on('connection', function(socket) {
-    socket.emit('data', {
-        graph: environment["graph"],
-        chart: environment["chart_scores"],
-        teams: environment["teams"],
-        messages: environment["messages"],
-        ports: environment["ports"],
-        machines: environment["machines"],
-        ignore: environment["ignore"]
-    });
-});
