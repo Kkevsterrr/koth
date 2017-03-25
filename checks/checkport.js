@@ -8,9 +8,9 @@ function CheckPort(machine_name, ip, options) {
 }
 
 CheckPort.prototype.check = function() {
-    port = this.port;
-    ip = this.ip;
-    machine_name = this.machine_name;
+    var port = this.port;
+    var ip = this.ip;
+    var machine_name = this.machine_name;
     return function (callback) {
         try {
             portscanner.checkPortStatus(port, ip, function(error, status) {
