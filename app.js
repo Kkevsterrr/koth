@@ -15,12 +15,13 @@ require('events').EventEmitter.prototype._maxListeners = 0;
 
 var GAME_NAME = "koth4";
 var CLAIM_DELAY = 30000;
-var SCAN_DELAY = 200000;
+var SCAN_DELAY = 10000;
 var PORT_OPEN_SCORE = 3;
 var PORT_CLOSED_SCORE = 0;
 var BOX_OWNERSHIP_SCORE = 1;
 var EXP_SCORING = true;
 var EXP_VAL = 60;
+var ONLY_SCAN_OWNED_BOXES = true;
 var d = new Date();
 
 var path = __dirname + "/games/" + GAME_NAME;
@@ -38,8 +39,8 @@ environment["ports"] = {};
 environment["messages"] = [];
 environment["scoring_iteration"] = 0;
 environment["chart_scores"] = [];
-environment["teams"] = {"Red Team" : "red", "Blue Team" : "blue", "Green Team" : "green", "Purple Team" : "purple", "Yellow Team": "yellow"};
-environment["ignore"] = ["Red Team"];
+environment["teams"] = {"Red Team" : "red", "Blue Team" : "blue", "Green Team" : "green"};
+environment["ignore"] = [];
 initialize_network(); //generate the gui graph
 
 var index = fs.readFileSync(__dirname + '/index.html');
@@ -172,15 +173,17 @@ function scan_net() {
     var machines = Object.keys(environment["machines"]);
     for(var i = 0; i < machines.length; i++) {
         var machine = environment["machines"][machines[i]];
-        var local_services = Object.keys(machine["services"]);
-        all_services = all_services.concat(local_services);
-        for (var j = 0; j < local_services.length; j++) {
-            var check_name = get_check(local_services[j]);
-            var mod = new checks[check_name](machine["name"], get_ip(machine), machine["services"][local_services[j]]);
-            check_funcs.push(mod.check());
+        if (!ONLY_SCAN_OWNED_BOXES || (ONLY_SCAN_OWNED_BOXES && machine["owner"] != "none")) {
+            var local_services = Object.keys(machine["services"]);
+            all_services = all_services.concat(local_services);
+            for (var j = 0; j < local_services.length; j++) {
+                var check_name = get_check(local_services[j]);
+                var mod = new checks[check_name](machine["name"], get_ip(machine), machine["services"][local_services[j]]);
+                check_funcs.push(mod.check());
+            }
         }
     }
-
+    console.log("Scanning " + check_funcs.length);
     async.parallel(check_funcs, function(err, result) {
         for (i = 0; i < result.length; i++) {
             environment["machines"][result[i]["name"]]["services"][all_services[i]]["status"] = result[i]["status"];

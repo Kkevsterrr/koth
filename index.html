@@ -159,6 +159,8 @@
                     color = teams[team_name];
                     $("#tables").append("<table class=\"ui " + color + " fixed table\"><thead><tr><th>"+team_name+" Machines</th><th>Status</th><th>Services</th></tr></thead><tbody id=\""+ color+"_machines\"></tbody></table>");
                 }
+                $("#tables").append("<table class=\"ui grey fixed table\"><thead><tr><th>Unclaimed Machines</th><th>Status</th><th>Services</th></tr></thead><tbody id=\"grey_machines\"></tbody></table>");
+
                 console.log(machines);
                 for(var name in machines) {
                     machine = machines[name];
