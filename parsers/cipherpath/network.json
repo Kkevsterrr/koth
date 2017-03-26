@@ -235,7 +235,7 @@
       "ip": [
         "10.3.0.3"
       ],
-      "owner": "Red Team",
+      "owner": "Green Team",
       "connections": [
         "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf"
       ]
@@ -275,7 +275,7 @@
       "ip": [
         "10.4.0.3"
       ],
-      "owner": "Red Team",
+      "owner": "Blue Team",
       "connections": [
         "33d3c9bc-296e-4e40-8bad-862be86ac256"
       ]
