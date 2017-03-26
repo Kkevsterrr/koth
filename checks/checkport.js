@@ -1,3 +1,5 @@
+'use strict';
+
 var portscanner = require('portscanner');
 
 function CheckPort(machine_name, ip, options) {

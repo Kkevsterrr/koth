@@ -1,3 +1,5 @@
+'use strict';
+
 var ping = require("net-ping");
 
 function CheckICMP(ip, options) {
@@ -6,15 +8,15 @@ function CheckICMP(ip, options) {
 }
 
 CheckICMP.prototype.check = function() {
-    ip = this.ip;
-    CheckPort = this.checkport;
+    var ip = this.ip;
+    var machine_name = this.machine_name;
     return function (callback) {
         var session = ping.createSession();
         session.pingHost(ip, function (error, target) {
             if (error) {
-                callback (null, "closed");
+                callback (null, {"name" : machine_name, "status": "closed"});
             } else {
-                callback (null, "open");
+                callback (null, {"name" : machine_name, "status": "open"});
             }
         });
     };

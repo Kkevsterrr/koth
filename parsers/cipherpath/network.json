@@ -1,52 +1,49 @@
 {
-  "ipv4": "10.4.0.254",
-  "edit_url": "/container/cbf34718-e0f8-4746-bdc8-df6af252d1a9/topology/network/68eed12c-7316-4ad3-b544-3d7e23839f54/",
-  "routes": [],
-  "mode": "switch",
-  "vlan": 132,
-  "dhcp": true,
-  "ipv6": "fec2:0:0:4::fe/64",
-  "netmask": "255.255.0.0",
-  "status": {
-    "running": "running"
-  },
-  "defaultgateway": null,
-  "slaac": true,
-  "name": "net-switch-00004",
-  "dns": false,
-  "defaultgatewayv6": null,
-  "link": null,
-  "id": "68eed12c-7316-4ad3-b544-3d7e23839f54",
-  "nameservers": [],
-  "dhcp_pools": [],
-  "description": "",
-  "layout": {
-    "x": 80,
-    "y": -40
-  },
-  "ip": "10.4.0.254/16",
-  "attached": true,
   "machines": {
     "Blue M3": {
       "name": "Blue M3",
       "id": "BlueM3",
-      "ports": {
-        "21": "open",
-        "22": "open",
-        "80": "open",
-        "1617": "open",
-        "3306": "open",
-        "4848": "open",
-        "8080": "open",
-        "8181": "open"
+      "services": {
+        "ftp": {
+          "port": 21,
+          "status": "open"
+        },
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "nimrod": {
+          "port": 1617,
+          "status": "open"
+        },
+        "mysql": {
+          "port": 3306,
+          "status": "open"
+        },
+        "appserv-http": {
+          "port": 4848,
+          "status": "open"
+        },
+        "http-alt": {
+          "port": 8080,
+          "status": "open"
+        },
+        "intermapper": {
+          "port": 8181,
+          "status": "open"
+        }
       },
       "color": "blue",
       "status": "8/8",
-      "percentage": "100%",
+      "percentage": "100",
       "ip": [
-        "10.1.0.1"
+        "127.0.0.1"
       ],
-      "owner": "Blue",
+      "owner": "Blue Team",
       "connections": [
         "9e6762fa-ab88-4569-94b6-e644fc35b215"
       ]
@@ -54,25 +51,43 @@
     "Red 1": {
       "name": "Red 1",
       "id": "Red1",
-      "ports": {
-        "21": "open",
-        "22": "open",
-        "23": "open",
-        "25": "open",
-        "80": "open",
-        "3306": "open"
+      "services": {
+        "ftp": {
+          "port": 21,
+          "status": "open"
+        },
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "telnet": {
+          "port": 23,
+          "status": "open"
+        },
+        "smtp": {
+          "port": 25,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "mysql": {
+          "port": 3306,
+          "status": "open"
+        }
       },
       "color": "red",
       "status": "6/6",
-      "percentage": "100%",
+      "percentage": "100",
       "ip": [
-        "10.1.0.2",
-        null,
-        "10.3.0.2",
-        "10.4.0.1",
-        "10.5.0.3"
+        "127.0.0.1",
+        "127.0.0.1",
+        "127.0.0.1",
+        "127.0.0.1",
+        "127.0.0.1"
       ],
-      "owner": "Red",
+      "owner": "Red Team",
       "connections": [
         "9e6762fa-ab88-4569-94b6-e644fc35b215",
         "e82404d4-24cf-405d-9122-3a5ecc980444",
@@ -84,20 +99,35 @@
     "BlueWin7": {
       "name": "BlueWin7",
       "id": "BlueWin7",
-      "ports": {
-        "22": "open",
-        "80": "open",
-        "3389": "open",
-        "5357": "open",
-        "8080": "open"
+      "services": {
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "rdp": {
+          "port": 3389,
+          "status": "open"
+        },
+        "wsdapi": {
+          "port": 5357,
+          "status": "open"
+        },
+        "http-alt": {
+          "port": 8080,
+          "status": "open"
+        }
       },
       "color": "blue",
       "status": "5/5",
-      "percentage": "100%",
+      "percentage": "100",
       "ip": [
-        "10.1.0.3"
+        "127.0.0.1"
       ],
-      "owner": "Blue",
+      "owner": "Blue Team",
       "connections": [
         "9e6762fa-ab88-4569-94b6-e644fc35b215"
       ]
@@ -105,22 +135,43 @@
     "BlueWin2012": {
       "name": "BlueWin2012",
       "id": "BlueWin2012",
-      "ports": {
-        "21": "open",
-        "22": "open",
-        "23": "open",
-        "53": "open",
-        "80": "open",
-        "443": "open",
-        "3389": "open"
+      "services": {
+        "ftp": {
+          "port": 21,
+          "status": "open"
+        },
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "telnet": {
+          "port": 23,
+          "status": "open"
+        },
+        "dns": {
+          "port": 53,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "https": {
+          "port": 443,
+          "status": "open"
+        },
+        "rdp": {
+          "port": 3389,
+          "status": "open"
+        }
       },
       "color": "blue",
       "status": "7/7",
-      "percentage": "100%",
+      "percentage": "100",
       "ip": [
-        "10.1.0.4"
+        "127.0.0.1"
       ],
-      "owner": "Blue",
+      "owner": "Blue Team",
       "connections": [
         "9e6762fa-ab88-4569-94b6-e644fc35b215"
       ]
@@ -128,25 +179,43 @@
     "Red 2": {
       "name": "Red 2",
       "id": "Red2",
-      "ports": {
-        "21": "open",
-        "22": "open",
-        "23": "open",
-        "25": "open",
-        "80": "open",
-        "3306": "open"
+      "services": {
+        "ftp": {
+          "port": 21,
+          "status": "open"
+        },
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "telnet": {
+          "port": 23,
+          "status": "open"
+        },
+        "smtp": {
+          "port": 25,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "mysql": {
+          "port": 3306,
+          "status": "open"
+        }
       },
       "color": "red",
       "status": "6/6",
-      "percentage": "100%",
+      "percentage": "100",
       "ip": [
-        "10.1.0.5",
-        null,
-        "10.5.0.6",
-        "10.4.0.6",
-        "10.3.0.6"
+        "127.0.0.1",
+        "127.0.0.1",
+        "127.0.0.1",
+        "127.0.0.1",
+        "127.0.0.1"
       ],
-      "owner": "Red",
+      "owner": "Red Team",
       "connections": [
         "9e6762fa-ab88-4569-94b6-e644fc35b215",
         "e82404d4-24cf-405d-9122-3a5ecc980444",
@@ -158,21 +227,39 @@
     "Blue Kali": {
       "name": "Blue Kali",
       "id": "BlueKali",
-      "ports": {
-        "21": "open",
-        "22": "open",
-        "23": "open",
-        "25": "open",
-        "80": "open",
-        "3306": "open"
+      "services": {
+        "ftp": {
+          "port": 21,
+          "status": "open"
+        },
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "telnet": {
+          "port": 23,
+          "status": "open"
+        },
+        "smtp": {
+          "port": 25,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "mysql": {
+          "port": 3306,
+          "status": "open"
+        }
       },
       "color": "blue",
       "status": "6/6",
-      "percentage": "100%",
+      "percentage": "100",
       "ip": [
-        "10.1.0.6"
+        "127.0.0.1"
       ],
-      "owner": "Blue",
+      "owner": "Blue Team",
       "connections": [
         "9e6762fa-ab88-4569-94b6-e644fc35b215"
       ]
@@ -180,23 +267,41 @@
     "Scorebot": {
       "name": "Scorebot",
       "id": "Scorebot",
-      "ports": {
-        "21": "open",
-        "22": "open",
-        "23": "open",
-        "25": "open",
-        "80": "open",
-        "3306": "open"
+      "services": {
+        "ftp": {
+          "port": 21,
+          "status": "open"
+        },
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "telnet": {
+          "port": 23,
+          "status": "open"
+        },
+        "smtp": {
+          "port": 25,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "mysql": {
+          "port": 3306,
+          "status": "open"
+        }
       },
       "color": "black",
       "status": "6/6",
-      "percentage": "100%",
+      "percentage": "100",
       "ip": [
-        "10.3.0.1",
-        "10.1.0.7",
-        "10.4.0.2",
-        "10.5.0.4",
-        null
+        "127.0.0.1",
+        "127.0.0.1",
+        "127.0.0.1",
+        "127.0.0.1",
+        "127.0.0.1"
       ],
       "owner": "none",
       "connections": [
@@ -210,20 +315,35 @@
     "Green GVM1": {
       "name": "Green GVM1",
       "id": "GreenGVM1",
-      "ports": {
-        "21": "open",
-        "22": "open",
-        "25": "open",
-        "80": "open",
-        "587": "open"
+      "services": {
+        "ftp": {
+          "port": 21,
+          "status": "open"
+        },
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "smtp": {
+          "port": 25,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "smpt-msa": {
+          "port": 587,
+          "status": "open"
+        }
       },
       "color": "green",
       "status": "5/5",
-      "percentage": "100%",
+      "percentage": "100",
       "ip": [
-        "10.3.0.3"
+        "127.0.0.1"
       ],
-      "owner": "Green",
+      "owner": "Green Team",
       "connections": [
         "8671ced9-3d0a-4279-a32e-421049edde47"
       ]
@@ -231,20 +351,35 @@
     "Green GVM2": {
       "name": "Green GVM2",
       "id": "GreenGVM2",
-      "ports": {
-        "7": "open",
-        "21": "open",
-        "22": "open",
-        "80": "open",
-        "81": "open"
+      "services": {
+        "echo": {
+          "port": 7,
+          "status": "open"
+        },
+        "ftp": {
+          "port": 21,
+          "status": "open"
+        },
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "http-alt": {
+          "port": 81,
+          "status": "open"
+        }
       },
       "color": "green",
       "status": "5/5",
-      "percentage": "100%",
+      "percentage": "100",
       "ip": [
-        "10.3.0.4"
+        "127.0.0.1"
       ],
-      "owner": "Green",
+      "owner": "Green Team",
       "connections": [
         "8671ced9-3d0a-4279-a32e-421049edde47"
       ]
@@ -252,20 +387,35 @@
     "Purple GVM1": {
       "name": "Purple GVM1",
       "id": "PurpleGVM1",
-      "ports": {
-        "21": "open",
-        "22": "open",
-        "25": "open",
-        "80": "open",
-        "587": "open"
+      "services": {
+        "ftp": {
+          "port": 21,
+          "status": "open"
+        },
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "smtp": {
+          "port": 25,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "smpt-msa": {
+          "port": 587,
+          "status": "open"
+        }
       },
       "color": "purple",
       "status": "5/5",
-      "percentage": "100%",
+      "percentage": "100",
       "ip": [
-        "10.4.0.3"
+        "127.0.0.1"
       ],
-      "owner": "Purple",
+      "owner": "Purple Team",
       "connections": [
         "68eed12c-7316-4ad3-b544-3d7e23839f54"
       ]
@@ -273,20 +423,35 @@
     "Purple GVM2": {
       "name": "Purple GVM2",
       "id": "PurpleGVM2",
-      "ports": {
-        "7": "open",
-        "21": "open",
-        "22": "open",
-        "80": "open",
-        "81": "open"
+      "services": {
+        "echo": {
+          "port": 7,
+          "status": "open"
+        },
+        "ftp": {
+          "port": 21,
+          "status": "open"
+        },
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "http-alt": {
+          "port": 81,
+          "status": "open"
+        }
       },
       "color": "purple",
       "status": "5/5",
-      "percentage": "100%",
+      "percentage": "100",
       "ip": [
-        "10.4.0.4"
+        "127.0.0.1"
       ],
-      "owner": "Purple",
+      "owner": "Purple Team",
       "connections": [
         "68eed12c-7316-4ad3-b544-3d7e23839f54"
       ]
@@ -294,20 +459,35 @@
     "Blue GVM1": {
       "name": "Blue GVM1",
       "id": "BlueGVM1",
-      "ports": {
-        "21": "open",
-        "22": "open",
-        "25": "open",
-        "80": "open",
-        "587": "open"
+      "services": {
+        "ftp": {
+          "port": 21,
+          "status": "open"
+        },
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "smtp": {
+          "port": 25,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "smpt-msa": {
+          "port": 587,
+          "status": "open"
+        }
       },
       "color": "blue",
       "status": "5/5",
-      "percentage": "100%",
+      "percentage": "100",
       "ip": [
-        "10.1.0.8"
+        "127.0.0.1"
       ],
-      "owner": "Blue",
+      "owner": "Blue Team",
       "connections": [
         "9e6762fa-ab88-4569-94b6-e644fc35b215"
       ]
@@ -315,20 +495,35 @@
     "Blue GVM2": {
       "name": "Blue GVM2",
       "id": "BlueGVM2",
-      "ports": {
-        "7": "open",
-        "21": "open",
-        "22": "open",
-        "80": "open",
-        "81": "open"
+      "services": {
+        "echo": {
+          "port": 7,
+          "status": "open"
+        },
+        "ftp": {
+          "port": 21,
+          "status": "open"
+        },
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "http-alt": {
+          "port": 81,
+          "status": "open"
+        }
       },
       "color": "blue",
       "status": "5/5",
-      "percentage": "100%",
+      "percentage": "100",
       "ip": [
-        "10.1.0.9"
+        "127.0.0.1"
       ],
-      "owner": "Blue",
+      "owner": "Blue Team",
       "connections": [
         "9e6762fa-ab88-4569-94b6-e644fc35b215"
       ]
@@ -336,20 +531,35 @@
     "Yellow GVM1": {
       "name": "Yellow GVM1",
       "id": "YellowGVM1",
-      "ports": {
-        "21": "open",
-        "22": "open",
-        "25": "open",
-        "80": "open",
-        "587": "open"
+      "services": {
+        "ftp": {
+          "port": 21,
+          "status": "open"
+        },
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "smtp": {
+          "port": 25,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "smpt-msa": {
+          "port": 587,
+          "status": "open"
+        }
       },
       "color": "yellow",
       "status": "5/5",
-      "percentage": "100%",
+      "percentage": "100",
       "ip": [
-        "10.5.0.1"
+        "127.0.0.1"
       ],
-      "owner": "Yellow",
+      "owner": "Yellow Team",
       "connections": [
         "0aed5cd0-e1f8-4862-9d64-156aa4609b54"
       ]
@@ -357,20 +567,35 @@
     "Yellow GVM2": {
       "name": "Yellow GVM2",
       "id": "YellowGVM2",
-      "ports": {
-        "7": "open",
-        "21": "open",
-        "22": "open",
-        "80": "open",
-        "81": "open"
+      "services": {
+        "echo": {
+          "port": 7,
+          "status": "open"
+        },
+        "ftp": {
+          "port": 21,
+          "status": "open"
+        },
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "http-alt": {
+          "port": 81,
+          "status": "open"
+        }
       },
       "color": "yellow",
       "status": "5/5",
-      "percentage": "100%",
+      "percentage": "100",
       "ip": [
-        "10.5.0.2"
+        "127.0.0.1"
       ],
-      "owner": "Yellow",
+      "owner": "Yellow Team",
       "connections": [
         "0aed5cd0-e1f8-4862-9d64-156aa4609b54"
       ]
@@ -378,25 +603,43 @@
     "Red 3": {
       "name": "Red 3",
       "id": "Red3",
-      "ports": {
-        "21": "open",
-        "22": "open",
-        "23": "open",
-        "25": "open",
-        "80": "open",
-        "3306": "open"
+      "services": {
+        "ftp": {
+          "port": 21,
+          "status": "open"
+        },
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "telnet": {
+          "port": 23,
+          "status": "open"
+        },
+        "smtp": {
+          "port": 25,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "mysql": {
+          "port": 3306,
+          "status": "open"
+        }
       },
       "color": "red",
       "status": "6/6",
-      "percentage": "100%",
+      "percentage": "100",
       "ip": [
-        null,
-        "10.5.0.5",
-        "10.1.0.10",
-        "10.3.0.5",
-        "10.4.0.5"
+        "127.0.0.1",
+        "127.0.0.1",
+        "127.0.0.1",
+        "127.0.0.1",
+        "127.0.0.1"
       ],
-      "owner": "Red",
+      "owner": "Red Team",
       "connections": [
         "e82404d4-24cf-405d-9122-3a5ecc980444",
         "0aed5cd0-e1f8-4862-9d64-156aa4609b54",
@@ -408,20 +651,35 @@
     "Blue M2": {
       "name": "Blue M2",
       "id": "BlueM2",
-      "ports": {
-        "21": "open",
-        "22": "open",
-        "80": "open",
-        "3306": "open",
-        "6667": "open"
+      "services": {
+        "ftp": {
+          "port": 21,
+          "status": "open"
+        },
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "mysql": {
+          "port": 3306,
+          "status": "open"
+        },
+        "irc": {
+          "port": 6667,
+          "status": "open"
+        }
       },
       "color": "blue",
       "status": "5/5",
-      "percentage": "100%",
+      "percentage": "100",
       "ip": [
-        "10.1.0.11"
+        "127.0.0.1"
       ],
-      "owner": "Blue",
+      "owner": "Blue Team",
       "connections": [
         "9e6762fa-ab88-4569-94b6-e644fc35b215"
       ]
@@ -429,20 +687,35 @@
     "Green M2": {
       "name": "Green M2",
       "id": "GreenM2",
-      "ports": {
-        "21": "open",
-        "22": "open",
-        "80": "open",
-        "3306": "open",
-        "6667": "open"
+      "services": {
+        "ftp": {
+          "port": 21,
+          "status": "open"
+        },
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "mysql": {
+          "port": 3306,
+          "status": "open"
+        },
+        "irc": {
+          "port": 6667,
+          "status": "open"
+        }
       },
       "color": "green",
       "status": "5/5",
-      "percentage": "100%",
+      "percentage": "100",
       "ip": [
-        "10.3.0.7"
+        "127.0.0.1"
       ],
-      "owner": "Green",
+      "owner": "Green Team",
       "connections": [
         "8671ced9-3d0a-4279-a32e-421049edde47"
       ]
@@ -450,20 +723,35 @@
     "Purple M2": {
       "name": "Purple M2",
       "id": "PurpleM2",
-      "ports": {
-        "21": "open",
-        "22": "open",
-        "80": "open",
-        "3306": "open",
-        "6667": "open"
+      "services": {
+        "ftp": {
+          "port": 21,
+          "status": "open"
+        },
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "mysql": {
+          "port": 3306,
+          "status": "open"
+        },
+        "irc": {
+          "port": 6667,
+          "status": "open"
+        }
       },
       "color": "purple",
       "status": "5/5",
-      "percentage": "100%",
+      "percentage": "100",
       "ip": [
-        "10.4.0.7"
+        "127.0.0.1"
       ],
-      "owner": "Purple",
+      "owner": "Purple Team",
       "connections": [
         "68eed12c-7316-4ad3-b544-3d7e23839f54"
       ]
@@ -471,20 +759,35 @@
     "Yellow M2": {
       "name": "Yellow M2",
       "id": "YellowM2",
-      "ports": {
-        "21": "open",
-        "22": "open",
-        "80": "open",
-        "3306": "open",
-        "6667": "open"
+      "services": {
+        "ftp": {
+          "port": 21,
+          "status": "open"
+        },
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "mysql": {
+          "port": 3306,
+          "status": "open"
+        },
+        "irc": {
+          "port": 6667,
+          "status": "open"
+        }
       },
       "color": "yellow",
       "status": "5/5",
-      "percentage": "100%",
+      "percentage": "100",
       "ip": [
-        "10.5.0.7"
+        "127.0.0.1"
       ],
-      "owner": "Yellow",
+      "owner": "Yellow Team",
       "connections": [
         "0aed5cd0-e1f8-4862-9d64-156aa4609b54"
       ]
@@ -492,23 +795,47 @@
     "Green M3": {
       "name": "Green M3",
       "id": "GreenM3",
-      "ports": {
-        "21": "open",
-        "22": "open",
-        "80": "open",
-        "1617": "open",
-        "3306": "open",
-        "4848": "open",
-        "8080": "open",
-        "8181": "open"
+      "services": {
+        "ftp": {
+          "port": 21,
+          "status": "open"
+        },
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "nimrod": {
+          "port": 1617,
+          "status": "open"
+        },
+        "mysql": {
+          "port": 3306,
+          "status": "open"
+        },
+        "appserv-http": {
+          "port": 4848,
+          "status": "open"
+        },
+        "http-alt": {
+          "port": 8080,
+          "status": "open"
+        },
+        "intermapper": {
+          "port": 8181,
+          "status": "open"
+        }
       },
       "color": "green",
       "status": "8/8",
-      "percentage": "100%",
+      "percentage": "100",
       "ip": [
-        "10.3.0.8"
+        "127.0.0.1"
       ],
-      "owner": "Green",
+      "owner": "Green Team",
       "connections": [
         "8671ced9-3d0a-4279-a32e-421049edde47"
       ]
@@ -516,22 +843,43 @@
     "GreenWin2012": {
       "name": "GreenWin2012",
       "id": "GreenWin2012",
-      "ports": {
-        "21": "open",
-        "22": "open",
-        "23": "open",
-        "53": "open",
-        "80": "open",
-        "443": "open",
-        "3389": "open"
+      "services": {
+        "ftp": {
+          "port": 21,
+          "status": "open"
+        },
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "telnet": {
+          "port": 23,
+          "status": "open"
+        },
+        "dns": {
+          "port": 53,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "https": {
+          "port": 443,
+          "status": "open"
+        },
+        "rdp": {
+          "port": 3389,
+          "status": "open"
+        }
       },
       "color": "green",
       "status": "7/7",
-      "percentage": "100%",
+      "percentage": "100",
       "ip": [
-        "10.3.0.9"
+        "127.0.0.1"
       ],
-      "owner": "Green",
+      "owner": "Green Team",
       "connections": [
         "8671ced9-3d0a-4279-a32e-421049edde47"
       ]
@@ -539,20 +887,35 @@
     "GreenWin7": {
       "name": "GreenWin7",
       "id": "GreenWin7",
-      "ports": {
-        "22": "open",
-        "80": "open",
-        "3389": "open",
-        "5357": "open",
-        "8080": "open"
+      "services": {
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "rdp": {
+          "port": 3389,
+          "status": "open"
+        },
+        "wsdapi": {
+          "port": 5357,
+          "status": "open"
+        },
+        "http-alt": {
+          "port": 8080,
+          "status": "open"
+        }
       },
       "color": "green",
       "status": "5/5",
-      "percentage": "100%",
+      "percentage": "100",
       "ip": [
-        "10.3.0.10"
+        "127.0.0.1"
       ],
-      "owner": "Green",
+      "owner": "Green Team",
       "connections": [
         "8671ced9-3d0a-4279-a32e-421049edde47"
       ]
@@ -560,23 +923,47 @@
     "Purple M3": {
       "name": "Purple M3",
       "id": "PurpleM3",
-      "ports": {
-        "21": "open",
-        "22": "open",
-        "80": "open",
-        "1617": "open",
-        "3306": "open",
-        "4848": "open",
-        "8080": "open",
-        "8181": "open"
+      "services": {
+        "ftp": {
+          "port": 21,
+          "status": "open"
+        },
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "nimrod": {
+          "port": 1617,
+          "status": "open"
+        },
+        "mysql": {
+          "port": 3306,
+          "status": "open"
+        },
+        "appserv-http": {
+          "port": 4848,
+          "status": "open"
+        },
+        "http-alt": {
+          "port": 8080,
+          "status": "open"
+        },
+        "intermapper": {
+          "port": 8181,
+          "status": "open"
+        }
       },
       "color": "purple",
       "status": "8/8",
-      "percentage": "100%",
+      "percentage": "100",
       "ip": [
-        "10.4.0.8"
+        "127.0.0.1"
       ],
-      "owner": "Purple",
+      "owner": "Purple Team",
       "connections": [
         "68eed12c-7316-4ad3-b544-3d7e23839f54"
       ]
@@ -584,23 +971,47 @@
     "Yellow M3": {
       "name": "Yellow M3",
       "id": "YellowM3",
-      "ports": {
-        "21": "open",
-        "22": "open",
-        "80": "open",
-        "1617": "open",
-        "3306": "open",
-        "4848": "open",
-        "8080": "open",
-        "8181": "open"
+      "services": {
+        "ftp": {
+          "port": 21,
+          "status": "open"
+        },
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "nimrod": {
+          "port": 1617,
+          "status": "open"
+        },
+        "mysql": {
+          "port": 3306,
+          "status": "open"
+        },
+        "appserv-http": {
+          "port": 4848,
+          "status": "open"
+        },
+        "http-alt": {
+          "port": 8080,
+          "status": "open"
+        },
+        "intermapper": {
+          "port": 8181,
+          "status": "open"
+        }
       },
       "color": "yellow",
       "status": "8/8",
-      "percentage": "100%",
+      "percentage": "100",
       "ip": [
-        "10.5.0.8"
+        "127.0.0.1"
       ],
-      "owner": "Yellow",
+      "owner": "Yellow Team",
       "connections": [
         "0aed5cd0-e1f8-4862-9d64-156aa4609b54"
       ]
@@ -608,22 +1019,43 @@
     "YellowWin2012": {
       "name": "YellowWin2012",
       "id": "YellowWin2012",
-      "ports": {
-        "21": "open",
-        "22": "open",
-        "23": "open",
-        "53": "open",
-        "80": "open",
-        "443": "open",
-        "3389": "open"
+      "services": {
+        "ftp": {
+          "port": 21,
+          "status": "open"
+        },
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "telnet": {
+          "port": 23,
+          "status": "open"
+        },
+        "dns": {
+          "port": 53,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "https": {
+          "port": 443,
+          "status": "open"
+        },
+        "rdp": {
+          "port": 3389,
+          "status": "open"
+        }
       },
       "color": "yellow",
       "status": "7/7",
-      "percentage": "100%",
+      "percentage": "100",
       "ip": [
-        "10.5.0.9"
+        "127.0.0.1"
       ],
-      "owner": "Yellow",
+      "owner": "Yellow Team",
       "connections": [
         "0aed5cd0-e1f8-4862-9d64-156aa4609b54"
       ]
@@ -631,22 +1063,43 @@
     "PurpleWin2012": {
       "name": "PurpleWin2012",
       "id": "PurpleWin2012",
-      "ports": {
-        "21": "open",
-        "22": "open",
-        "23": "open",
-        "53": "open",
-        "80": "open",
-        "443": "open",
-        "3389": "open"
+      "services": {
+        "ftp": {
+          "port": 21,
+          "status": "open"
+        },
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "telnet": {
+          "port": 23,
+          "status": "open"
+        },
+        "dns": {
+          "port": 53,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "https": {
+          "port": 443,
+          "status": "open"
+        },
+        "rdp": {
+          "port": 3389,
+          "status": "open"
+        }
       },
       "color": "purple",
       "status": "7/7",
-      "percentage": "100%",
+      "percentage": "100",
       "ip": [
-        "10.4.0.9"
+        "127.0.0.1"
       ],
-      "owner": "Purple",
+      "owner": "Purple Team",
       "connections": [
         "68eed12c-7316-4ad3-b544-3d7e23839f54"
       ]
@@ -654,20 +1107,35 @@
     "YellowWin7": {
       "name": "YellowWin7",
       "id": "YellowWin7",
-      "ports": {
-        "22": "open",
-        "80": "open",
-        "3389": "open",
-        "5357": "open",
-        "8080": "open"
+      "services": {
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "rdp": {
+          "port": 3389,
+          "status": "open"
+        },
+        "wsdapi": {
+          "port": 5357,
+          "status": "open"
+        },
+        "http-alt": {
+          "port": 8080,
+          "status": "open"
+        }
       },
       "color": "yellow",
       "status": "5/5",
-      "percentage": "100%",
+      "percentage": "100",
       "ip": [
-        "10.5.0.10"
+        "127.0.0.1"
       ],
-      "owner": "Yellow",
+      "owner": "Yellow Team",
       "connections": [
         "0aed5cd0-e1f8-4862-9d64-156aa4609b54"
       ]
@@ -675,20 +1143,35 @@
     "PurpleWin7": {
       "name": "PurpleWin7",
       "id": "PurpleWin7",
-      "ports": {
-        "22": "open",
-        "80": "open",
-        "3389": "open",
-        "5357": "open",
-        "8080": "open"
+      "services": {
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "rdp": {
+          "port": 3389,
+          "status": "open"
+        },
+        "wsdapi": {
+          "port": 5357,
+          "status": "open"
+        },
+        "http-alt": {
+          "port": 8080,
+          "status": "open"
+        }
       },
       "color": "purple",
       "status": "5/5",
-      "percentage": "100%",
+      "percentage": "100",
       "ip": [
-        "10.4.0.10"
+        "127.0.0.1"
       ],
-      "owner": "Purple",
+      "owner": "Purple Team",
       "connections": [
         "68eed12c-7316-4ad3-b544-3d7e23839f54"
       ]
@@ -696,21 +1179,39 @@
     "Green Kali": {
       "name": "Green Kali",
       "id": "GreenKali",
-      "ports": {
-        "21": "open",
-        "22": "open",
-        "23": "open",
-        "25": "open",
-        "80": "open",
-        "3306": "open"
+      "services": {
+        "ftp": {
+          "port": 21,
+          "status": "open"
+        },
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "telnet": {
+          "port": 23,
+          "status": "open"
+        },
+        "smtp": {
+          "port": 25,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "mysql": {
+          "port": 3306,
+          "status": "open"
+        }
       },
       "color": "green",
       "status": "6/6",
-      "percentage": "100%",
+      "percentage": "100",
       "ip": [
-        "10.3.0.11"
+        "127.0.0.1"
       ],
-      "owner": "Green",
+      "owner": "Green Team",
       "connections": [
         "8671ced9-3d0a-4279-a32e-421049edde47"
       ]
@@ -718,21 +1219,39 @@
     "Purple Kali": {
       "name": "Purple Kali",
       "id": "PurpleKali",
-      "ports": {
-        "21": "open",
-        "22": "open",
-        "23": "open",
-        "25": "open",
-        "80": "open",
-        "3306": "open"
+      "services": {
+        "ftp": {
+          "port": 21,
+          "status": "open"
+        },
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "telnet": {
+          "port": 23,
+          "status": "open"
+        },
+        "smtp": {
+          "port": 25,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "mysql": {
+          "port": 3306,
+          "status": "open"
+        }
       },
       "color": "purple",
       "status": "6/6",
-      "percentage": "100%",
+      "percentage": "100",
       "ip": [
-        "10.4.0.11"
+        "127.0.0.1"
       ],
-      "owner": "Purple",
+      "owner": "Purple Team",
       "connections": [
         "68eed12c-7316-4ad3-b544-3d7e23839f54"
       ]
@@ -740,21 +1259,39 @@
     "Yellow Kali": {
       "name": "Yellow Kali",
       "id": "YellowKali",
-      "ports": {
-        "21": "open",
-        "22": "open",
-        "23": "open",
-        "25": "open",
-        "80": "open",
-        "3306": "open"
+      "services": {
+        "ftp": {
+          "port": 21,
+          "status": "open"
+        },
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "telnet": {
+          "port": 23,
+          "status": "open"
+        },
+        "smtp": {
+          "port": 25,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "mysql": {
+          "port": 3306,
+          "status": "open"
+        }
       },
       "color": "yellow",
       "status": "6/6",
-      "percentage": "100%",
+      "percentage": "100",
       "ip": [
-        "10.5.0.11"
+        "127.0.0.1"
       ],
-      "owner": "Yellow",
+      "owner": "Yellow Team",
       "connections": [
         "0aed5cd0-e1f8-4862-9d64-156aa4609b54"
       ]

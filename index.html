@@ -143,7 +143,7 @@
             //randomUpdate();
             String.prototype.cap = function() { return this.charAt(0).toUpperCase() + this.slice(1); }
             function pad(i) { return (i < 10 ? "0" : "") + i }
-            function first(arr) { return arr[0].toLowerCase(); }
+            function first(arr) { return arr[0]; }
 
             var socket = io();
             socket.on('scan', function(data) { scan(data) });
@@ -166,8 +166,9 @@
                     color = machine["color"];
                     console.log(machine);
                     $("#" + color + "_machines").append("<tr onclick=\"javascript:$('."+color + "_" + id.toLowerCase() + "').toggle('fast');\" class='" + color + "_" + id.toLowerCase() + "_control machine_row'><td><i class=\"chevron down icon\"></i>" + name + "</td><td><div id='" + color + "_" + id.toLowerCase() + "_bar' class=\"ui indicating progress active\" data-percent=\""+machine["percentage"] + "\" style=\"margin-bottom: 0px;\"><div id='" + color + "_" + id.toLowerCase() + "_bar_inner' class=\"bar\" style=\"transition-duration: 300ms; width: "+machine["percentage"]+"%;\"></div></div></td><td id=\"" + color + "_" + id.toLowerCase() + "_status\">" + machine["status"] + "</td></tr>");
-                    for(var port in machine["ports"]) {
-                        status = machine["ports"][port];
+                    for(var service in machine["services"]) {
+                        var status = machine["services"][service]["status"];
+                        var port = machine["services"][service]["port"];
                         if(status == "open") {
                             category = "positive";
                             icon = "checkmark";
@@ -198,8 +199,9 @@
                     $("#"+color+"_"+id.toLowerCase() +"_bar").attr('data-percent', machine["percentage"])
                     $("#"+color+"_"+id.toLowerCase() +"_bar_inner").css("width", machine["percentage"] + "%")
 
-                    for(var port in machine["ports"]) {
-                        status = machine["ports"][port];
+                    for(var service in machine["services"]) {
+                        var status = machine["services"][service]["status"];
+                        var port = machine["services"][service]["port"];
                         $("#" + color + "_" + id.toLowerCase() + "_" + port).removeClass("positive").removeClass("negative").removeClass("warning");
                         $("#" + color + "_" + id.toLowerCase() + "_" + port + "_icon").removeClass("green").removeClass("yellow").removeClass("red");
                         $("#" + color + "_" + id.toLowerCase() + "_" + port + "_icon").removeClass("checkmark").removeClass("remove").removeClass("warning");
@@ -254,10 +256,14 @@
                 }
             }
             function buildChart(data) {
+                console.log("correct:");
+                console.log(data["teams"])
+                console.log(data["chart"].map(first).map(function(team_name) {return data["teams"][team_name]}));
                 chart = c3.generate({
+
                     bindto: '#chart',
                     data: { columns: data["chart"] },
-                    color: { pattern: data["chart"].map(first) }
+                    color: { pattern: data["chart"].map(first).map(function(team_name) {return data["teams"][team_name]}) }
                 });
                 chart.resize();
             }

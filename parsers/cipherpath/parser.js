@@ -1,6 +1,5 @@
 var fs = require('fs');
-var teams = {"Red" : "red", "Blue" : "blue", "Green" : "green", "Purple" : "purple", "Yellow": "yellow"}
-
+var teams = {"Red Team" : "red", "Blue Team" : "blue", "Green Team" : "green", "Purple Team" : "purple", "Yellow Team": "yellow"}
 network = {};
 
 GAME_NAME = "redblue1";
@@ -12,19 +11,19 @@ machines = {};
 function get_ports(name) {
     console.log(name);
     if(name.toLowerCase().indexOf("gvm2") > -1) { //george vm 1
-       return [7,21,22,80,81];
+       return {"echo" : 7, "ftp": 21, "ssh": 22, "http": 80, "http-alt": 81};
    } else if(name.toLowerCase().indexOf("gvm1") > -1) { //george vm 2
-        return [21,22,25,80,587];
+        return {"ftp": 21, "ssh": 22, "smtp" : 25, "http": 80, "smpt-msa": 587};
     } else if(name.toLowerCase().indexOf("m3") > -1) { //windows
-       return [21,22,80,1617,3306,4848,8080,8181];
+       return {"ftp": 21, "ssh": 22, "http": 80, "nimrod":1617, "mysql":3306, "appserv-http":4848,"http-alt":8080, "intermapper":8181};
    } else if(name.toLowerCase().indexOf("win7") > -1) { //kali half pivots
-       return [22, 80, 3389, 5357, 8080];
+       return {"ssh": 22, "http": 80, "rdp":3389, "wsdapi":5357, "http-alt": 8080};
    } else if(name.toLowerCase().indexOf("2012") > -1 ) { //kali full pivots
-        return [21,22,23,53,80,443,3389];
+        return {"ftp": 21, "ssh": 22, "telnet" : 23, "dns": 53, "http":80,"https":443,"rdp":3389};
     } else if(name.toLowerCase().indexOf("m2") > -1) { //lets chat
-        return [21, 22, 80, 3306, 6667];
+        return {"ftp": 21, "ssh": 22, "http": 80, "mysql":3306, "irc": 6667};
     } else {
-        return [21, 22, 23, 25, 80, 3306];
+        return  {"ftp": 21, "ssh": 22, "telnet" : 23, "smtp": 25, "http": 80, "mysql":3306};
     }
 }
 //console.log(cipherpath_json["machines"])
@@ -38,20 +37,20 @@ for (var i = 0; i < cipherpath_json["machines"].length; i++) {
     m["name"] = name
     m["id"] = name.replace(/ /g,'');
     m["forwarded_ports"] = cm["network_connections"]["forward_ports"];
-    ports = get_ports(name);
-    m["ports"] = {};
-    for(var j = 0; j < ports.length; j++) {
-        m["ports"][ports[j]] = DEFAULT_PORT_STATE;
+    servs = get_ports(name);
+    m["services"] = {};
+    for(var serv in servs) {
+        m["services"][serv] = {"port" : servs[serv], "status": DEFAULT_PORT_STATE};
     }
     color = get_color(name);
     m["color"] = color;
-    m["status"] = ports.length+"/"+ports.length;
+    m["status"] = Object.keys(servs).length+"/"+Object.keys(servs).length;
     m["percentage"] = "100";
     m["ip"] = [];
     m["owner"] = get_owner(name);
     for(var j = 0; j < cm["connections"].length; j++) {
         connection = cm["connections"][j];
-        m["ip"].push(connection["ip"]);
+        m["ip"].push(connection["ip"]); //m["ip"].push("127.0.0.1");//
         (m["connections"] = m["connections"] || []).push(connection["network"]);
         (rids[connection["network"]] = rids[connection["network"]] || []).push(m["id"]);
     }
@@ -71,6 +70,7 @@ for(var i = 0; i < cipherpath_json["networks"].length; i++) {
         routers[router["id"]] = router;
     }
 }
+network = {}
 console.log(routers);
 network["machines"] = machines;
 network["routers"] = routers;
@@ -174,9 +174,9 @@ function get_owner(name) {
     if(name == "Scorebot") {
         return "none";
     }
-    for(team in teams) {
-        if (name.indexOf(team) > -1) {
-            return team;
+    for(team_name in teams) {
+        if (name.toLowerCase().indexOf(teams[team_name].toLowerCase()) > -1) {
+            return team_name;
         }
     }
     return "none";
@@ -186,9 +186,9 @@ function get_color(name) {
     if(name == "Scorebot") {
         return "black";
     }
-    for(team in teams) {
-        if (name.indexOf(team) > -1) {
-            return teams[team];
+    for(team_name in teams) {
+        if (name.toLowerCase().indexOf(teams[team_name].toLowerCase()) > -1) {
+            return teams[team_name];
         }
     }
     return "grey";
