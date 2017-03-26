@@ -15,7 +15,7 @@ require('events').EventEmitter.prototype._maxListeners = 0;
 
 var GAME_NAME = "koth4";
 var CLAIM_DELAY = 30000;
-var SCAN_DELAY = 2000;
+var SCAN_DELAY = 200000;
 var PORT_OPEN_SCORE = 3;
 var PORT_CLOSED_SCORE = 0;
 var BOX_OWNERSHIP_SCORE = 1;

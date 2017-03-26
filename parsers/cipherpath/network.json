@@ -229,7 +229,7 @@
           "status": "open"
         }
       },
-      "color": "red",
+      "color": "green",
       "status": "6/6",
       "percentage": "100",
       "ip": [
@@ -269,7 +269,7 @@
           "status": "open"
         }
       },
-      "color": "red",
+      "color": "blue",
       "status": "6/6",
       "percentage": "100",
       "ip": [
