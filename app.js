@@ -79,7 +79,7 @@ io.on('connection', function(socket) {
         chart: environment["chart_scores"],
         teams: environment["teams"],
         messages: environment["messages"],
-        services: environment["services"], //TODO UPDATE THIS TO SERVICES
+        services: environment["services"],
         machines: environment["machines"],
         ignore: environment["ignore"]
     });
@@ -173,7 +173,7 @@ function scan_net() {
     var machines = Object.keys(environment["machines"]);
     for(var i = 0; i < machines.length; i++) {
         var machine = environment["machines"][machines[i]];
-        if (!ONLY_SCAN_OWNED_BOXES || (ONLY_SCAN_OWNED_BOXES && machine["owner"] != "none")) {
+        if (machine["name"].indexOf("Entry") > -1 && (!ONLY_SCAN_OWNED_BOXES || (ONLY_SCAN_OWNED_BOXES && machine["owner"] != "none"))) {
             var local_services = Object.keys(machine["services"]);
             all_services = all_services.concat(local_services);
             for (var j = 0; j < local_services.length; j++) {
