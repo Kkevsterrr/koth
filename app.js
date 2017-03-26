@@ -13,7 +13,7 @@ var path_module = require('path');
 
 require('events').EventEmitter.prototype._maxListeners = 0;
 
-var GAME_NAME = "redblue1";
+var GAME_NAME = "koth4";
 var CLAIM_DELAY = 30000;
 var SCAN_DELAY = 2000;
 var PORT_OPEN_SCORE = 3;
@@ -289,7 +289,7 @@ function initialize_network() {
         try {
             //init = ; // /games/" + GAME_NAME +
             process.stdout.write("Reading initialization file for " + GAME_NAME + "...");
-            var network = JSON.parse(fs.readFileSync("network.json", 'utf8'));
+            var network = JSON.parse(fs.readFileSync("games/"+GAME_NAME+"/network.json", 'utf8'));
             var graph = {};
             graph["nodes"] = [];
             graph["edges"] = [];

@@ -175,7 +175,7 @@ function get_owner(name) {
         return "none";
     }
     for(team_name in teams) {
-        if (name.toLowerCase().indexOf(teams[team_name].toLowerCase()) > -1) {
+        if (name.toLowerCase().indexOf("entry") > -1) {
             return team_name;
         }
     }
@@ -187,7 +187,7 @@ function get_color(name) {
         return "black";
     }
     for(team_name in teams) {
-        if (name.toLowerCase().indexOf(teams[team_name].toLowerCase()) > -1) {
+        if (name.toLowerCase().indexOf("entry") > -1) {
             return teams[team_name];
         }
     }
