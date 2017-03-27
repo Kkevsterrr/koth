@@ -15,7 +15,7 @@ require('events').EventEmitter.prototype._maxListeners = 0;
 
 var GAME_NAME = "koth4";
 var CLAIM_DELAY = 30000;
-var SCAN_DELAY = 10000;
+var SCAN_DELAY = 180000;
 var PORT_OPEN_SCORE = 3;
 var PORT_CLOSED_SCORE = 0;
 var BOX_OWNERSHIP_SCORE = 1;
@@ -126,7 +126,7 @@ function handle(req, res, color) {
 }
 
 String.prototype.cap = function() { return this.charAt(0).toUpperCase() + this.slice(1); }
-Array.prototype.last = function() { return this[this.length - 1]; }
+function last(arr) { return arr[arr.length - 1]; }
 function pad(i) { return (i < 10 ? "0" : "") + i }
 function first(arr) { return arr[0].toLowerCase(); }
 function get_color(team_name) { return environment["teams"][team_name]; }
@@ -259,7 +259,7 @@ function calculate_score() {
         if(environment["scores"][team] == undefined) {
             environment["scores"][team] = [s[team]];
         } else {
-            environment["scores"][team].push(environment["scores"][team].last() + s[team]);
+            environment["scores"][team].push(last(environment["scores"][team]) + s[team]);
         }
     }
     var i = 0;
@@ -283,9 +283,9 @@ function check_valid(ip) {
 }
 
 function save_network() {
-    /*fs.writeFileSync(save_path, JSON.stringify(environment, null, 4), 'utf-8', function(err) {
+    fs.writeFile(save_path, JSON.stringify(environment, null, 4), 'utf-8', function(err) {
         if(err) { return console.log(err); }
-    });*/
+    });
 }
 
 function initialize_network() {

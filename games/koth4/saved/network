@@ -1,0 +1,1305 @@
+{
+    "ownership": {
+        "GreenM3-1": "none",
+        "RedM3-2": "none",
+        "BlueM3-1": "none",
+        "Scorebot": "none",
+        "GreenEntry": "Green Team",
+        "BlueEntry": "Blue Team",
+        "RedEntry": "Red Team",
+        "GreenM2": "none",
+        "BlueM2": "none",
+        "RedM2": "none",
+        "BlueM3-2": "none",
+        "GreenM3-2": "none",
+        "RedM3-1": "none",
+        "GreenAD": "none",
+        "BlueAD": "none",
+        "RedAD": "none",
+        "Red2k3": "none",
+        "Blue2k3": "none",
+        "Green2k3": "none"
+    },
+    "claim_times": {},
+    "scores": {
+        "Green Team": [
+            4.120833333333334,
+            8.354166666666668,
+            12.711666666666668
+        ],
+        "Blue Team": [
+            4.120833333333334,
+            8.354166666666668,
+            12.711666666666668
+        ],
+        "Red Team": [
+            4.120833333333334,
+            8.354166666666668,
+            12.711666666666668
+        ]
+    },
+    "ports": {},
+    "messages": [],
+    "scoring_iteration": 3,
+    "chart_scores": [
+        [
+            "Green Team",
+            4.120833333333334,
+            8.354166666666668,
+            12.711666666666668
+        ],
+        [
+            "Blue Team",
+            4.120833333333334,
+            8.354166666666668,
+            12.711666666666668
+        ],
+        [
+            "Red Team",
+            4.120833333333334,
+            8.354166666666668,
+            12.711666666666668
+        ]
+    ],
+    "teams": {
+        "Red Team": "red",
+        "Blue Team": "blue",
+        "Green Team": "green"
+    },
+    "ignore": [],
+    "graph": {
+        "nodes": [
+            {
+                "data": {
+                    "id": "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf",
+                    "name": "Router 1",
+                    "weight": 5,
+                    "color": "black",
+                    "ip": [
+                        "10.3.0.254/16"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "id": "33d3c9bc-296e-4e40-8bad-862be86ac256",
+                    "name": "Router 2",
+                    "weight": 5,
+                    "color": "black",
+                    "ip": [
+                        "10.4.0.254/16"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "id": "5fc10660-febc-4edc-9ffe-5b7ec40c742d",
+                    "name": "Router 3",
+                    "weight": 5,
+                    "color": "black",
+                    "ip": [
+                        "10.2.0.254/16"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Green M3 - 1",
+                    "id": "GreenM3-1",
+                    "weight": 5,
+                    "color": "grey",
+                    "ip": [
+                        "10.3.0.1",
+                        "10.2.0.5"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Red M3 - 2",
+                    "id": "RedM3-2",
+                    "weight": 5,
+                    "color": "grey",
+                    "ip": [
+                        "10.2.0.1",
+                        "10.3.0.7"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Blue M3 - 1",
+                    "id": "BlueM3-1",
+                    "weight": 5,
+                    "color": "grey",
+                    "ip": [
+                        "10.4.0.1",
+                        "10.3.0.5"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Scorebot",
+                    "id": "Scorebot",
+                    "weight": 5,
+                    "color": "black",
+                    "ip": [
+                        null,
+                        "10.2.0.2",
+                        "10.3.0.2",
+                        "10.4.0.2",
+                        null,
+                        null
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Green Entry",
+                    "id": "GreenEntry",
+                    "weight": 5,
+                    "color": "green",
+                    "ip": [
+                        "10.3.0.3"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Blue Entry",
+                    "id": "BlueEntry",
+                    "weight": 5,
+                    "color": "blue",
+                    "ip": [
+                        "10.4.0.3"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Red Entry",
+                    "id": "RedEntry",
+                    "weight": 5,
+                    "color": "red",
+                    "ip": [
+                        "10.2.0.4"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Green M2",
+                    "id": "GreenM2",
+                    "weight": 5,
+                    "color": "grey",
+                    "ip": [
+                        "10.3.0.4"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Blue M2",
+                    "id": "BlueM2",
+                    "weight": 5,
+                    "color": "grey",
+                    "ip": [
+                        "10.4.0.4"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Red M2",
+                    "id": "RedM2",
+                    "weight": 5,
+                    "color": "grey",
+                    "ip": [
+                        "10.2.0.3"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Blue M3 - 2",
+                    "id": "BlueM3-2",
+                    "weight": 5,
+                    "color": "grey",
+                    "ip": [
+                        "10.4.0.5",
+                        "10.2.0.6"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Green M3 -2 ",
+                    "id": "GreenM3-2",
+                    "weight": 5,
+                    "color": "grey",
+                    "ip": [
+                        "10.3.0.6",
+                        "10.4.0.9"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Red M3 - 1",
+                    "id": "RedM3-1",
+                    "weight": 5,
+                    "color": "grey",
+                    "ip": [
+                        "10.2.0.7",
+                        "10.4.0.6"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Green AD",
+                    "id": "GreenAD",
+                    "weight": 5,
+                    "color": "grey",
+                    "ip": [
+                        "10.3.0.8"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Blue AD",
+                    "id": "BlueAD",
+                    "weight": 5,
+                    "color": "grey",
+                    "ip": [
+                        "10.4.0.7"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Red AD",
+                    "id": "RedAD",
+                    "weight": 5,
+                    "color": "grey",
+                    "ip": [
+                        "10.2.0.8"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Red 2k3",
+                    "id": "Red2k3",
+                    "weight": 5,
+                    "color": "grey",
+                    "ip": [
+                        "10.2.0.9"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Blue 2k3",
+                    "id": "Blue2k3",
+                    "weight": 5,
+                    "color": "grey",
+                    "ip": [
+                        "10.4.0.8"
+                    ]
+                }
+            },
+            {
+                "data": {
+                    "name": "Green 2k3",
+                    "id": "Green2k3",
+                    "weight": 5,
+                    "color": "grey",
+                    "ip": [
+                        "10.3.0.9"
+                    ]
+                }
+            }
+        ],
+        "edges": [
+            {
+                "data": {
+                    "source": "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf",
+                    "target": "GreenM3-1",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "5fc10660-febc-4edc-9ffe-5b7ec40c742d",
+                    "target": "GreenM3-1",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "5fc10660-febc-4edc-9ffe-5b7ec40c742d",
+                    "target": "RedM3-2",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf",
+                    "target": "RedM3-2",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "33d3c9bc-296e-4e40-8bad-862be86ac256",
+                    "target": "BlueM3-1",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf",
+                    "target": "BlueM3-1",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "5fc10660-febc-4edc-9ffe-5b7ec40c742d",
+                    "target": "Scorebot",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf",
+                    "target": "Scorebot",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "33d3c9bc-296e-4e40-8bad-862be86ac256",
+                    "target": "Scorebot",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf",
+                    "target": "GreenEntry",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "33d3c9bc-296e-4e40-8bad-862be86ac256",
+                    "target": "BlueEntry",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "5fc10660-febc-4edc-9ffe-5b7ec40c742d",
+                    "target": "RedEntry",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf",
+                    "target": "GreenM2",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "33d3c9bc-296e-4e40-8bad-862be86ac256",
+                    "target": "BlueM2",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "5fc10660-febc-4edc-9ffe-5b7ec40c742d",
+                    "target": "RedM2",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "33d3c9bc-296e-4e40-8bad-862be86ac256",
+                    "target": "BlueM3-2",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "5fc10660-febc-4edc-9ffe-5b7ec40c742d",
+                    "target": "BlueM3-2",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf",
+                    "target": "GreenM3-2",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "33d3c9bc-296e-4e40-8bad-862be86ac256",
+                    "target": "GreenM3-2",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "5fc10660-febc-4edc-9ffe-5b7ec40c742d",
+                    "target": "RedM3-1",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "33d3c9bc-296e-4e40-8bad-862be86ac256",
+                    "target": "RedM3-1",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf",
+                    "target": "GreenAD",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "33d3c9bc-296e-4e40-8bad-862be86ac256",
+                    "target": "BlueAD",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "5fc10660-febc-4edc-9ffe-5b7ec40c742d",
+                    "target": "RedAD",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "5fc10660-febc-4edc-9ffe-5b7ec40c742d",
+                    "target": "Red2k3",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "33d3c9bc-296e-4e40-8bad-862be86ac256",
+                    "target": "Blue2k3",
+                    "color": "black",
+                    "strength": 10
+                }
+            },
+            {
+                "data": {
+                    "source": "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf",
+                    "target": "Green2k3",
+                    "color": "black",
+                    "strength": 10
+                }
+            }
+        ]
+    },
+    "machines": {
+        "Green M3 - 1": {
+            "name": "Green M3 - 1",
+            "id": "GreenM3-1",
+            "services": {
+                "ftp": {
+                    "port": 21,
+                    "status": "open"
+                },
+                "ssh": {
+                    "port": 22,
+                    "status": "open"
+                },
+                "http": {
+                    "port": 80,
+                    "status": "open"
+                },
+                "nimrod": {
+                    "port": 1617,
+                    "status": "open"
+                },
+                "mysql": {
+                    "port": 3306,
+                    "status": "open"
+                },
+                "appserv-http": {
+                    "port": 4848,
+                    "status": "open"
+                },
+                "http-alt": {
+                    "port": 8080,
+                    "status": "open"
+                },
+                "intermapper": {
+                    "port": 8181,
+                    "status": "open"
+                }
+            },
+            "color": "grey",
+            "status": "8/8",
+            "percentage": "100",
+            "ip": [
+                "10.3.0.1",
+                "10.2.0.5"
+            ],
+            "owner": "none",
+            "connections": [
+                "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf",
+                "5fc10660-febc-4edc-9ffe-5b7ec40c742d"
+            ]
+        },
+        "Red M3 - 2": {
+            "name": "Red M3 - 2",
+            "id": "RedM3-2",
+            "services": {
+                "ftp": {
+                    "port": 21,
+                    "status": "open"
+                },
+                "ssh": {
+                    "port": 22,
+                    "status": "open"
+                },
+                "http": {
+                    "port": 80,
+                    "status": "open"
+                },
+                "nimrod": {
+                    "port": 1617,
+                    "status": "open"
+                },
+                "mysql": {
+                    "port": 3306,
+                    "status": "open"
+                },
+                "appserv-http": {
+                    "port": 4848,
+                    "status": "open"
+                },
+                "http-alt": {
+                    "port": 8080,
+                    "status": "open"
+                },
+                "intermapper": {
+                    "port": 8181,
+                    "status": "open"
+                }
+            },
+            "color": "grey",
+            "status": "8/8",
+            "percentage": "100",
+            "ip": [
+                "10.2.0.1",
+                "10.3.0.7"
+            ],
+            "owner": "none",
+            "connections": [
+                "5fc10660-febc-4edc-9ffe-5b7ec40c742d",
+                "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf"
+            ]
+        },
+        "Blue M3 - 1": {
+            "name": "Blue M3 - 1",
+            "id": "BlueM3-1",
+            "services": {
+                "ftp": {
+                    "port": 21,
+                    "status": "open"
+                },
+                "ssh": {
+                    "port": 22,
+                    "status": "open"
+                },
+                "http": {
+                    "port": 80,
+                    "status": "open"
+                },
+                "nimrod": {
+                    "port": 1617,
+                    "status": "open"
+                },
+                "mysql": {
+                    "port": 3306,
+                    "status": "open"
+                },
+                "appserv-http": {
+                    "port": 4848,
+                    "status": "open"
+                },
+                "http-alt": {
+                    "port": 8080,
+                    "status": "open"
+                },
+                "intermapper": {
+                    "port": 8181,
+                    "status": "open"
+                }
+            },
+            "color": "grey",
+            "status": "8/8",
+            "percentage": "100",
+            "ip": [
+                "10.4.0.1",
+                "10.3.0.5"
+            ],
+            "owner": "none",
+            "connections": [
+                "33d3c9bc-296e-4e40-8bad-862be86ac256",
+                "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf"
+            ]
+        },
+        "Scorebot": {
+            "name": "Scorebot",
+            "id": "Scorebot",
+            "services": {
+                "ftp": {
+                    "port": 21,
+                    "status": "open"
+                },
+                "ssh": {
+                    "port": 22,
+                    "status": "open"
+                },
+                "telnet": {
+                    "port": 23,
+                    "status": "open"
+                },
+                "smtp": {
+                    "port": 25,
+                    "status": "open"
+                },
+                "http": {
+                    "port": 80,
+                    "status": "open"
+                },
+                "mysql": {
+                    "port": 3306,
+                    "status": "open"
+                }
+            },
+            "color": "black",
+            "status": "6/6",
+            "percentage": "100",
+            "ip": [
+                null,
+                "10.2.0.2",
+                "10.3.0.2",
+                "10.4.0.2",
+                null,
+                null
+            ],
+            "owner": "none",
+            "connections": [
+                "725143e8-741e-49cf-97c8-f049eb3b4953",
+                "5fc10660-febc-4edc-9ffe-5b7ec40c742d",
+                "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf",
+                "33d3c9bc-296e-4e40-8bad-862be86ac256",
+                "725143e8-741e-49cf-97c8-f049eb3b4953",
+                "725143e8-741e-49cf-97c8-f049eb3b4953"
+            ]
+        },
+        "Green Entry": {
+            "name": "Green Entry",
+            "id": "GreenEntry",
+            "services": {
+                "ssh": {
+                    "port": 22,
+                    "status": "open"
+                }
+            },
+            "color": "green",
+            "status": "1/1",
+            "percentage": "100",
+            "ip": [
+                "10.3.0.3"
+            ],
+            "owner": "Green Team",
+            "connections": [
+                "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf"
+            ]
+        },
+        "Blue Entry": {
+            "name": "Blue Entry",
+            "id": "BlueEntry",
+            "services": {
+                "ssh": {
+                    "port": 22,
+                    "status": "open"
+                }
+            },
+            "color": "blue",
+            "status": "1/1",
+            "percentage": "100",
+            "ip": [
+                "10.4.0.3"
+            ],
+            "owner": "Blue Team",
+            "connections": [
+                "33d3c9bc-296e-4e40-8bad-862be86ac256"
+            ]
+        },
+        "Red Entry": {
+            "name": "Red Entry",
+            "id": "RedEntry",
+            "services": {
+                "ssh": {
+                    "port": 22,
+                    "status": "open"
+                }
+            },
+            "color": "red",
+            "status": "1/1",
+            "percentage": "100",
+            "ip": [
+                "10.2.0.4"
+            ],
+            "owner": "Red Team",
+            "connections": [
+                "5fc10660-febc-4edc-9ffe-5b7ec40c742d"
+            ]
+        },
+        "Green M2": {
+            "name": "Green M2",
+            "id": "GreenM2",
+            "services": {
+                "ftp": {
+                    "port": 21,
+                    "status": "open"
+                },
+                "ssh": {
+                    "port": 22,
+                    "status": "open"
+                },
+                "http": {
+                    "port": 80,
+                    "status": "open"
+                },
+                "mysql": {
+                    "port": 3306,
+                    "status": "open"
+                },
+                "irc": {
+                    "port": 6667,
+                    "status": "open"
+                }
+            },
+            "color": "grey",
+            "status": "5/5",
+            "percentage": "100",
+            "ip": [
+                "10.3.0.4"
+            ],
+            "owner": "none",
+            "connections": [
+                "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf"
+            ]
+        },
+        "Blue M2": {
+            "name": "Blue M2",
+            "id": "BlueM2",
+            "services": {
+                "ftp": {
+                    "port": 21,
+                    "status": "open"
+                },
+                "ssh": {
+                    "port": 22,
+                    "status": "open"
+                },
+                "http": {
+                    "port": 80,
+                    "status": "open"
+                },
+                "mysql": {
+                    "port": 3306,
+                    "status": "open"
+                },
+                "irc": {
+                    "port": 6667,
+                    "status": "open"
+                }
+            },
+            "color": "grey",
+            "status": "5/5",
+            "percentage": "100",
+            "ip": [
+                "10.4.0.4"
+            ],
+            "owner": "none",
+            "connections": [
+                "33d3c9bc-296e-4e40-8bad-862be86ac256"
+            ]
+        },
+        "Red M2": {
+            "name": "Red M2",
+            "id": "RedM2",
+            "services": {
+                "ftp": {
+                    "port": 21,
+                    "status": "open"
+                },
+                "ssh": {
+                    "port": 22,
+                    "status": "open"
+                },
+                "http": {
+                    "port": 80,
+                    "status": "open"
+                },
+                "mysql": {
+                    "port": 3306,
+                    "status": "open"
+                },
+                "irc": {
+                    "port": 6667,
+                    "status": "open"
+                }
+            },
+            "color": "grey",
+            "status": "5/5",
+            "percentage": "100",
+            "ip": [
+                "10.2.0.3"
+            ],
+            "owner": "none",
+            "connections": [
+                "5fc10660-febc-4edc-9ffe-5b7ec40c742d"
+            ]
+        },
+        "Blue M3 - 2": {
+            "name": "Blue M3 - 2",
+            "id": "BlueM3-2",
+            "services": {
+                "ftp": {
+                    "port": 21,
+                    "status": "open"
+                },
+                "ssh": {
+                    "port": 22,
+                    "status": "open"
+                },
+                "http": {
+                    "port": 80,
+                    "status": "open"
+                },
+                "nimrod": {
+                    "port": 1617,
+                    "status": "open"
+                },
+                "mysql": {
+                    "port": 3306,
+                    "status": "open"
+                },
+                "appserv-http": {
+                    "port": 4848,
+                    "status": "open"
+                },
+                "http-alt": {
+                    "port": 8080,
+                    "status": "open"
+                },
+                "intermapper": {
+                    "port": 8181,
+                    "status": "open"
+                }
+            },
+            "color": "grey",
+            "status": "8/8",
+            "percentage": "100",
+            "ip": [
+                "10.4.0.5",
+                "10.2.0.6"
+            ],
+            "owner": "none",
+            "connections": [
+                "33d3c9bc-296e-4e40-8bad-862be86ac256",
+                "5fc10660-febc-4edc-9ffe-5b7ec40c742d"
+            ]
+        },
+        "Green M3 -2 ": {
+            "name": "Green M3 -2 ",
+            "id": "GreenM3-2",
+            "services": {
+                "ftp": {
+                    "port": 21,
+                    "status": "open"
+                },
+                "ssh": {
+                    "port": 22,
+                    "status": "open"
+                },
+                "http": {
+                    "port": 80,
+                    "status": "open"
+                },
+                "nimrod": {
+                    "port": 1617,
+                    "status": "open"
+                },
+                "mysql": {
+                    "port": 3306,
+                    "status": "open"
+                },
+                "appserv-http": {
+                    "port": 4848,
+                    "status": "open"
+                },
+                "http-alt": {
+                    "port": 8080,
+                    "status": "open"
+                },
+                "intermapper": {
+                    "port": 8181,
+                    "status": "open"
+                }
+            },
+            "color": "grey",
+            "status": "8/8",
+            "percentage": "100",
+            "ip": [
+                "10.3.0.6",
+                "10.4.0.9"
+            ],
+            "owner": "none",
+            "connections": [
+                "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf",
+                "33d3c9bc-296e-4e40-8bad-862be86ac256"
+            ]
+        },
+        "Red M3 - 1": {
+            "name": "Red M3 - 1",
+            "id": "RedM3-1",
+            "services": {
+                "ftp": {
+                    "port": 21,
+                    "status": "open"
+                },
+                "ssh": {
+                    "port": 22,
+                    "status": "open"
+                },
+                "http": {
+                    "port": 80,
+                    "status": "open"
+                },
+                "nimrod": {
+                    "port": 1617,
+                    "status": "open"
+                },
+                "mysql": {
+                    "port": 3306,
+                    "status": "open"
+                },
+                "appserv-http": {
+                    "port": 4848,
+                    "status": "open"
+                },
+                "http-alt": {
+                    "port": 8080,
+                    "status": "open"
+                },
+                "intermapper": {
+                    "port": 8181,
+                    "status": "open"
+                }
+            },
+            "color": "grey",
+            "status": "8/8",
+            "percentage": "100",
+            "ip": [
+                "10.2.0.7",
+                "10.4.0.6"
+            ],
+            "owner": "none",
+            "connections": [
+                "5fc10660-febc-4edc-9ffe-5b7ec40c742d",
+                "33d3c9bc-296e-4e40-8bad-862be86ac256"
+            ]
+        },
+        "Green AD": {
+            "name": "Green AD",
+            "id": "GreenAD",
+            "services": {
+                "ftp": {
+                    "port": 21,
+                    "status": "open"
+                },
+                "ssh": {
+                    "port": 22,
+                    "status": "open"
+                },
+                "telnet": {
+                    "port": 23,
+                    "status": "open"
+                },
+                "smtp": {
+                    "port": 25,
+                    "status": "open"
+                },
+                "http": {
+                    "port": 80,
+                    "status": "open"
+                },
+                "mysql": {
+                    "port": 3306,
+                    "status": "open"
+                }
+            },
+            "color": "grey",
+            "status": "6/6",
+            "percentage": "100",
+            "ip": [
+                "10.3.0.8"
+            ],
+            "owner": "none",
+            "connections": [
+                "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf"
+            ]
+        },
+        "Blue AD": {
+            "name": "Blue AD",
+            "id": "BlueAD",
+            "services": {
+                "ftp": {
+                    "port": 21,
+                    "status": "open"
+                },
+                "ssh": {
+                    "port": 22,
+                    "status": "open"
+                },
+                "telnet": {
+                    "port": 23,
+                    "status": "open"
+                },
+                "smtp": {
+                    "port": 25,
+                    "status": "open"
+                },
+                "http": {
+                    "port": 80,
+                    "status": "open"
+                },
+                "mysql": {
+                    "port": 3306,
+                    "status": "open"
+                }
+            },
+            "color": "grey",
+            "status": "6/6",
+            "percentage": "100",
+            "ip": [
+                "10.4.0.7"
+            ],
+            "owner": "none",
+            "connections": [
+                "33d3c9bc-296e-4e40-8bad-862be86ac256"
+            ]
+        },
+        "Red AD": {
+            "name": "Red AD",
+            "id": "RedAD",
+            "services": {
+                "ftp": {
+                    "port": 21,
+                    "status": "open"
+                },
+                "ssh": {
+                    "port": 22,
+                    "status": "open"
+                },
+                "telnet": {
+                    "port": 23,
+                    "status": "open"
+                },
+                "smtp": {
+                    "port": 25,
+                    "status": "open"
+                },
+                "http": {
+                    "port": 80,
+                    "status": "open"
+                },
+                "mysql": {
+                    "port": 3306,
+                    "status": "open"
+                }
+            },
+            "color": "grey",
+            "status": "6/6",
+            "percentage": "100",
+            "ip": [
+                "10.2.0.8"
+            ],
+            "owner": "none",
+            "connections": [
+                "5fc10660-febc-4edc-9ffe-5b7ec40c742d"
+            ]
+        },
+        "Red 2k3": {
+            "name": "Red 2k3",
+            "id": "Red2k3",
+            "services": {
+                "ftp": {
+                    "port": 21,
+                    "status": "open"
+                },
+                "ssh": {
+                    "port": 22,
+                    "status": "open"
+                },
+                "telnet": {
+                    "port": 23,
+                    "status": "open"
+                },
+                "smtp": {
+                    "port": 25,
+                    "status": "open"
+                },
+                "http": {
+                    "port": 80,
+                    "status": "open"
+                },
+                "mysql": {
+                    "port": 3306,
+                    "status": "open"
+                }
+            },
+            "color": "grey",
+            "status": "6/6",
+            "percentage": "100",
+            "ip": [
+                "10.2.0.9"
+            ],
+            "owner": "none",
+            "connections": [
+                "5fc10660-febc-4edc-9ffe-5b7ec40c742d"
+            ]
+        },
+        "Blue 2k3": {
+            "name": "Blue 2k3",
+            "id": "Blue2k3",
+            "services": {
+                "ftp": {
+                    "port": 21,
+                    "status": "open"
+                },
+                "ssh": {
+                    "port": 22,
+                    "status": "open"
+                },
+                "telnet": {
+                    "port": 23,
+                    "status": "open"
+                },
+                "smtp": {
+                    "port": 25,
+                    "status": "open"
+                },
+                "http": {
+                    "port": 80,
+                    "status": "open"
+                },
+                "mysql": {
+                    "port": 3306,
+                    "status": "open"
+                }
+            },
+            "color": "grey",
+            "status": "6/6",
+            "percentage": "100",
+            "ip": [
+                "10.4.0.8"
+            ],
+            "owner": "none",
+            "connections": [
+                "33d3c9bc-296e-4e40-8bad-862be86ac256"
+            ]
+        },
+        "Green 2k3": {
+            "name": "Green 2k3",
+            "id": "Green2k3",
+            "services": {
+                "ftp": {
+                    "port": 21,
+                    "status": "open"
+                },
+                "ssh": {
+                    "port": 22,
+                    "status": "open"
+                },
+                "telnet": {
+                    "port": 23,
+                    "status": "open"
+                },
+                "smtp": {
+                    "port": 25,
+                    "status": "open"
+                },
+                "http": {
+                    "port": 80,
+                    "status": "open"
+                },
+                "mysql": {
+                    "port": 3306,
+                    "status": "open"
+                }
+            },
+            "color": "grey",
+            "status": "6/6",
+            "percentage": "100",
+            "ip": [
+                "10.3.0.9"
+            ],
+            "owner": "none",
+            "connections": [
+                "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf"
+            ]
+        }
+    }
+}
