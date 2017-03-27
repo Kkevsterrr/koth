@@ -180,7 +180,7 @@ function scan_net() {
     var machines = Object.keys(environment["machines"]);
     for(var i = 0; i < machines.length; i++) {
         var machine = environment["machines"][machines[i]];
-        if (machine["name"].indexOf("Entry") == -1 && (!ONLY_SCAN_OWNED_BOXES || (ONLY_SCAN_OWNED_BOXES && machine["owner"] != "none"))) {
+        if ((!ONLY_SCAN_OWNED_BOXES || (ONLY_SCAN_OWNED_BOXES && machine["owner"] != "none"))) {
             var local_services = Object.keys(machine["services"]);
             all_services = all_services.concat(local_services);
             for (var j = 0; j < local_services.length; j++) {
