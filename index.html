@@ -234,6 +234,8 @@
             }
 
             function update(data) {
+                console.log("UDPATE RECEIEVED")
+                console.log(data);
                 cy.$('#'+data["id"]).data('color', data["color"]);
                 date = new Date();
                 $("#messages").prepend(pad(date.getHours()) + ":" + pad(date.getMinutes()) + ":" + pad(date.getSeconds()) + " - <span class=\"ui " + data["color"] + " small inverted header\">" + data["color"].cap() + "<\/span> team has claimed " + data["id"] + "<br/>");

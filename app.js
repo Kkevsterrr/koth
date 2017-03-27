@@ -85,33 +85,36 @@ io.on('connection', function(socket) {
     });
 });
 
-function handle(req, res, team_name) {
+function handle(req, res, color) {
     var body='';
     var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
-    claim_times = environment["claim_times"];
-    id = check_valid(ip);
+    var claim_times = environment["claim_times"];
+    var name = check_valid(ip);
 
-    console.log("Attempted claim from " + ip + " on machine id " + id + " for team " + team_name);
-    if(team_name in teams && id != "") {
-        now = new Date();
+    var team_name = get_team_by_color(color);
+    console.log(("[!] Attempted claim from " + ip + " on machine " + name + " for color " + color + " for team " + team_name+"").yellow);
+    if(team_name in environment["teams"] && name != "") {
+        var now = new Date();
 
-        if(id in claim_times && team_name in claim_times[id] && now.getTime() - claim_times[id][team_name] < CLAIM_DELAY) {
+        if(name in claim_times && team_name in claim_times[name] && now.getTime() - claim_times[name][team_name] < CLAIM_DELAY) {
             res.write("Cannot claim box - please wait.");
-            claim_times[id][team_name] = now.getTime()
-        } else if(environment["machines"][id]["owner"] == team_name) {
-            res.write("Team already owns this box - cannot reclaim.");
-            claim_times[id][team_name] = now.getTime()
-        } else {
-            if(!(id in claim_times)) {
-                claim_times[id] = {}
+            claim_times[name][team_name] = now.getTime()
+        } else if(environment["machines"][name]["owner"] == team_name) {
+            res.write("Your team already owns this box - cannot reclaim.");
+            if(!(name in claim_times)) {
+                claim_times[name] = {}
             }
-            claim_times[id][team_name] = now.getTime();
-            claim_machine(id, team_name);
-            environment["machines"][id]["owner"] == team_name;
-            messages.push(pad(now.getHours()) + ":" + pad(now.getMinutes()) + ":" + pad(now.getSeconds()) + " - <span class=\"ui " + teams[team] + " small inverted header\">" + team.cap() + "<\/span> team has claimed " + id + "<br/>");
-            console.log(messages);
+            claim_times[name][team_name] = now.getTime()
+        } else {
+            if(!(name in claim_times)) {
+                claim_times[name] = {}
+            }
+            claim_times[name][team_name] = now.getTime();
+            claim_machine(name, team_name);
+            environment["machines"][name]["owner"] == team_name;
+            environment["messages"].push(pad(now.getHours()) + ":" + pad(now.getMinutes()) + ":" + pad(now.getSeconds()) + " - <span class=\"ui " + environment["teams"][team_name] + " small inverted header\">" + team_name.cap() + "<\/span> team has claimed " + name + "<br/>");
             res.write("Box claimed for team " + team_name + ".");
-            console.log("Box " + id + " ("+ip+") claimed for team " + team_name + ".");
+            console.log(("[*] Box " + name + " ("+ip+") claimed for team " + team_name + ".").green);
         }
     } else {
         res.write("Unknown team or machine.")
@@ -168,6 +171,7 @@ function import_checks(path) {
 }
 
 function scan_net() {
+    console.log("[*] Scanning network and pushing results to clients.");
     var all_services = [];
     var check_funcs = [];
     var machines = Object.keys(environment["machines"]);
@@ -183,7 +187,6 @@ function scan_net() {
             }
         }
     }
-    console.log("Scanning " + check_funcs.length);
     async.parallel(check_funcs, function(err, result) {
         for (i = 0; i < result.length; i++) {
             environment["machines"][result[i]["name"]]["services"][all_services[i]]["status"] = result[i]["status"];
@@ -200,11 +203,11 @@ function scan_net() {
     });
 }
 
-function claim_machine(id, team_name) {
-    if(id in environment["machines"]) {
-        environment["machines"][id]["color"] = teams[team_name];
-        environment["machines"][id]["owner"] = team_name;
-        io.sockets.emit('update', { id: id, color: teams[team_name] });
+function claim_machine(name, team_name) {
+    if(name in environment["machines"]) {
+        environment["machines"][name]["color"] = environment["teams"][team_name];
+        environment["machines"][name]["owner"] = team_name;
+        io.sockets.emit('update', { id: environment["machines"][name]["id"], color: environment["teams"][team_name] });
         return true;
     } else {
         return false;
@@ -212,15 +215,14 @@ function claim_machine(id, team_name) {
 }
 
 function get_team_by_color(color) {
-    for(team in teams) {
-        if(teams[team] == color) { return team; }
+    for(var team_name in environment["teams"]) {
+        if(environment["teams"][team_name] == color) { return team_name; }
     }
     return null;
 }
 
 function calculate_score() {
     environment["scoring_iteration"] += 1;
-    console.log("Calculating score...");
     var s = {};
     var ret = [];
     for(var name in environment["machines"]) {
@@ -262,7 +264,7 @@ function calculate_score() {
         ret[i] = [team].concat(environment["scores"][team]);
         i++;
     }
-    console.log(ret);
+    //console.log(ret);
     environment["chart_scores"] = ret;
 
     save_network();
@@ -271,8 +273,8 @@ function calculate_score() {
 
 function check_valid(ip) {
     for(var name in environment["machines"]) {
-        machine = environment["machines"][name];
-        if (machine["ip"].indexOf(ip) > -1) { return machine["id"]; }
+        var machine = environment["machines"][name];
+        if (machine["ip"].indexOf(ip) > -1) { return machine["name"]; }
     }
     return "";
 }
@@ -285,13 +287,13 @@ function save_network() {
 
 function initialize_network() {
     if (fs.existsSync(save_path)) {
-        process.stdout.write("Reading save data file for " + GAME_NAME + "...");
+        process.stdout.write("[*] Reading save data file for " + GAME_NAME + "...");
         environment = JSON.parse(fs.readFileSync(save_path, 'utf8'));
         console.log("done".green);
     } else {
         try {
             //init = ; // /games/" + GAME_NAME +
-            process.stdout.write("Reading initialization file for " + GAME_NAME + "...");
+            process.stdout.write("[*] Reading initialization file for " + GAME_NAME + "...");
             var network = JSON.parse(fs.readFileSync("games/"+GAME_NAME+"/network.json", 'utf8'));
             var graph = {};
             graph["nodes"] = [];
