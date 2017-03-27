@@ -13,7 +13,7 @@ var path_module = require('path');
 
 require('events').EventEmitter.prototype._maxListeners = 0;
 
-var GAME_NAME = "koth4";
+var GAME_NAME = "test";
 var CLAIM_DELAY = 30000;
 var SCAN_DELAY = 10000;
 var PORT_OPEN_SCORE = 3;
@@ -68,7 +68,7 @@ server.listen(3000);
 scorebot.listen(8000);
 
 app.get('/', function (req, res) { res.sendFile(__dirname + '/index.html'); });
-scorebot.get("/", function (req, res) { handle(req, res, req.param("team")); });
+scorebot.get("/", function (req, res) { handle(req, res, req.query["team"]); });
 scorebot.post("/", function(req, res) { handle(req, res, req.body.team); });
 
 calculate_score();
@@ -99,9 +99,11 @@ function handle(req, res, color) {
 
         if(name in claim_times && team_name in claim_times[name] && now.getTime() - claim_times[name][team_name] < CLAIM_DELAY) {
             res.write("Cannot claim box - please wait.");
+            console.log("[!] Could not claim box - enough time has not yet passed.".red)
             claim_times[name][team_name] = now.getTime()
         } else if(environment["machines"][name]["owner"] == team_name) {
             res.write("Your team already owns this box - cannot reclaim.");
+            console.log("[!] Could not claim box - this team appears to own this box already".red)
             if(!(name in claim_times)) {
                 claim_times[name] = {}
             }

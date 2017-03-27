@@ -16,6 +16,7 @@ CheckPort.prototype.check = function() {
     return function (callback) {
         try {
             portscanner.checkPortStatus(port, ip, function(error, status) {
+                console.log("Just scanned machine " + machine_name + " on port " + port + " and it is " + status)
                 callback (null, {"name" : machine_name, "status": status});
             });
         } catch(ex) {

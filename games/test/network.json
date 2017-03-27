@@ -4,7 +4,9 @@
       "name": "Blue 1",
       "id": "Blue1",
       "services": {
-        "SSH": {"port": 22, "username": "student", "password": "student", "status": "open"}
+        "SSH": {"port": 22, "username": "student", "password": "student", "status": "open"},
+        "HTTP": {"port": 8080, "status": "open"}
+
       },
       "color": "blue",
       "status": "8/8",
