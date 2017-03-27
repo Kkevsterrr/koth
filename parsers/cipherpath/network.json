@@ -1,8 +1,8 @@
 {
   "machines": {
-    "Green M3 GRHP": {
-      "name": "Green M3 GRHP",
-      "id": "GreenM3GRHP",
+    "Green M3 - 1": {
+      "name": "Green M3 - 1",
+      "id": "GreenM3-1",
       "services": {
         "ftp": {
           "port": 21,
@@ -50,9 +50,9 @@
         "5fc10660-febc-4edc-9ffe-5b7ec40c742d"
       ]
     },
-    "Red M3 RGHP": {
-      "name": "Red M3 RGHP",
-      "id": "RedM3RGHP",
+    "Red M3 - 2": {
+      "name": "Red M3 - 2",
+      "id": "RedM3-2",
       "services": {
         "ftp": {
           "port": 21,
@@ -100,9 +100,9 @@
         "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf"
       ]
     },
-    "Blue M3 BGHP": {
-      "name": "Blue M3 BGHP",
-      "id": "BlueM3BGHP",
+    "Blue M3 - 1": {
+      "name": "Blue M3 - 1",
+      "id": "BlueM3-1",
       "services": {
         "ftp": {
           "port": 21,
@@ -204,33 +204,13 @@
       "name": "Green Entry",
       "id": "GreenEntry",
       "services": {
-        "ftp": {
-          "port": 21,
-          "status": "open"
-        },
         "ssh": {
           "port": 22,
-          "status": "open"
-        },
-        "telnet": {
-          "port": 23,
-          "status": "open"
-        },
-        "smtp": {
-          "port": 25,
-          "status": "open"
-        },
-        "http": {
-          "port": 80,
-          "status": "open"
-        },
-        "mysql": {
-          "port": 3306,
           "status": "open"
         }
       },
       "color": "green",
-      "status": "6/6",
+      "status": "1/1",
       "percentage": "100",
       "ip": [
         "10.3.0.3"
@@ -244,33 +224,13 @@
       "name": "Blue Entry",
       "id": "BlueEntry",
       "services": {
-        "ftp": {
-          "port": 21,
-          "status": "open"
-        },
         "ssh": {
           "port": 22,
-          "status": "open"
-        },
-        "telnet": {
-          "port": 23,
-          "status": "open"
-        },
-        "smtp": {
-          "port": 25,
-          "status": "open"
-        },
-        "http": {
-          "port": 80,
-          "status": "open"
-        },
-        "mysql": {
-          "port": 3306,
           "status": "open"
         }
       },
       "color": "blue",
-      "status": "6/6",
+      "status": "1/1",
       "percentage": "100",
       "ip": [
         "10.4.0.3"
@@ -284,33 +244,13 @@
       "name": "Red Entry",
       "id": "RedEntry",
       "services": {
-        "ftp": {
-          "port": 21,
-          "status": "open"
-        },
         "ssh": {
           "port": 22,
-          "status": "open"
-        },
-        "telnet": {
-          "port": 23,
-          "status": "open"
-        },
-        "smtp": {
-          "port": 25,
-          "status": "open"
-        },
-        "http": {
-          "port": 80,
-          "status": "open"
-        },
-        "mysql": {
-          "port": 3306,
           "status": "open"
         }
       },
       "color": "red",
-      "status": "6/6",
+      "status": "1/1",
       "percentage": "100",
       "ip": [
         "10.2.0.4"
@@ -428,9 +368,9 @@
         "5fc10660-febc-4edc-9ffe-5b7ec40c742d"
       ]
     },
-    "Blue M3 BRHP": {
-      "name": "Blue M3 BRHP",
-      "id": "BlueM3BRHP",
+    "Blue M3 - 2": {
+      "name": "Blue M3 - 2",
+      "id": "BlueM3-2",
       "services": {
         "ftp": {
           "port": 21,
@@ -478,9 +418,9 @@
         "5fc10660-febc-4edc-9ffe-5b7ec40c742d"
       ]
     },
-    "Green M3 GBHP": {
-      "name": "Green M3 GBHP",
-      "id": "GreenM3GBHP",
+    "Green M3 -2 ": {
+      "name": "Green M3 -2 ",
+      "id": "GreenM3-2",
       "services": {
         "ftp": {
           "port": 21,
@@ -519,16 +459,18 @@
       "status": "8/8",
       "percentage": "100",
       "ip": [
-        "10.3.0.6"
+        "10.3.0.6",
+        "10.4.0.9"
       ],
       "owner": "none",
       "connections": [
-        "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf"
+        "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf",
+        "33d3c9bc-296e-4e40-8bad-862be86ac256"
       ]
     },
-    "Red M3 RBHP": {
-      "name": "Red M3 RBHP",
-      "id": "RedM3RBHP",
+    "Red M3 - 1": {
+      "name": "Red M3 - 1",
+      "id": "RedM3-1",
       "services": {
         "ftp": {
           "port": 21,
@@ -609,13 +551,11 @@
       "status": "6/6",
       "percentage": "100",
       "ip": [
-        "10.3.0.8",
-        null
+        "10.3.0.8"
       ],
       "owner": "none",
       "connections": [
-        "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf",
-        "725143e8-741e-49cf-97c8-f049eb3b4953"
+        "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf"
       ]
     },
     "Blue AD": {
@@ -738,46 +678,6 @@
         "5fc10660-febc-4edc-9ffe-5b7ec40c742d"
       ]
     },
-    "CCDC-AD-00002": {
-      "name": "CCDC-AD-00002",
-      "id": "CCDC-AD-00002",
-      "services": {
-        "ftp": {
-          "port": 21,
-          "status": "open"
-        },
-        "ssh": {
-          "port": 22,
-          "status": "open"
-        },
-        "telnet": {
-          "port": 23,
-          "status": "open"
-        },
-        "smtp": {
-          "port": 25,
-          "status": "open"
-        },
-        "http": {
-          "port": 80,
-          "status": "open"
-        },
-        "mysql": {
-          "port": 3306,
-          "status": "open"
-        }
-      },
-      "color": "grey",
-      "status": "6/6",
-      "percentage": "100",
-      "ip": [
-        "10.3.0.9"
-      ],
-      "owner": "none",
-      "connections": [
-        "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf"
-      ]
-    },
     "Blue 2k3": {
       "name": "Blue 2k3",
       "id": "Blue2k3",
@@ -816,6 +716,46 @@
       "owner": "none",
       "connections": [
         "33d3c9bc-296e-4e40-8bad-862be86ac256"
+      ]
+    },
+    "Green 2k3": {
+      "name": "Green 2k3",
+      "id": "Green2k3",
+      "services": {
+        "ftp": {
+          "port": 21,
+          "status": "open"
+        },
+        "ssh": {
+          "port": 22,
+          "status": "open"
+        },
+        "telnet": {
+          "port": 23,
+          "status": "open"
+        },
+        "smtp": {
+          "port": 25,
+          "status": "open"
+        },
+        "http": {
+          "port": 80,
+          "status": "open"
+        },
+        "mysql": {
+          "port": 3306,
+          "status": "open"
+        }
+      },
+      "color": "grey",
+      "status": "6/6",
+      "percentage": "100",
+      "ip": [
+        "10.3.0.9"
+      ],
+      "owner": "none",
+      "connections": [
+        "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf"
       ]
     }
   },
