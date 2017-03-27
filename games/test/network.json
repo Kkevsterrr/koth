@@ -1,0 +1,47 @@
+{
+  "machines": {
+    "Blue 1": {
+      "name": "Blue 1",
+      "id": "Blue1",
+      "services": {
+        "SSH": {"port": 22, "username": "student", "password": "student", "status": "open"}
+      },
+      "color": "blue",
+      "status": "8/8",
+      "percentage": "100%",
+      "ip": [
+        "127.0.0.1"
+      ],
+      "owner": "Blue Team",
+      "connections": [
+        "9e6762fa-ab88-4569-94b6-e644fc35b215"
+      ]
+    },
+    "Green 1": {
+      "name": "Green 1",
+      "id": "Green1",
+      "services": {
+          "FTP": {"port": 21, "username": "student", "password": "student", "status": "open"}
+      },
+      "color": "green",
+      "status": "6/6",
+      "percentage": "100%",
+      "ip": [
+        "::ffff:127.0.0.1"
+      ],
+      "owner": "Green Team",
+      "connections": [
+        "9e6762fa-ab88-4569-94b6-e644fc35b215"
+      ]
+    }
+  },
+  "routers": {
+    "9e6762fa-ab88-4569-94b6-e644fc35b215": {
+      "ip": [
+        "10.1.0.254/16"
+      ],
+      "id": "9e6762fa-ab88-4569-94b6-e644fc35b215",
+      "name": "Router 1"
+    }
+  }
+}
