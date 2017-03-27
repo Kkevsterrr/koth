@@ -13,7 +13,7 @@ var path_module = require('path');
 
 require('events').EventEmitter.prototype._maxListeners = 0;
 
-var GAME_NAME = "test";
+var GAME_NAME = "koth4";
 var CLAIM_DELAY = 30000;
 var SCAN_DELAY = 10000;
 var PORT_OPEN_SCORE = 3;
