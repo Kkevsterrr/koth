@@ -15,17 +15,21 @@ function get_ports(name) {
    } else if(name.toLowerCase().indexOf("gvm1") > -1) { //george vm 2
         return {"ftp": 21, "ssh": 22, "smtp" : 25, "http": 80, "smpt-msa": 587};
     } else if(name.toLowerCase().indexOf("m3") > -1) { //windows
-       return {"ftp": 21, "ssh": 22, "http": 80, "nimrod":1617, "mysql":3306, "appserv-http":4848,"http-alt":8080, "intermapper":8181};
+       return {"ftp": 21, "ssh": 22, "http": 80, "nimrod":1617, "mysql":3306, "appserv-http":4848,"http-alt":8080};
    } else if(name.toLowerCase().indexOf("win7") > -1) { //kali half pivots
        return {"ssh": 22, "http": 80, "rdp":3389, "wsdapi":5357, "http-alt": 8080};
    } else if(name.toLowerCase().indexOf("2012") > -1 ) { //kali full pivots
         return {"ftp": 21, "ssh": 22, "telnet" : 23, "dns": 53, "http":80,"https":443,"rdp":3389};
-    } else if(name.toLowerCase().indexOf("m2") > -1) { //lets chat
+    } else if(name.toLowerCase().indexOf("2k3") > -1 ) { //kali full pivots
+         return {"http":80, "rdp":3389};
+     } else if(name.toLowerCase().indexOf("ad") > -1 ) { //kali full pivots
+          return {"http":80, "rdp":3389};
+      } else if(name.toLowerCase().indexOf("m2") > -1) { //lets chat
         return {"ftp": 21, "ssh": 22, "http": 80, "mysql":3306, "irc": 6667};
     } else if(name.toLowerCase().indexOf("entry") > -1) { //lets chat
         return {"ssh": 22};
     } else {
-        return  {"ftp": 21, "ssh": 22, "telnet" : 23, "smtp": 25, "http": 80, "mysql":3306};
+        return  {"http": 80, "netbiosd":445};
     }
 }
 //console.log(cipherpath_json["machines"])

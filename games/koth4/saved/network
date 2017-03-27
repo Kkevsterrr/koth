@@ -23,42 +23,30 @@
     "claim_times": {},
     "scores": {
         "Green Team": [
-            4.120833333333334,
-            8.354166666666668,
-            12.711666666666668
+            4.120833333333334
         ],
         "Blue Team": [
-            4.120833333333334,
-            8.354166666666668,
-            12.711666666666668
+            4.120833333333334
         ],
         "Red Team": [
-            4.120833333333334,
-            8.354166666666668,
-            12.711666666666668
+            4.120833333333334
         ]
     },
     "ports": {},
     "messages": [],
-    "scoring_iteration": 3,
+    "scoring_iteration": 1,
     "chart_scores": [
         [
             "Green Team",
-            4.120833333333334,
-            8.354166666666668,
-            12.711666666666668
+            4.120833333333334
         ],
         [
             "Blue Team",
-            4.120833333333334,
-            8.354166666666668,
-            12.711666666666668
+            4.120833333333334
         ],
         [
             "Red Team",
-            4.120833333333334,
-            8.354166666666668,
-            12.711666666666668
+            4.120833333333334
         ]
     ],
     "teams": {
@@ -109,8 +97,7 @@
                     "weight": 5,
                     "color": "grey",
                     "ip": [
-                        "10.3.0.1",
-                        "10.2.0.5"
+                        "10.3.0.1"
                     ]
                 }
             },
@@ -121,8 +108,7 @@
                     "weight": 5,
                     "color": "grey",
                     "ip": [
-                        "10.2.0.1",
-                        "10.3.0.7"
+                        "10.2.0.1"
                     ]
                 }
             },
@@ -133,8 +119,7 @@
                     "weight": 5,
                     "color": "grey",
                     "ip": [
-                        "10.4.0.1",
-                        "10.3.0.5"
+                        "10.4.0.1"
                     ]
                 }
             },
@@ -227,8 +212,7 @@
                     "weight": 5,
                     "color": "grey",
                     "ip": [
-                        "10.4.0.5",
-                        "10.2.0.6"
+                        "10.4.0.5"
                     ]
                 }
             },
@@ -239,8 +223,7 @@
                     "weight": 5,
                     "color": "grey",
                     "ip": [
-                        "10.3.0.6",
-                        "10.4.0.9"
+                        "10.3.0.6"
                     ]
                 }
             },
@@ -251,8 +234,7 @@
                     "weight": 5,
                     "color": "grey",
                     "ip": [
-                        "10.2.0.7",
-                        "10.4.0.6"
+                        "10.2.0.7"
                     ]
                 }
             },
@@ -335,22 +317,6 @@
             {
                 "data": {
                     "source": "5fc10660-febc-4edc-9ffe-5b7ec40c742d",
-                    "target": "GreenM3-1",
-                    "color": "black",
-                    "strength": 10
-                }
-            },
-            {
-                "data": {
-                    "source": "5fc10660-febc-4edc-9ffe-5b7ec40c742d",
-                    "target": "RedM3-2",
-                    "color": "black",
-                    "strength": 10
-                }
-            },
-            {
-                "data": {
-                    "source": "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf",
                     "target": "RedM3-2",
                     "color": "black",
                     "strength": 10
@@ -359,14 +325,6 @@
             {
                 "data": {
                     "source": "33d3c9bc-296e-4e40-8bad-862be86ac256",
-                    "target": "BlueM3-1",
-                    "color": "black",
-                    "strength": 10
-                }
-            },
-            {
-                "data": {
-                    "source": "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf",
                     "target": "BlueM3-1",
                     "color": "black",
                     "strength": 10
@@ -454,14 +412,6 @@
             },
             {
                 "data": {
-                    "source": "5fc10660-febc-4edc-9ffe-5b7ec40c742d",
-                    "target": "BlueM3-2",
-                    "color": "black",
-                    "strength": 10
-                }
-            },
-            {
-                "data": {
                     "source": "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf",
                     "target": "GreenM3-2",
                     "color": "black",
@@ -470,23 +420,7 @@
             },
             {
                 "data": {
-                    "source": "33d3c9bc-296e-4e40-8bad-862be86ac256",
-                    "target": "GreenM3-2",
-                    "color": "black",
-                    "strength": 10
-                }
-            },
-            {
-                "data": {
                     "source": "5fc10660-febc-4edc-9ffe-5b7ec40c742d",
-                    "target": "RedM3-1",
-                    "color": "black",
-                    "strength": 10
-                }
-            },
-            {
-                "data": {
-                    "source": "33d3c9bc-296e-4e40-8bad-862be86ac256",
                     "target": "RedM3-1",
                     "color": "black",
                     "strength": 10
@@ -574,23 +508,17 @@
                 "http-alt": {
                     "port": 8080,
                     "status": "open"
-                },
-                "intermapper": {
-                    "port": 8181,
-                    "status": "open"
                 }
             },
             "color": "grey",
-            "status": "8/8",
+            "status": "7/7",
             "percentage": "100",
             "ip": [
-                "10.3.0.1",
-                "10.2.0.5"
+                "10.3.0.1"
             ],
             "owner": "none",
             "connections": [
-                "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf",
-                "5fc10660-febc-4edc-9ffe-5b7ec40c742d"
+                "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf"
             ]
         },
         "Red M3 - 2": {
@@ -624,23 +552,17 @@
                 "http-alt": {
                     "port": 8080,
                     "status": "open"
-                },
-                "intermapper": {
-                    "port": 8181,
-                    "status": "open"
                 }
             },
             "color": "grey",
-            "status": "8/8",
+            "status": "7/7",
             "percentage": "100",
             "ip": [
-                "10.2.0.1",
-                "10.3.0.7"
+                "10.2.0.1"
             ],
             "owner": "none",
             "connections": [
-                "5fc10660-febc-4edc-9ffe-5b7ec40c742d",
-                "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf"
+                "5fc10660-febc-4edc-9ffe-5b7ec40c742d"
             ]
         },
         "Blue M3 - 1": {
@@ -674,56 +596,34 @@
                 "http-alt": {
                     "port": 8080,
                     "status": "open"
-                },
-                "intermapper": {
-                    "port": 8181,
-                    "status": "open"
                 }
             },
             "color": "grey",
-            "status": "8/8",
+            "status": "7/7",
             "percentage": "100",
             "ip": [
-                "10.4.0.1",
-                "10.3.0.5"
+                "10.4.0.1"
             ],
             "owner": "none",
             "connections": [
-                "33d3c9bc-296e-4e40-8bad-862be86ac256",
-                "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf"
+                "33d3c9bc-296e-4e40-8bad-862be86ac256"
             ]
         },
         "Scorebot": {
             "name": "Scorebot",
             "id": "Scorebot",
             "services": {
-                "ftp": {
-                    "port": 21,
-                    "status": "open"
-                },
-                "ssh": {
-                    "port": 22,
-                    "status": "open"
-                },
-                "telnet": {
-                    "port": 23,
-                    "status": "open"
-                },
-                "smtp": {
-                    "port": 25,
-                    "status": "open"
-                },
                 "http": {
                     "port": 80,
                     "status": "open"
                 },
-                "mysql": {
-                    "port": 3306,
+                "netbiosd": {
+                    "port": 445,
                     "status": "open"
                 }
             },
             "color": "black",
-            "status": "6/6",
+            "status": "2/2",
             "percentage": "100",
             "ip": [
                 null,
@@ -942,23 +842,17 @@
                 "http-alt": {
                     "port": 8080,
                     "status": "open"
-                },
-                "intermapper": {
-                    "port": 8181,
-                    "status": "open"
                 }
             },
             "color": "grey",
-            "status": "8/8",
+            "status": "7/7",
             "percentage": "100",
             "ip": [
-                "10.4.0.5",
-                "10.2.0.6"
+                "10.4.0.5"
             ],
             "owner": "none",
             "connections": [
-                "33d3c9bc-296e-4e40-8bad-862be86ac256",
-                "5fc10660-febc-4edc-9ffe-5b7ec40c742d"
+                "33d3c9bc-296e-4e40-8bad-862be86ac256"
             ]
         },
         "Green M3 -2 ": {
@@ -992,23 +886,17 @@
                 "http-alt": {
                     "port": 8080,
                     "status": "open"
-                },
-                "intermapper": {
-                    "port": 8181,
-                    "status": "open"
                 }
             },
             "color": "grey",
-            "status": "8/8",
+            "status": "7/7",
             "percentage": "100",
             "ip": [
-                "10.3.0.6",
-                "10.4.0.9"
+                "10.3.0.6"
             ],
             "owner": "none",
             "connections": [
-                "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf",
-                "33d3c9bc-296e-4e40-8bad-862be86ac256"
+                "06ee2cc5-85d3-40a1-9b2d-2606a92ca4cf"
             ]
         },
         "Red M3 - 1": {
@@ -1042,56 +930,34 @@
                 "http-alt": {
                     "port": 8080,
                     "status": "open"
-                },
-                "intermapper": {
-                    "port": 8181,
-                    "status": "open"
                 }
             },
             "color": "grey",
-            "status": "8/8",
+            "status": "7/7",
             "percentage": "100",
             "ip": [
-                "10.2.0.7",
-                "10.4.0.6"
+                "10.2.0.7"
             ],
             "owner": "none",
             "connections": [
-                "5fc10660-febc-4edc-9ffe-5b7ec40c742d",
-                "33d3c9bc-296e-4e40-8bad-862be86ac256"
+                "5fc10660-febc-4edc-9ffe-5b7ec40c742d"
             ]
         },
         "Green AD": {
             "name": "Green AD",
             "id": "GreenAD",
             "services": {
-                "ftp": {
-                    "port": 21,
-                    "status": "open"
-                },
-                "ssh": {
-                    "port": 22,
-                    "status": "open"
-                },
-                "telnet": {
-                    "port": 23,
-                    "status": "open"
-                },
-                "smtp": {
-                    "port": 25,
-                    "status": "open"
-                },
                 "http": {
                     "port": 80,
                     "status": "open"
                 },
-                "mysql": {
-                    "port": 3306,
+                "rdp": {
+                    "port": 3389,
                     "status": "open"
                 }
             },
             "color": "grey",
-            "status": "6/6",
+            "status": "2/2",
             "percentage": "100",
             "ip": [
                 "10.3.0.8"
@@ -1105,33 +971,17 @@
             "name": "Blue AD",
             "id": "BlueAD",
             "services": {
-                "ftp": {
-                    "port": 21,
-                    "status": "open"
-                },
-                "ssh": {
-                    "port": 22,
-                    "status": "open"
-                },
-                "telnet": {
-                    "port": 23,
-                    "status": "open"
-                },
-                "smtp": {
-                    "port": 25,
-                    "status": "open"
-                },
                 "http": {
                     "port": 80,
                     "status": "open"
                 },
-                "mysql": {
-                    "port": 3306,
+                "rdp": {
+                    "port": 3389,
                     "status": "open"
                 }
             },
             "color": "grey",
-            "status": "6/6",
+            "status": "2/2",
             "percentage": "100",
             "ip": [
                 "10.4.0.7"
@@ -1145,33 +995,17 @@
             "name": "Red AD",
             "id": "RedAD",
             "services": {
-                "ftp": {
-                    "port": 21,
-                    "status": "open"
-                },
-                "ssh": {
-                    "port": 22,
-                    "status": "open"
-                },
-                "telnet": {
-                    "port": 23,
-                    "status": "open"
-                },
-                "smtp": {
-                    "port": 25,
-                    "status": "open"
-                },
                 "http": {
                     "port": 80,
                     "status": "open"
                 },
-                "mysql": {
-                    "port": 3306,
+                "rdp": {
+                    "port": 3389,
                     "status": "open"
                 }
             },
             "color": "grey",
-            "status": "6/6",
+            "status": "2/2",
             "percentage": "100",
             "ip": [
                 "10.2.0.8"
@@ -1185,33 +1019,17 @@
             "name": "Red 2k3",
             "id": "Red2k3",
             "services": {
-                "ftp": {
-                    "port": 21,
-                    "status": "open"
-                },
-                "ssh": {
-                    "port": 22,
-                    "status": "open"
-                },
-                "telnet": {
-                    "port": 23,
-                    "status": "open"
-                },
-                "smtp": {
-                    "port": 25,
-                    "status": "open"
-                },
                 "http": {
                     "port": 80,
                     "status": "open"
                 },
-                "mysql": {
-                    "port": 3306,
+                "rdp": {
+                    "port": 3389,
                     "status": "open"
                 }
             },
             "color": "grey",
-            "status": "6/6",
+            "status": "2/2",
             "percentage": "100",
             "ip": [
                 "10.2.0.9"
@@ -1225,33 +1043,17 @@
             "name": "Blue 2k3",
             "id": "Blue2k3",
             "services": {
-                "ftp": {
-                    "port": 21,
-                    "status": "open"
-                },
-                "ssh": {
-                    "port": 22,
-                    "status": "open"
-                },
-                "telnet": {
-                    "port": 23,
-                    "status": "open"
-                },
-                "smtp": {
-                    "port": 25,
-                    "status": "open"
-                },
                 "http": {
                     "port": 80,
                     "status": "open"
                 },
-                "mysql": {
-                    "port": 3306,
+                "rdp": {
+                    "port": 3389,
                     "status": "open"
                 }
             },
             "color": "grey",
-            "status": "6/6",
+            "status": "2/2",
             "percentage": "100",
             "ip": [
                 "10.4.0.8"
@@ -1265,33 +1067,17 @@
             "name": "Green 2k3",
             "id": "Green2k3",
             "services": {
-                "ftp": {
-                    "port": 21,
-                    "status": "open"
-                },
-                "ssh": {
-                    "port": 22,
-                    "status": "open"
-                },
-                "telnet": {
-                    "port": 23,
-                    "status": "open"
-                },
-                "smtp": {
-                    "port": 25,
-                    "status": "open"
-                },
                 "http": {
                     "port": 80,
                     "status": "open"
                 },
-                "mysql": {
-                    "port": 3306,
+                "rdp": {
+                    "port": 3389,
                     "status": "open"
                 }
             },
             "color": "grey",
-            "status": "6/6",
+            "status": "2/2",
             "percentage": "100",
             "ip": [
                 "10.3.0.9"
