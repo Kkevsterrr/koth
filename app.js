@@ -13,7 +13,7 @@ var path_module = require('path');
 
 require('events').EventEmitter.prototype._maxListeners = 0;
 
-var GAME_NAME = "koth4";
+var GAME_NAME = "test";
 var CLAIM_DELAY = 30000;
 var SCAN_DELAY = 10000;
 var PORT_OPEN_SCORE = 3;
@@ -88,6 +88,7 @@ io.on('connection', function(socket) {
 function handle(req, res, color) {
     var body='';
     var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
+    ip = ip.replace("::ffff:", "");
     var claim_times = environment["claim_times"];
     var name = check_valid(ip);
 

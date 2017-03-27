@@ -27,7 +27,7 @@
       "status": "6/6",
       "percentage": "100%",
       "ip": [
-        "::ffff:127.0.0.1"
+        "127.0.0.1"
       ],
       "owner": "Green Team",
       "connections": [
