@@ -9,8 +9,8 @@
 
       },
       "color": "blue",
-      "status": "8/8",
-      "percentage": "100%",
+      "status": "2/2",
+      "percentage": "100",
       "ip": [
         "127.0.0.1"
       ],
@@ -23,11 +23,12 @@
       "name": "Green 1",
       "id": "Green1",
       "services": {
-          "FTP": {"port": 21, "username": "student", "password": "student", "status": "open"}
+          "FTP": {"port": 21, "username": "student", "password": "student", "status": "open"},
+          "SMTP": {"port": 25, "status": "issue"}
       },
       "color": "green",
-      "status": "6/6",
-      "percentage": "100%",
+      "status": "1/2",
+      "percentage": "50",
       "ip": [
         "127.0.0.1"
       ],

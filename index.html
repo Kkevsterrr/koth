@@ -184,7 +184,7 @@
                             icon = "warning";
                             icon_color = "yellow";
                         }
-                        $("#" + color + "_machines").append("<tr id=\"" + color + "_" + id.toLowerCase() + "_" + port + "\" class=\"" + category + " " + color + "_" + id.toLowerCase() + "\"><td class=\"center aligned\"><i id=\"" + color + "_" + id.toLowerCase() + "_" + port + "_icon\" class=\"large " + icon_color + " " + icon + " icon\"></i> </td><td>" + port + "</td><td id=\"" + color + "_" + id.toLowerCase() + "_" + port + "_status\">"+status+"</td></tr>");
+                        $("#" + color + "_machines").append("<tr id=\"" + color + "_" + id.toLowerCase() + "_" + port + "\" class=\"" + category + " " + color + "_" + id.toLowerCase() + "\"><td class=\"center aligned\"><i id=\"" + color + "_" + id.toLowerCase() + "_" + port + "_icon\" class=\"large " + icon_color + " " + icon + " icon\"></i> </td><td>" + service + " - " + port + "</td><td id=\"" + color + "_" + id.toLowerCase() + "_" + port + "_status\">"+status+"</td></tr>");
                     }
                     $("."+color + "_" + id.toLowerCase()).hide();
                 }
