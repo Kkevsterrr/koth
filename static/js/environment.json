@@ -35,7 +35,7 @@
     "ports": {},
     "messages": [],
     "scoring_iteration": 1,
-    "chart_scores": [
+    "chart": [
         [
             "Green Team",
             4.120833333333334
