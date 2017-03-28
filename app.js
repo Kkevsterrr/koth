@@ -13,7 +13,7 @@ var path_module = require('path');
 
 require('events').EventEmitter.prototype._maxListeners = 0;
 
-var GAME_NAME = "koth4";
+var GAME_NAME = "test";
 var CLAIM_DELAY = 30000;
 var SCAN_DELAY = 180000;
 var PORT_OPEN_SCORE = 3;
@@ -208,6 +208,12 @@ function scan_net() {
 
 function claim_machine(name, team_name) {
     if(name in environment["machines"]) {
+        for (var i = 0;i < environment["graph"]["nodes"].length; i++) {
+            var node = environment["graph"]["nodes"][i];
+            if (node["data"]["name"] == name) {
+                node["data"]["color"] = environment["teams"][team_name];
+            }
+        }
         environment["machines"][name]["color"] = environment["teams"][team_name];
         environment["machines"][name]["owner"] = team_name;
         io.sockets.emit('update', { id: environment["machines"][name]["id"], color: environment["teams"][team_name] });
