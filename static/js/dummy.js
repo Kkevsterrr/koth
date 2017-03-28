@@ -13,17 +13,17 @@ function flipPorts(data) {
         machine = data["machines"][name];
         if (Math.random() > 0.2) { continue; }
         num_open = 0;
-        for(var port_num in machine["ports"]) {
+        for(var service_name in machine["services"]) {
             if (Math.random() > 0.2) {
-                if (machine["ports"][port_num] == "open") { num_open++; }
+                if (machine["services"][service_name]["status"] == "open") { num_open++; }
                 continue;
             }
-            machine["ports"][port_num] = rand_item(['open', 'closed', 'issue']);
-            console.log("Flipping " + port_num + " for machine " + name);
-            if (machine["ports"][port_num] == "open") { num_open++; }
+            machine["services"][service_name]["status"] = rand_item(['open', 'closed', 'issue']);
+            console.log("Flipping " + machine["services"][service_name]["port"] + " ("+service_name+") for machine " + name);
+            if (machine["services"][service_name]["status"] == "open") { num_open++; }
         }
-        machine["status"] = num_open + "/" + Object.keys(machine["ports"]).length;
-        machine["percentage"] = 100 * (num_open / Object.keys(machine["ports"]).length);
+        machine["status"] = num_open + "/" + Object.keys(machine["services"]).length;
+        machine["percentage"] = 100 * (num_open / Object.keys(machine["services"]).length);
     }
     return data;
 }
