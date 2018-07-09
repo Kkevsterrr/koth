@@ -12,7 +12,7 @@ Gameplay occurs over a large, complex, isolated virtual environment, comprised o
 
 Teams earn points keeping critical services up-and-running on the machines they control. They therefore have to consider the real-world trade-offs between keeping a vulnerable service up or shutting it down to help keep the rest of their network safe from attack. 
 
-For detailed information, please view our ![ASE 2018 paper](http://koth.cs.umd.edu/papers/koth_ase2018.pdf) or at ![koth.cs.umd.edu](http://koth.cs.umd.edu).
+For detailed information, please view our [ASE 2018 paper](http://koth.cs.umd.edu/papers/koth_ase2018.pdf) or at [koth.cs.umd.edu](http://koth.cs.umd.edu).
 
 Note that repository is solely the front-end for the competition - in order to run KotH, you will have to setup the network itself.
 
