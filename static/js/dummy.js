@@ -5,7 +5,10 @@ function rand_item(items) {
 function randomUpdate(data) {
     id = rand_item(Object.values(data["machines"]))["id"]
     color = rand_item(Object.values(data["teams"]))
-    update({"id": id , "color" : color});
+    console.log(id)
+    if (id.indexOf("Scorebot") == -1) {
+        update({"id": id , "color" : color});
+    }
 }
 
 function flipPorts(data) {
@@ -29,10 +32,10 @@ function flipPorts(data) {
 }
 
 function randomScan(data) {
-    for(var i = 0; i < data["chart"].length; i++) {
-        scores = data["chart"][i]
+    for(var i = 0; i < data["chart_scores"].length; i++) {
+        scores = data["chart_scores"][i]
         score_adj = (Math.random() < 0.5 ? -1 : 1) * (scores[1] * Math.random() / 4)
-        data["chart"][i].push(scores[scores.length - 1] + score_adj)
+        data["chart_scores"][i].push(scores[scores.length - 1] + score_adj)
     }
     flipPorts(data);
     scan(data);

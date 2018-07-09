@@ -263,19 +263,19 @@
             function buildChart(data) {
                 console.log("correct:");
                 console.log(data["teams"])
-                console.log(data["chart"].map(first).map(function(team_name) {return data["teams"][team_name]}));
+                console.log(data["chart_scores"].map(first).map(function(team_name) {return data["teams"][team_name]}));
                 chart = c3.generate({
 
                     bindto: '#chart',
-                    data: { columns: data["chart"] },
-                    color: { pattern: data["chart"].map(first).map(function(team_name) {return data["teams"][team_name]}) }
+                    data: { columns: data["chart_scores"] },
+                    color: { pattern: data["chart_scores"].map(first).map(function(team_name) {return data["teams"][team_name]}) }
                 });
                 chart.resize();
             }
 
             function buildcy(data) {
                 var defaults = {
-                    name: 'cose',
+                    name: 'cose-bilkent',
                     idealEdgeLength: 10,
                     nodeRepulsion: 400000,
                     nodeOverlap : 10,
