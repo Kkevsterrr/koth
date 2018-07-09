@@ -13,9 +13,9 @@ var path_module = require('path');
 
 require('events').EventEmitter.prototype._maxListeners = 0;
 
-var GAME_NAME = "test";
+var GAME_NAME = "hacs408t";
 var CLAIM_DELAY = 30000;
-var SCAN_DELAY = 180000;
+var SCAN_DELAY = 120000;
 var PORT_OPEN_SCORE = 3;
 var PORT_CLOSED_SCORE = 0;
 var BOX_OWNERSHIP_SCORE = 1;
@@ -39,7 +39,7 @@ environment["ports"] = {};
 environment["messages"] = [];
 environment["scoring_iteration"] = 0;
 environment["chart_scores"] = [];
-environment["teams"] = {"Red Team" : "red", "Blue Team" : "blue", "Green Team" : "green"};
+environment["teams"] = {"Red Team" : "red", "Blue Team" : "blue", "Green Team" : "green", "Orange Team" : "orange"};
 environment["ignore"] = [];
 initialize_network(); //generate the gui graph
 
@@ -234,6 +234,9 @@ function calculate_score() {
     environment["scoring_iteration"] += 1;
     var s = {};
     var ret = [];
+    for (owner in environment["teams"]) {
+        s[owner] = 0;
+    }
     for(var name in environment["machines"]) {
         var machine = environment["machines"][name];
         var owner = machine["owner"];
@@ -257,7 +260,7 @@ function calculate_score() {
                 }
                 val += environment["scoring_iteration"] / EXP_VAL*val
                 val = Math.round(val * 100) / 100
-                s[owner] += val + environment["scoring_iteration"]/EXP_VAL*val;
+                s[owner] += Math.round(val + environment["scoring_iteration"]/EXP_VAL*val);
             }
         }
     }
@@ -295,6 +298,7 @@ function save_network() {
 }
 
 function initialize_network() {
+    process.stdout.write(save_path);
     if (fs.existsSync(save_path)) {
         process.stdout.write("[*] Reading save data file for " + GAME_NAME + "...");
         environment = JSON.parse(fs.readFileSync(save_path, 'utf8'));
@@ -322,11 +326,11 @@ function initialize_network() {
                 var machine = network["machines"][name];
                 var id = machine["id"]
                 environment["ownership"][id] = machine["owner"];
-                for(var j = 0; j < machine["connections"].length; j++) {
-                    if(machine["connections"][j] in network["routers"]) {
+                for(var j = 0; j < machine["network_connections"].length; j++) {
+                    if(machine["network_connections"][j] in network["routers"]) {
                         var edge = {}
                         edge["data"] = {}
-                        edge["data"]["source"] = machine["connections"][j];
+                        edge["data"]["source"] = machine["network_connections"][j];
                         edge["data"]["target"] = id;
                         edge["data"]["color"] = "black";
                         edge["data"]["strength"] = 10;
