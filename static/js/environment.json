@@ -27,16 +27,16 @@
     "claim_times": {},
     "scores": {
         "Red Team": [
-            0
+            4
         ],
         "Blue Team": [
-            0
+            4
         ],
         "Green Team": [
-            0
+            4
         ],
         "Orange Team": [
-            0
+            4
         ]
     },
     "ports": {},
@@ -45,19 +45,19 @@
     "chart_scores": [
         [
             "Red Team",
-            0
+            4
         ],
         [
             "Blue Team",
-            0
+            4
         ],
         [
             "Green Team",
-            0
+            4
         ],
         [
             "Orange Team",
-            0
+            4
         ]
     ],
     "teams": {
@@ -343,7 +343,7 @@
                     "name": "Orange Kali",
                     "id": "OrangeKali",
                     "weight": 5,
-                    "color": "grey",
+                    "color": "orange",
                     "ip": [
                         "10.4.0.1"
                     ]
@@ -354,7 +354,7 @@
                     "name": "Red Kali",
                     "id": "RedKali",
                     "weight": 5,
-                    "color": "grey",
+                    "color": "red",
                     "ip": [
                         "10.2.0.1"
                     ]
@@ -365,7 +365,7 @@
                     "name": "Green Kali",
                     "id": "GreenKali",
                     "weight": 5,
-                    "color": "grey",
+                    "color": "green",
                     "ip": [
                         "10.3.0.1"
                     ]
@@ -376,7 +376,7 @@
                     "name": "Blue Kali",
                     "id": "BlueKali",
                     "weight": 5,
-                    "color": "grey",
+                    "color": "blue",
                     "ip": [
                         "10.5.0.1"
                     ]

@@ -229,7 +229,8 @@
             }
             function scan(data) {
                 console.log("Received scan data...");
-                chart.load({ columns: data["chart"] });
+                console.log(data["chart_scores"]);
+                chart.load({ columns: data["chart_scores"] });
                 updateTables(data);
                 toastr.success("Service check complete.");
             }

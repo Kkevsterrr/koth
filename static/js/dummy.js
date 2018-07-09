@@ -34,7 +34,11 @@ function flipPorts(data) {
 function randomScan(data) {
     for(var i = 0; i < data["chart_scores"].length; i++) {
         scores = data["chart_scores"][i]
-        score_adj = (Math.random() < 0.5 ? -1 : 1) * (scores[1] * Math.random() / 4)
+        if (scores[scores.length - 1] == 0) {
+            score_adj = Math.random() * 10;
+        } else {
+            score_adj = (Math.random() < 0.5 ? -1 : 1) * (scores[scores.length - 1] * Math.random() / 5)
+        }
         data["chart_scores"][i].push(scores[scores.length - 1] + score_adj)
     }
     flipPorts(data);
