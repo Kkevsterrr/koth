@@ -162,11 +162,11 @@
                 }
                 $("#tables").append("<table class=\"ui grey fixed table\"><thead><tr><th>Unclaimed Machines</th><th>Status</th><th>Services</th></tr></thead><tbody id=\"grey_machines\"></tbody></table>");
 
-                console.log(machines);
                 for(var name in machines) {
                     machine = machines[name];
                     id = machine["id"]
                     color = machine["color"];
+                    console.log("This machine is: " + color);
                     console.log(machine);
                     $("#" + color + "_machines").append("<tr onclick=\"javascript:$('."+color + "_" + id.toLowerCase() + "').toggle('fast');\" class='" + color + "_" + id.toLowerCase() + "_control machine_row'><td><i class=\"chevron down icon\"></i>" + name + "</td><td><div id='" + color + "_" + id.toLowerCase() + "_bar' class=\"ui indicating progress active\" data-percent=\""+machine["percentage"] + "\" style=\"margin-bottom: 0px;\"><div id='" + color + "_" + id.toLowerCase() + "_bar_inner' class=\"bar\" style=\"transition-duration: 300ms; width: "+machine["percentage"]+"%;\"></div></div></td><td id=\"" + color + "_" + id.toLowerCase() + "_status\">" + machine["status"] + "</td></tr>");
                     for(var service in machine["services"]) {
@@ -230,7 +230,8 @@
             function scan(data) {
                 console.log("Received scan data...");
                 chart.load({ columns: data["chart"] });
-                updateTables(data);
+                $("#tables").html("");
+                buildTables(data);
                 toastr.success("Service check complete.");
             }
 
@@ -276,12 +277,12 @@
             function buildcy(data) {
                 var defaults = {
                     name: 'cose-bilkent',
-                    idealEdgeLength: 10,
+                    idealEdgeLength: 5,
                     nodeRepulsion: 400000,
-                    nodeOverlap : 10,
+                    nodeOverlap : 0,
                     padding: 10,
-                    gravity: 80,
-             numIter: 25000,
+                    gravity: 100,
+                    numIter: 25000,
                     animate: false,
                 };
                 var cy = window.cy = cytoscape({
@@ -305,7 +306,7 @@
                     })
                     .selector('edge')
                     .css({
-                        'opacity': 0.666,
+                        'opacity': 0.33,
                         'line-color': 'data(color)',
                     })
                     .selector('.faded')
@@ -367,6 +368,7 @@
                         Ports List
                     </div>
                 </h2>
+                <h3>Only claimed machines are scanned. Tables update at each scanning interval.</h3>
                 <div id="tables"></div></div>
             <div id="messages" class="ui inverted segment"></div>
         </body>

@@ -16,6 +16,28 @@ function get_ports(name) {
         return {"ssh":22, "http":80, "http-alt":8080}
     } else if (name.toLowerCase().indexOf("asset 2") > -1) {
         return {"ftp": 21, "ssh":22, "http":80}
+     } else if (name.toLowerCase().indexOf("asset 3") > -1) {
+        return {"rpc": 135, "smb":445, "ad":1028}
+    } else if(name.toLowerCase().indexOf("compiler") > -1) { //george vm 2
+        return {"ssh": 22, "http": 80, "compiler": 33333};
+    } else if(name.toLowerCase().indexOf("workstation") > -1) { //windows
+        return {"rdp": 3389, "smb":445, "discovery":5357};
+    } else if(name.toLowerCase().indexOf("windows fullpivot") > -1) { //win ftp
+        return {"smb": 445, "rdp": 3389, "http-alt" : 8080};
+    } else if(name.toLowerCase().indexOf("windows ftp") > -1) { //win full pivots
+        return {"ftp": 21, "http": 80, "netbiosd" : 445};
+    } else if(name.toLowerCase().indexOf("linux ftp") > -1 ) { //kali full pivots
+        return {"ftp": 21, "ssh": 22, "http": 80};
+    } else {
+        console.log("defaulting")
+        return  {"ssh": 22};
+    }
+    /*if(name.toLowerCase().indexOf("kali") > -1) { //asset 1 or asset 2 or kali
+        return {"ssh": 22};
+    } else if (name.toLowerCase().indexOf("asset 1") > -1) {
+        return {"ssh":22, "http":80, "http-alt":8080}
+    } else if (name.toLowerCase().indexOf("asset 2") > -1) {
+        return {"ftp": 21, "ssh":22, "http":80}
     } else if(name.toLowerCase().indexOf("compiler") > -1) { //george vm 2
         return {"ssh": 22, "http": 80, "compiler": 33333};
     } else if(name.toLowerCase().indexOf("workstation") > -1) { //windows
@@ -27,7 +49,7 @@ function get_ports(name) {
     } else {
         console.log("defaulting")
         return  {"ssh": 22};
-    }
+    }*/
 
     /*
     if(name.toLowerCase().indexOf("gvm2") > -1) { //george vm 1
@@ -59,7 +81,7 @@ for (var i = 0; i < cipherpath_json["machines"].length; i++) {
 
     cm = cipherpath_json["machines"][i];
     name = cm["name"];
-    if (name.indexOf("Hidden") != -1 || name.indexOf("DC") != -1) { continue; }
+    if (name.indexOf("Hidden") != -1 || name.indexOf("DC") != -1 || name.indexOf("HACS408T") != -1 || name.indexOf("IMPLANTOR") != -1) { continue; }
 
     m = {}
     m["name"] = name
@@ -79,10 +101,13 @@ for (var i = 0; i < cipherpath_json["machines"].length; i++) {
     for(var j = 0; j < cm["network_connections"].length; j++) {
         connection = cm["network_connections"][j];
         m["ip"].push(connection["vlans"]["1"]["ip"]); //m["ip"].push("127.0.0.1");//
-        (m["network_connections"] = m["network_connections"] || []).push(connection["network"]);
         if (name.indexOf("Scorebot") == -1) {
+            (m["network_connections"] = m["network_connections"] || []).push(connection["network"]);
             (rids[connection["network"]] = rids[connection["network"]] || []).push(m["id"]);
+        } else {
+            m["network_connections"] = []
         }
+
     }
     machines[name] = m;
 }

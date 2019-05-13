@@ -13,9 +13,9 @@ var path_module = require('path');
 
 require('events').EventEmitter.prototype._maxListeners = 0;
 
-var GAME_NAME = "hacs408t";
+var GAME_NAME = "hacs408t_2019";
 var CLAIM_DELAY = 30000;
-var SCAN_DELAY = 120000;
+var SCAN_DELAY = 12000;
 var PORT_OPEN_SCORE = 3;
 var PORT_CLOSED_SCORE = 0;
 var BOX_OWNERSHIP_SCORE = 1;
@@ -23,6 +23,10 @@ var EXP_SCORING = true;
 var EXP_VAL = 60;
 var ONLY_SCAN_OWNED_BOXES = true;
 var d = new Date();
+var DEBUG_CLAIM_MODE = false;
+if (DEBUG_CLAIM_MODE) {
+    console.log("WARNING: In debug claim mode, anyone can claim any machine.".red);
+}
 
 var path = __dirname + "/games/" + GAME_NAME;
 var save_path = path + "/saved/network";
@@ -87,7 +91,13 @@ io.on('connection', function(socket) {
 
 function handle(req, res, color) {
     var body='';
-    var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
+    var ip;
+    if (DEBUG_CLAIM_MODE) {
+        ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
+    } else {
+        ip = req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress || req.headers['x-forwarded-for'];
+    }
+
     ip = ip.replace("::ffff:", "");
     var claim_times = environment["claim_times"];
     var name = check_valid(ip);
@@ -201,7 +211,8 @@ function scan_net() {
             chart: calculate_score(),
             graph: environment["graph"],
             machines: environment["machines"],
-            team: environment["teams"]
+            team: environment["teams"],
+            teams: environment["teams"],
         });
     });
 }
