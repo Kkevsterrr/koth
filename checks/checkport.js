@@ -15,9 +15,16 @@ CheckPort.prototype.check = function() {
     var machine_name = this.machine_name;
     return function (callback) {
         try {
-            portscanner.checkPortStatus(port, ip, function(error, status) {
+            portscanner.checkPortStatus(port, ip, 2000, function(error, status) {
                 console.log("Just scanned machine " + machine_name + " on port " + port + " and it is " + status)
-                callback (null, {"name" : machine_name, "status": status});
+                if (status == "closed") {
+                    portscanner.checkPortStatus(port, ip, 2000, function(error, status) {
+                        console.log("Just scanned machine " + machine_name + " on port " + port + " and it is " + status)
+                        callback (null, {"name" : machine_name, "status": status});
+                    });
+                } else {
+                    callback (null, {"name" : machine_name, "status": status});
+                }
             });
         } catch(ex) {
             callback("Error in checking port status", {"name" : machine_name, "status": "closed"});

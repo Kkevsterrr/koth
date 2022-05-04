@@ -13,15 +13,15 @@ var path_module = require('path');
 
 require('events').EventEmitter.prototype._maxListeners = 0;
 
-var GAME_NAME = "test";
-var CLAIM_DELAY = 30000;
-var SCAN_DELAY = 180000;
+var GAME_NAME = "hacs408t";
+var CLAIM_DELAY = 10000;
+var SCAN_DELAY = 18000;
 var PORT_OPEN_SCORE = 3;
 var PORT_CLOSED_SCORE = 0;
 var BOX_OWNERSHIP_SCORE = 1;
 var EXP_SCORING = true;
 var EXP_VAL = 60;
-var ONLY_SCAN_OWNED_BOXES = true;
+var ONLY_SCAN_OWNED_BOXES = false;
 var d = new Date();
 
 var path = __dirname + "/games/" + GAME_NAME;
@@ -39,7 +39,7 @@ environment["ports"] = {};
 environment["messages"] = [];
 environment["scoring_iteration"] = 0;
 environment["chart_scores"] = [];
-environment["teams"] = {"Red Team" : "red", "Blue Team" : "blue", "Green Team" : "green"};
+environment["teams"] = {"Red Team" : "red", "Blue Team" : "blue", "Green Team" : "green", "Orange Team" : "orange"};
 environment["ignore"] = [];
 initialize_network(); //generate the gui graph
 
@@ -96,17 +96,18 @@ function handle(req, res, color) {
     console.log(("[!] Attempted claim from " + ip + " on machine " + name + " for color " + color + " for team " + team_name+"").yellow);
     if(team_name in environment["teams"] && name != "") {
         var now = new Date();
-
-        if(name in claim_times && team_name in claim_times[name] && now.getTime() - claim_times[name][team_name] < CLAIM_DELAY) {
-            res.write("Cannot claim box - please wait.");
-            console.log("[!] Could not claim box - enough time has not yet passed.".red)
-            claim_times[name][team_name] = now.getTime()
-        } else if(environment["machines"][name]["owner"] == team_name) {
-            res.write("Your team already owns this box - cannot reclaim.");
+        console.log(environment["machines"])
+        console.log(environment["machines"][name])
+        if(environment["machines"][name]["owner"] == team_name) {
+            res.write("Your team already owns this box - cannot reclaim.\n");
             console.log("[!] Could not claim box - this team appears to own this box already".red)
             if(!(name in claim_times)) {
                 claim_times[name] = {}
             }
+            claim_times[name][team_name] = now.getTime()
+        } else if(name in claim_times && team_name in claim_times[name] && now.getTime() - claim_times[name][team_name] < CLAIM_DELAY) {
+            res.write("Cannot claim for another " + Math.round(CLAIM_DELAY/1000 - (now.getTime() - claim_times[name][team_name])/1000).toString() + " seconds. Resetting " + (CLAIM_DELAY/1000).toString() +"s claim timer.\n");
+            console.log("[!] Could not claim box - not enough time has passed. Resetting timer.".red)
             claim_times[name][team_name] = now.getTime()
         } else {
             if(!(name in claim_times)) {
@@ -257,7 +258,7 @@ function calculate_score() {
                 }
                 val += environment["scoring_iteration"] / EXP_VAL*val
                 val = Math.round(val * 100) / 100
-                s[owner] += val + environment["scoring_iteration"]/EXP_VAL*val;
+                s[owner] += Math.round(val + environment["scoring_iteration"]/EXP_VAL*val);
             }
         }
     }
@@ -295,6 +296,7 @@ function save_network() {
 }
 
 function initialize_network() {
+    process.stdout.write(save_path);
     if (fs.existsSync(save_path)) {
         process.stdout.write("[*] Reading save data file for " + GAME_NAME + "...");
         environment = JSON.parse(fs.readFileSync(save_path, 'utf8'));
@@ -316,17 +318,19 @@ function initialize_network() {
                 node["data"]["weight"] = 5;
                 node["data"]["color"] = "black";
                 node["data"]["ip"] = router["ip"];
+                node["data"]["row"] = router["row"];
+                node["data"]["col"] = router["col"];
                 graph["nodes"].push(node);
             }
             for(var name in network["machines"]) {
                 var machine = network["machines"][name];
                 var id = machine["id"]
                 environment["ownership"][id] = machine["owner"];
-                for(var j = 0; j < machine["connections"].length; j++) {
-                    if(machine["connections"][j] in network["routers"]) {
+                for(var j = 0; j < machine["network_connections"].length; j++) {
+                    if(machine["network_connections"][j] in network["routers"]) {
                         var edge = {}
                         edge["data"] = {}
-                        edge["data"]["source"] = machine["connections"][j];
+                        edge["data"]["source"] = machine["network_connections"][j];
                         edge["data"]["target"] = id;
                         edge["data"]["color"] = "black";
                         edge["data"]["strength"] = 10;
@@ -340,6 +344,8 @@ function initialize_network() {
                 node["data"]["weight"] = 5;
                 node["data"]["color"] = machine["color"];
                 node["data"]["ip"] = machine["ip"];
+                node["data"]["row"] = machine["row"];
+                node["data"]["col"] = machine["col"];
                 graph["nodes"].push(node);
             }
             environment["graph"] = graph;
